@@ -1,11 +1,12 @@
 import React from 'react';
-import Login from './components/login/Login'
+/* import Hero from './components/hero/hero'; */
+import NavBar from './components/navBar/navBar';
 
 function App() {
   return (
     <>
-     Recipie
-     <Login />
+     {/* <Hero /> */}
+     <NavBar />
     </>
   );
 }
