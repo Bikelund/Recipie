@@ -1,12 +1,12 @@
 import React from 'react';
-import Register from './components/register/register';
+import Login from './components/login/Login'
 
 function App() {
   return (
-    <div className="App">
+    <>
      Recipie
-     <Register />
-    </div>
+     <Login />
+    </>
   );
 }
 

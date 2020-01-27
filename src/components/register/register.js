@@ -15,7 +15,9 @@ function Register() {
     function handleSubmit(event) {
         event.preventDefault();
 
-        firebase.initializeApp(config);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+          }
         firebase.database().ref(username).set({
                 email: email,
                 password: password
