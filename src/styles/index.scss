@@ -1,7 +1,14 @@
+// Import variables
 @import 'abstracts/variables';
 
-
+// Import style for specific screen size
 @import 'layout/general';
 @import 'layout/mobile';
 
-
+// Import style for components
+@import '../components/hero/hero';
+@import '../components/login/login';
+@import '../components/register/register';
+@import '../components/menu/menu';
+@import '../components/navBar/navBar';
+@import '../components/recipe/recipe';
