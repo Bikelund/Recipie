@@ -1,6 +1,7 @@
 import React from 'react';
 import Recipe from '../recipe/recipe';
 import Hero from '../hero/hero';
+import Menu from '../menu/menu';
 import {
     BrowserRouter as Router,
     Switch,
@@ -20,6 +21,9 @@ import {
               <li>
                 <Link to="/recipe">Recipe</Link>
               </li>
+              <li>
+                <Link to="/menu">Menu</Link>
+              </li>
             </ul>
           </nav>
   
@@ -31,6 +35,9 @@ import {
             </Route>
             <Route path="/recipe">
               <Recipe />
+            </Route>
+            <Route path="/menu">
+              <Menu />
             </Route>
           </Switch>
         </div>
