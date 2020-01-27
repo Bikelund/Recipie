@@ -1,12 +1,11 @@
 import React from 'react';
-import Register from './components/register/register';
+import Hero from './components/hero/hero';
 
 function App() {
   return (
-    <div className="App">
-     Recipie
-     <Register />
-    </div>
+    <>
+     <Hero />
+    </>
   );
 }
 
