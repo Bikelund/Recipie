@@ -3,41 +3,47 @@ import * as firebase from 'firebase';
 import config from '../firebase/firebase'
 
 function Register() {
-    const [username, setUsername] = useState('')
+    // const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
 
     function validateForm() {
-        return email.length > 0 && password.length > 0 && username.length > 0;
+        return email.length > 0 && password.length > 0 ;
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         if (!firebase.apps.length) {
             firebase.initializeApp(config);
           }
-        firebase.database().ref(username).set({
-                email: email,
-                password: password
-        });
+          try {
+            await firebase.auth().createUserWithEmailAndPassword(email, password);
+            alert('Register Success')
+            setEmail('')
+            setPassword('')
+          } catch (error) {
+            alert(error);
+          }
+
+       
     }
 
     return (
         <>
+        <div>Sign in</div>
             <form onSubmit={handleSubmit}>
-                <input
+                {/* <input
                     name="username"
                     id="username"
                     value={username}
                     type="text"
                     placeholder="username"
                     onChange={e => setUsername(e.target.value)}
-                /><br />
+                /><br /> */}
                 <input
                     name="email"
-                    id="email"
                     value={email}
                     type="text"
                     placeholder="Email"
@@ -45,7 +51,6 @@ function Register() {
                 /><br />
                 <input
                     name="password"
-                    id="password"
                     value={password}
                     type="password"
                     placeholder="Password"
