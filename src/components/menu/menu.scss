@@ -1,0 +1,12 @@
+.menu {
+    width: 100vw;
+    height: 100vh;
+    background: $color_green;
+    position: fixed;
+    bottom: -100vh; // Placed outside screen
+    left: 0; 
+
+    &__ul {
+        list-style-type: none;
+    }
+}
