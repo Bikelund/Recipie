@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     min-width: 300px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     background: url('/img/bgImg.jpg');
     background-size: cover;
     background-position: center;
