@@ -1,0 +1,23 @@
+.navigation {
+    width: 100vw;
+    height: 80px;
+    background-color: $color_green;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
+    &__ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__ul__li {
+        display: inline-block;
+    }
+}

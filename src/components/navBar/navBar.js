@@ -13,15 +13,15 @@ import {
     return (
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
+          <nav className="navigation">
+            <ul className="navigation__ul">
+              <li className="navigation__ul__li">
                 <Link to="/">Home</Link>
               </li>
-              <li>
+              <li className="navigation__ul__li">
                 <Link to="/recipe">Recipe</Link>
               </li>
-              <li>
+              <li className="navigation__ul__li">
                 <Link to="/menu">Menu</Link>
               </li>
             </ul>
