@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-// import firebase from '../firebase/firebase';
+import firebase from '../firebase/firebase';
 
 function CreateRecipe() {
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
 
-
+    
     function handleSubmit(event) {
         event.preventDefault();
-
+        firebase.auth().onAuthStateChanged(user => {
+            firebase.firestore().collection('users').doc(user.uid).collection('recipes').add({
+                title: title,
+                category: category,
+                servings: servings
+            })
+        })
+        
 
     }
 
