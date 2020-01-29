@@ -31,7 +31,7 @@ function Register({ loginIsShown }) {
     return (
         <>
             {registerIsShown ? 
-                <div className={registerIsShown ? 'register' : 'register hidden'}>
+                <div>
                     <div>Sign in</div>
                     <form onSubmit={handleSubmit}>
                         <input

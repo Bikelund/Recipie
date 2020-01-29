@@ -3,7 +3,7 @@ import firebase from '../firebase/firebase';
 import ResetPassword from './ResetPassword';
 import Register from '../register/register';
 
-function Login({registerIsShown}) {
+function Login({ registerIsShown }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [resetPassword, setResetPassword] = useState(false)
@@ -20,7 +20,6 @@ function Login({registerIsShown}) {
 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
-            alert('Login Success')
             setEmail('')
             setPassword('')
         } catch (error) {
@@ -31,7 +30,7 @@ function Login({registerIsShown}) {
     return (
         <>{
             loginIsShown ?
-                <div className={loginIsShown ? 'login' : 'login hidden'}>
+                <div>
                     <div>Log in</div>
                     <form onSubmit={handleSubmit}>
                         <input
@@ -58,7 +57,7 @@ function Login({registerIsShown}) {
                     <button type="submit" onClick={() => setLoginIsShown(false)}>
                         SIGN UP
             </button>
-                </div> : <Register loginIsShown={loginIsShown}/>
+                </div> : <Register loginIsShown={loginIsShown} />
         }
             {
                 resetPassword ? <ResetPassword /> : ''
