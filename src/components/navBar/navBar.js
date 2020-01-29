@@ -2,8 +2,7 @@ import React from 'react';
 import Recipe from '../recipe/recipe';
 import Hero from '../hero/hero';
 import Menu from '../menu/menu';
-import Login from '../login/Login';
-import firebase from '../firebase/firebase';
+import User from '../user/User';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,10 +11,7 @@ import {
 } from "react-router-dom";
 
 function NavBar() {
-  firebase.auth().onAuthStateChanged(user => {
-    console.log(user) // Check if user is logged in
-  
-  })
+
   return (
     <Router>
       <div>
@@ -46,9 +42,7 @@ function NavBar() {
             <Recipe />
           </Route>
           <Route path="/user">
-            <Login />
-            {/* <Register />
-            <button onClick={() => firebase.auth().signOut()}>sign out</button> */}
+            <User />
           </Route>
           <Route path="/menu">
             <Menu />
