@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Login from '../login/Login';
-import Register from '../register/register';
 import CreateRecipe from '../createRecipe/createRecipe';
 import MyRecipes from '../myRecipes/myRecipes';
 import firebase from '../firebase/firebase';
@@ -8,14 +7,15 @@ import firebase from '../firebase/firebase';
 function User() {
     const [isUserloggedIn, setIsUserLoggedIn] = useState(false)
     const [createRecipeIsShown, setCreateRecipeIsShown] = useState(false)
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            setIsUserLoggedIn(true)
-        }
-        else {
-            setIsUserLoggedIn(false)
-        }
-
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                setIsUserLoggedIn(true)
+            }
+            else {
+                setIsUserLoggedIn(false)
+            }
+        })
     })
 
     return (
