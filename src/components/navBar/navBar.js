@@ -1,5 +1,5 @@
 import React from 'react';
-import Recipe from '../recipe/recipe';
+import Recipes from '../recipes/recipes';
 import Hero from '../hero/hero';
 import Menu from '../menu/menu';
 import User from '../user/User';
@@ -21,7 +21,7 @@ function NavBar() {
               <Link to="/">Home</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/recipe">Recipe</Link>
+              <Link to="/recipes">Recipes</Link>
             </li>
             <li className="navigation__ul__li">
               <Link to="/user">User</Link>
@@ -38,8 +38,8 @@ function NavBar() {
           <Route exact strict path="/">
             <Hero />
           </Route>
-          <Route path="/recipe">
-            <Recipe />
+          <Route path="/recipes">
+            <Recipes />
           </Route>
           <Route path="/user">
             <User />
