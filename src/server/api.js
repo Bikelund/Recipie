@@ -24,3 +24,23 @@ export async function getUserRecipes(userId) {
 
         return userRecipes;
 }
+
+export async function getAllUserRecipes() {
+    
+    let allUserRecipes = [];
+    
+    await firebase.firestore().collectionGroup('recipes').get()
+        .then((querySnapshot) => {
+          return  querySnapshot.forEach((doc) => {
+                if (doc.exists) {
+                    console.log(doc.id)
+                    allUserRecipes.push(doc.data());                    
+                }
+            });
+        })
+        .catch(function (error) {
+            return {}
+        });
+
+        return allUserRecipes;
+}

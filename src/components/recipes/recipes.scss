@@ -1,0 +1,27 @@
+.recipes {
+    background-color: $color_white;
+    padding-bottom: 60px;
+
+    h1 {
+        text-align: center;
+        margin: 0;
+        padding: 12px 0;
+    }
+}
+
+.recipes__recipe {
+    width: 80%;
+    margin: 0 auto 10px;
+    cursor: pointer;
+
+    &__title {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    &__image {
+        height: 120px;
+        /* background: url(https://i.picsum.photos/id/44/288/120.jpg);
+        background-size: cover; */
+    }
+}
