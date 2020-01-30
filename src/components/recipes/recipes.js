@@ -1,54 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from '../firebase/firebase';
+import { getAllUserRecipes } from '../../server/api';
 
-function Recipes() {
+function AllRecipes() {
+    const [recipes, setRecipes] = useState([])
 
-    /* const dbRef = firebase.firestore().collection('users');
-
-    dbRef.get().then(function(doc) {
-        if (doc.exists) {
-        console.log("Document data:", doc.data());
-        } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+    useEffect(() => {
+        async function fetchData() {
+            const allUserRecipes = await getAllUserRecipes();
+            setRecipes(allUserRecipes)
         }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    }); */
-
-    firebase.firestore().collection('users').doc('test')
-    .onSnapshot(function(doc) {
-        console.log("Current data: ", doc.data());
-    });
-
-    /* firebase.auth().onAuthStateChanged(user => {
-        firebase.firestore().collection('users').doc(user.uid).collection('recipes').get({
-            title: title,
-            category: category,
-            servings: servings
-        })
-    }) */
-
-    /* firebase.auth().onAuthStateChanged(user => {
-
-        firebase.firestore().collection('users').doc(user.uid).collection('recipes').get().then((snapshot) => {
-            snapshot.docs.forEach(e => {
-                 console.log(e.data().title);
-            })
-        })
-    }) */
-
+        fetchData();
+      }, []);
+    
     return (
         <>
-        <div className="recipes">
-        <h1>All recipes</h1>
-            <div className="recipes__recipe">
-                <h2 className="recipes__recipe__title">*Recipe title*</h2>
-                <div className="recipes__recipe__image"></div>
-            </div>
+        <div className='recipes'>
+            <h1>All recipes</h1>
+            {recipes.map((recipe,key) =>
+                <div className='recipes__recipe' key={key}>
+                    {console.log(key)}
+                    <h2 className='recipes__recipe__title'>{recipe.title}</h2>
+                    <img className='recipes__recipe__image' src='https://i.picsum.photos/id/44/288/120.jpg' alt={recipe.title}></img>
+                </div>  
+            )}
         </div>
         </>
     )
-};
+}
 
-export default Recipes;
+export default AllRecipes
