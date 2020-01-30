@@ -1,30 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import firebase from '../firebase/firebase';
+import { getUserRecipes } from '../../server/api'
+
 
 function MyRecipes() {
-    const recipes = [];
+    const [recipes, setRecipes] = useState([])
 
     useEffect(() => {
-         firebase.auth().onAuthStateChanged(user => {
-            firebase.firestore().collection('users').doc(user.uid).collection('recipes').get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        if (doc.exists) {
-                            recipes.push(doc.data())
-                        } else {
-                            console.log("No such document!");
-                        }
-                    });
-                }).catch(function (error) {
-                    console.log("Error getting document:", error);
-                });
+         firebase.auth().onAuthStateChanged(async(user) => {
+            const userRecipes = await getUserRecipes(user.uid);
+            setRecipes(userRecipes)
         })
     },[])
     
     return (
         <>
             <h1>My Recipes</h1>
-            {console.log(recipes)}
+    {recipes.map(e => <h2>{e.title}</h2>)}
         </>
     )
 }
