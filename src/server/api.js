@@ -12,11 +12,9 @@ export async function getUserRecipes(userId) {
         .then((querySnapshot) => {
           return  querySnapshot.forEach((doc) => {
                 if (doc.exists) {
-                    console.log(doc.id)
-                    userRecipes.push(doc.data());                    
+                    userRecipes.push(doc.data())
                 } else {
-                    userRecipes = 'There is no recipe'
-                    return  userRecipes 
+                    return userRecipes
                 }
             });
         })

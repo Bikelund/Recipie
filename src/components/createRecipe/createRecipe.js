@@ -5,7 +5,6 @@ function CreateRecipe() {
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
-
     
     function handleSubmit(event) {
         event.preventDefault();
