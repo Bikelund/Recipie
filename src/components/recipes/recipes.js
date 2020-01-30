@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
+import firebase from '../firebase/firebase';
 
 function Recipes() {
 
@@ -40,7 +40,13 @@ function Recipes() {
 
     return (
         <>
+        <div className="recipes">
         <h1>All recipes</h1>
+            <div className="recipes__recipe">
+                <h2 className="recipes__recipe__title">*Recipe title*</h2>
+                <div className="recipes__recipe__image"></div>
+            </div>
+        </div>
         </>
     )
 };
