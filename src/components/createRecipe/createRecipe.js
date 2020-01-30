@@ -10,6 +10,7 @@ function CreateRecipe() {
     function handleSubmit(event) {
         event.preventDefault();
         firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
             firebase.firestore().collection('users').doc(user.uid).collection('recipes').add({
                 title: title,
                 category: category,
