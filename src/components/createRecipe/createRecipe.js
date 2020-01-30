@@ -5,11 +5,11 @@ function CreateRecipe() {
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
-
     
     function handleSubmit(event) {
         event.preventDefault();
         firebase.auth().onAuthStateChanged(user => {
+            console.log(firebase.firestore().collectionGroup('recipes'))
             firebase.firestore().collection('users').doc(user.uid).collection('recipes').add({
                 title: title,
                 category: category,
