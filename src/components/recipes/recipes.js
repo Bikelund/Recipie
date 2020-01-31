@@ -21,13 +21,12 @@ function AllRecipes() {
         <>
         <div className='recipes'>
             <h1>All recipes</h1>
-            {recipes.map((recipe,key) =>
+            {recipes.length === 0 ? <div>There are no recipes here</div> : Object.keys(recipes).map((i, key) => (
                 <div className='recipes__recipe' key={key} onClick={() => goToRecipe()}>
-                    {console.log(key)}
-                    <h2 className='recipes__recipe__title'>{recipe.title}</h2>
-                    <img className='recipes__recipe__image' src='https://i.picsum.photos/id/44/288/120.jpg' alt={recipe.title}></img>
+                    <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
+                    <img className='recipes__recipe__image' src='https://i.picsum.photos/id/44/288/120.jpg' alt={recipes[i].title}></img>
                 </div>  
-            )}
+            ))}
         </div>
         </>
     )
