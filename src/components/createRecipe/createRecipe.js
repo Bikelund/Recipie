@@ -16,7 +16,7 @@ function CreateRecipe() {
         const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
         const filename = image.name; //Get image name from image state
         const ext = filename.slice(filename.lastIndexOf("."));
-        const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique name in every image
+        const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
 
         storageRef.put(image) //File uploaded
                 .then(() => {
