@@ -34,7 +34,7 @@ function MyRecipes() {
                 {recipes.length === 0 ? <div>There is no recipe</div> : Object.keys(recipes).map((i, key) => (
                     <div className='recipes__recipe' key={key} onClick={() => {seeRecipe(recipes[i]); setshowRecipeList(false)}}>
                         <h2 className='recipes__recipe__title' >{recipes[i].title}</h2>
-                        <img className='recipes__recipe__image' src='https://i.picsum.photos/id/44/288/120.jpg' alt={recipes[i].title}></img>
+                        <img className='recipes__recipe__image' src={recipes[i].imageUrl} alt={recipes[i].title}></img>
                     </div>
                 ))}
             </div>
