@@ -1,61 +1,89 @@
+.arrow {
+  height: 10px;
+  width: 10px;
+  border: 1px solid rgba($color: $color_light_red_orange, $alpha: 3.0);
+  border-width: 1px 1px 0 0;
+  transform: rotate(-134deg);
+  position: absolute;
+  top: 3%;
+  left: 6%;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 10px;
+    width: 10px;
+    border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
+    border-width: 1px 1px 0 0;
+    transform: translate(5px, -6px);
+  }
+}
 .login__title {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 50px;
-    font-weight: 100;
-    opacity: .8;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 50px;
+  font-weight: 100;
+  opacity: 0.8;
 }
 .fontAwesome {
-    font-family: Helvetica, 'FontAwesome', sans-serif;
+  font-family: Helvetica, "FontAwesome", sans-serif;
 }
 .login__form {
-
-
-    &__button {
-        background-color: $color_green;
-        color: $color_white;
-        border: none;
-        padding: 4px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        font-size: 10px;
-        margin: 20px auto;
-    }
-    &__button:disabled {
-        opacity: 0.5;
-        font-family: $fonts_montserrat;
-    }
+  &__button {
+    background-color: $color_light_red_orange;
+    color: $color_white;
+    border: none;
+    padding: 4px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 10px;
+    margin: 20px auto;
+  }
+  &__button:disabled {
+    opacity: 0.5;
+    font-family: $fonts_montserrat;
+  }
 }
 .login__form__input {
-    display: block;
-    margin: 0 50px;
+  display: block;
+  margin: 0 50px;
 
-    &__text {
-        width: calc(100% - 20px);
-        margin: 6px 0;
-        padding: 4px 10px;
-        border: 1px solid rgba($color: $color_light_red_orange, $alpha: .6);
-    }
+  &__text {
+    width: calc(100% - 20px);
+    margin: 6px 0;
+    padding: 4px 10px;
+    border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
+  }
+
+  &__error__message {
+    font-size: 10px;
+    font-family: $fonts_montserrat;
+    color: red;
+  }
 }
 .forgot__password {
-    color: $color_light_red_orange;
-    font-size: 10px;
-    text-align: right;
-    font-family: $fonts_montserrat;
+  color: $color_light_red_orange;
+  font-size: 10px;
+  text-align: right;
+  font-family: $fonts_montserrat;
 }
 .sign__up {
-    margin: 33px auto 20px;
+  margin: 33px auto 20px;
+  background-color: $color_green;
+}
+.submit {
+  background-color: $color_pink;
 }
 hr {
-    width: 90%;
-    opacity: .9;
+  width: 90%;
+  opacity: 0.9;
 }
 .switch__login {
-    text-align: center;
-    font-size: 20px;
-    margin-top: 50px;
-    /* color: $color_light_red_orange */;
-    font-weight: 100;
-    opacity: .8;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 50px;
+  /* color: $color_light_red_orange */
+  font-weight: 100;
+  opacity: 0.8;
 }

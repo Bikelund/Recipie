@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import Recipes from '../recipes/recipes';
 import Hero from '../hero/hero';
 import Menu from '../menu/menu';
-import User from '../user/User';
+import Login from '../login/Login';
+import MyRecipes from '../myRecipes/myRecipes';
+import firebase from '../firebase/firebase';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +13,19 @@ import {
 } from "react-router-dom";
 
 function NavBar() {
+  const [isUserloggedIn, setIsUserLoggedIn] = useState('')
+
+  useEffect(() => {
+      firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+              setIsUserLoggedIn(<MyRecipes />)
+          }
+          else {
+              setIsUserLoggedIn(<Login />)
+          }
+      })
+      
+  })
 
   return (
     <Router>
@@ -42,7 +57,7 @@ function NavBar() {
             <Recipes />
           </Route>
           <Route path="/user">
-            <User />
+            {isUserloggedIn}
           </Route>
           <Route path="/menu">
             <Menu />

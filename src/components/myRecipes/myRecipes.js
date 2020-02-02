@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../firebase/firebase';
 import { getUserRecipes } from '../../server/api';
 import Recipe from '../recipe/recipe';
+import CreateRecipe from '../createRecipe/createRecipe';
+
 
 
 function MyRecipes() {
     const [recipes, setRecipes] = useState([]) //All my recipe lists state
     const [recipe, setrecipe] = useState([]) //One recipe state which was clicked 
     const [showRecipeList, setshowRecipeList] = useState(true) //Check if my recipe list is shown
+    const [createRecipeIsShown, setCreateRecipeIsShown] = useState(false) //Check if create recipe component is shown
 
     //Data fetching after render
     useEffect(() => {
@@ -32,19 +35,22 @@ function MyRecipes() {
     }
 
     return (
-        //If my recipe list is true then show myRecipe component. Otherwise show <Recipe /> component
-        <>{showRecipeList? <>
-            <h1>My Recipes</h1>
-            <div className='recipes'>
-                {recipes.length === 0 ? <div>There is no recipe</div> 
-                  : Object.keys(recipes).map((i, key) => (
-                    <div className='recipes__recipe' key={key} onClick={() => {seeRecipe(recipes[i]); setshowRecipeList(false)}}>
-                        <h2 className='recipes__recipe__title' >{recipes[i].title}</h2>
-                        <img className='recipes__recipe__image' src={recipes[i].imageUrl} alt={recipes[i].title}></img>
+        <>
+            {createRecipeIsShown ? <CreateRecipe /> :
+                showRecipeList ? <>
+                    <h1>My Recipes</h1>
+                    <button onClick={() => firebase.auth().signOut()}>LOG OUT</button>
+                    <button onClick={() => { setCreateRecipeIsShown(true) }}>Create Recipe</button>
+                    <div className='recipes'>
+                        {recipes.length === 0 ? <div>There is no recipe</div>
+                            : Object.keys(recipes).map((i, key) => (
+                                <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
+                                    <h2 className='recipes__recipe__title' >{recipes[i].title}</h2>
+                                    <img className='recipes__recipe__image' src={recipes[i].imageUrl} alt={recipes[i].title}></img>
+                                </div>
+                            ))}
                     </div>
-                ))}
-            </div>
-            </> : <Recipe recipe={recipe}/> 
+                </> : <Recipe recipe={recipe} />
             }
         </>
     )
