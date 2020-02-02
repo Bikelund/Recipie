@@ -30,35 +30,39 @@ function Register({ loginIsShown }) {
 
     return (
         <>
-            {registerIsShown ? 
-                <div>
-                    <div>Sign in</div>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            name="email"
-                            value={email}
-                            type="text"
-                            placeholder="Email"
-                            onChange={e => setEmail(e.target.value)}
-                        /><br />
-                        <input
-                            name="password"
-                            value={password}
-                            type="password"
-                            placeholder="Password"
-                            onChange={e => setPassword(e.target.value)}
-                        /><br />
-                        <button type="submit" disabled={!validateForm()} >
-                            Sign In
-                </button>
-                    </form>
-                    <hr />
-                    <div>Log in to Recipie</div>
-                    <button type="submit" onClick={() => setRegisterIsShown(false)}>
-                        LOG IN
-                </button>
-                </div> : <Login registerIsShown={registerIsShown}/>
-            }
+        {registerIsShown ? 
+            <div>
+                <h1 className="login__title">Create a New Account</h1>
+                <form className="login__form" onSubmit={handleSubmit}>
+                    <div className="login__form__input">
+                    <input
+                        name="email"
+                        className="fontAwesome login__form__input__text"
+                        value={email}
+                        type="text"
+                        placeholder="&#xf0e0; Email"
+                        onChange={e => setEmail(e.target.value)}
+                    /><br />
+                    <input
+                        name="password"
+                        className="fontAwesome login__form__input__text"
+                        value={password}
+                        type="password"
+                        placeholder="&#xf13e; Password"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    </div>
+                    <button type="submit" className="login__form__button sign__up" disabled={!validateForm()} >
+                        SIGN UP
+                    </button>
+                </form>
+                <hr />
+                <h2 className="switch__login">Log in to Recipie</h2>
+                <button type="submit" className="login__form__button" onClick={() => setRegisterIsShown(false)}>
+                    LOG IN
+            </button>
+            </div> : <Login registerIsShown={registerIsShown}/>
+        }
         </>
     )
 }

@@ -9,11 +9,9 @@ function Login({ registerIsShown }) {
     const [resetPassword, setResetPassword] = useState(false)
     const [loginIsShown, setLoginIsShown] = useState(!registerIsShown ? true : false)
 
-
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
-
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -28,36 +26,40 @@ function Login({ registerIsShown }) {
     }
 
     return (
-        <>{
-            loginIsShown ?
-                <div>
-                    <div>Log in</div>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            name="email"
-                            value={email}
-                            type="text"
-                            placeholder="email"
-                            onChange={e => setEmail(e.target.value)}
-                        /><br />
-                        <input
-                            name="password"
-                            value={password}
-                            type="password"
-                            placeholder="Password"
-                            onChange={e => setPassword(e.target.value)}
-                        /><br />
-                        <div onClick={() => { setResetPassword(true); setLoginIsShown(false) }}>Forgot Password?</div>
-                        <button type="submit" disabled={!validateForm()} >
-                            LOG IN
+        <>
+        {loginIsShown ?
+            <div>
+                <h1 className="login__title">Log in to Recipie</h1>
+                <form className="login__form" onSubmit={handleSubmit}>
+                    <div className="login__form__input">
+                    <input
+                        name="email"
+                        className="fontAwesome login__form__input__text"
+                        value={email}
+                        type="text"
+                        placeholder="&#xf0e0; Email"
+                        onChange={e => setEmail(e.target.value)}
+                    /><br />
+                    <input
+                        name="password"
+                        className="fontAwesome login__form__input__text"
+                        value={password}
+                        type="password"
+                        placeholder="&#xf13e; Password"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <div className="forgot__password" onClick={() => { setResetPassword(true); setLoginIsShown(false) }}>Forgot Password?</div>
+                    </div>
+                    <button type="submit" className="login__form__button" disabled={!validateForm()} >
+                        LOG IN
+                    </button>
+                </form>
+                <hr />
+                <h2 className="switch__login">Create a New Account</h2>
+                <button type="submit" className="login__form__button" onClick={() => setLoginIsShown(false)}>
+                    SIGN UP
                 </button>
-                    </form>
-                    <hr />
-                    <div>Create a New Account</div>
-                    <button type="submit" onClick={() => setLoginIsShown(false)}>
-                        SIGN UP
-            </button>
-                </div> : <Register loginIsShown={loginIsShown} />
+            </div> : <Register loginIsShown={loginIsShown} />
         }
             {
                 resetPassword ? <ResetPassword /> : ''
