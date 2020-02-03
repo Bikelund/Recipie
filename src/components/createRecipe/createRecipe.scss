@@ -21,6 +21,7 @@
 .create__recipe__form__input {
   display: block;
   margin: 0 50px;
+
   &__title {
     font-size: 10px;
   }
@@ -31,11 +32,14 @@
     padding: 4px 10px;
     border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
   }
+
   &__image {
     display: none;
+
     &__title {
       font-size: 10px;
     }
+
     &__box {
       width: calc(100% - 120px);
       height: 70px;
@@ -43,6 +47,7 @@
       background-color: white;
       position: relative;
     }
+
     &__icon {
         font-size: 23px;
         opacity: 0.6;
@@ -52,4 +57,23 @@
         transform: translate(-51%, -53%);
     }
   }
+}
+
+.create__recipe__form__select,
+.create__recipe__form__category {
+  margin: 6px 0;
+  padding: 4px 10px;
+  border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
+  width: 100%;
+  background-color: white;
+}
+
+.create__recipe__form__select:hover,
+.create__recipe__form__category:hover {
+  border: 1px solid rgba($color: $color_light_red_orange, $alpha: 1);
+}
+
+.create__recipe__form__select option,
+.create__recipe__form__category option {
+  font-weight:normal;
 }
