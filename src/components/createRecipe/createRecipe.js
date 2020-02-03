@@ -11,32 +11,45 @@ function CreateRecipe() {
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
     const [ingredients, setIngredients] = useState([])
+    const [fields, setFields] = useState([{ value: null }]);
     const [image, setImage] = useState('')
+    const [srcImg, setSrcImg] = useState('')
     const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder value
 
 
     function addIngredientsField() {
-
+        const values = [...fields];
+        values.push({ value: null });
+        setFields(values);
     }
 
 
-    function setIngredientsChange (e, index) {
-        ingredients[index] = e.target.value
-        console.log(index)
-        setIngredients(ingredients)
+    function setIngredientsChange(event, i) {
+        const values = [...ingredients];
 
+        //Make first letter uppercase 
+        values[i] = event.target.value
+            .toLowerCase()
+            .split(' ')
+            .map(s => s.charAt(0).toUpperCase() + s.substr(1))
+            .join(' ');
+
+        setIngredients(values);
     }
-    // function setIngredientsChange(e) {
-    //     console.log(e.target.name)
-    //     // ingredients[index] = e.target.value
 
-    //     //Set tha changed state
-    //     setIngredients(ingredients)
-    //     console.log(ingredients)
-    // }
+    function setSrcImage(file) {
+        let reader = new FileReader()
+        reader.onloadend = () => {
+            setSrcImg(reader.result)
+        }   
+        reader.readAsDataURL(file)
+    }
+
+
 
     function handleSubmit(event) {
         event.preventDefault()
+        console.log(ingredients)
         firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
             const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
             const filename = image.name; //Get image name from image state
@@ -53,6 +66,7 @@ function CreateRecipe() {
                         title: title,
                         category: category,
                         servings: servings,
+                        ingredients: ingredients,
                         imageUrl: downloadUrl
                     })
                 })
@@ -89,12 +103,11 @@ function CreateRecipe() {
                         </label>
                         <label htmlFor="category">
                             <div className="create__recipe__form__input__title">Category</div>
-                            {/* Nicklas */}
-                            <select 
-                            name="category" 
-                            id="category" 
-                            className="create__recipe__form__category"
-                            onChange={e => setServings(e.target.value)}>
+                            <select
+                                name="category"
+                                id="category"
+                                className="create__recipe__form__category"
+                                onChange={e => setCategory(e.target.value)}>
                                 <option value="Brunch">Brunch</option>
                                 <option value="Buffé">Buffé</option>
                                 <option value="Efterrätt">Efterrätt</option>
@@ -107,16 +120,16 @@ function CreateRecipe() {
                                 <option value="Middag">Middag</option>
                             </select>
                         </label>
-                        {/* Nicklas slut */}
                         <label htmlFor="servings">
                             <div className="create__recipe__form__input__title">Servings</div>
-                            <select 
-                            name="servings" 
-                            id="servings" 
-                            className="create__recipe__form__select"
-                            onChange={e => setServings(e.target.value)}>
+                            <select
+                                name="servings"
+                                id="servings"
+                                defaultValue="2"
+                                className="create__recipe__form__select"
+                                onChange={e => setServings(e.target.value)}>
                                 <option value="1">1</option>
-                                <option value="2" selected>2</option>
+                                <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
@@ -131,17 +144,31 @@ function CreateRecipe() {
                                     key={index}
                                     id={index}
                                     className="create__recipe__form__input__text"
-                                    value={ingredients}
-                                    type="ingredients"
+                                    // value={ingredients[index]}
+                                    type="text"
                                     placeholder={placeholder}
-                                    onChange={e => setIngredients(e.target.value)}
+                                    onChange={e => { setIngredientsChange(e, e.target.id) }}
                                 />
                             )
                         })}
-                        <div onClick={addIngredientsField}>Add</div>
+
+                        {fields.map((_, index) => {
+                            return (
+                                <input
+                                    name="ingredients"
+                                    key={index}
+                                    id={index + 5} //Index starts from 5 because there are already 4 default input field.
+                                    className="create__recipe__form__input__text"
+                                    // value={ingredients[index + 5]}
+                                    type="text"
+                                    onChange={e => { setIngredientsChange(e, e.target.id) }}
+                                />
+                            );
+                        })}
+                        <div className="fontAwesome create__recipe__form__input__add" onClick={() => addIngredientsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
-                        <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>
-                            <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => setImage(e.target.files[0])} />
+                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
+                            <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
                     </div>
                     <button className="create__recipe__form__button" type="submit">
