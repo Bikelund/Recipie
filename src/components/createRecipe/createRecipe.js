@@ -90,28 +90,38 @@ function CreateRecipe() {
                         <label htmlFor="category">
                             <div className="create__recipe__form__input__title">Category</div>
                             {/* Nicklas */}
-                            <input
-                                name="category"
-                                id="category"
-                                className="create__recipe__form__input__text"
-                                value={category}
-                                type="category"
-                                placeholder="Pasta"
-                                onChange={e => setCategory(e.target.value)}
-                            /><br />
+                            <select 
+                            name="category" 
+                            id="category" 
+                            className="create__recipe__form__category"
+                            onChange={e => setServings(e.target.value)}>
+                                <option value="Brunch">Brunch</option>
+                                <option value="Buffé">Buffé</option>
+                                <option value="Efterrätt">Efterrätt</option>
+                                <option value="Fika">Fika</option>
+                                <option value="Frukost">Frukost</option>
+                                <option value="Förrätt">Förrätt</option>
+                                <option value="Huvudrätt">Huvudrätt</option>
+                                <option value="Lunch">Lunch</option>
+                                <option value="Mellanmål">Mellanmål</option>
+                                <option value="Middag">Middag</option>
+                            </select>
                         </label>
                         {/* Nicklas slut */}
                         <label htmlFor="servings">
                             <div className="create__recipe__form__input__title">Servings</div>
-                            <input
-                                name="servings"
-                                id="servings"
-                                className="create__recipe__form__input__text"
-                                value={servings}
-                                type="servings"
-                                placeholder="2"
-                                onChange={e => setServings(e.target.value)}
-                            /><br />
+                            <select 
+                            name="servings" 
+                            id="servings" 
+                            className="create__recipe__form__select"
+                            onChange={e => setServings(e.target.value)}>
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
                         </label>
                         <div className="create__recipe__form__input__title">Ingredients</div>
                         {ingredientsPlaceholder.map((placeholder, index) => {
