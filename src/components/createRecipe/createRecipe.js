@@ -10,7 +10,20 @@ function CreateRecipe() {
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
+    const [ingredients, setIngredients] = useState([])
     const [image, setImage] = useState('')
+
+    function addIngredientsField() {
+        setIngredients([...ingredients])
+    }
+
+    function handleChange(e, index) {
+        ingredients[index] = e.target.value
+
+        //Set tha changed state
+        setIngredients(ingredients)
+       console.log(ingredients)
+    }
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -52,43 +65,68 @@ function CreateRecipe() {
                 <div className="create__recipe__title">Create Recipe</div>
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
-                        <label for="title">
-                            <div className="create__recipe__form__input__title">title</div>
+                        <label htmlFor="title">
+                            <div className="create__recipe__form__input__title">Title</div>
                             <input
                                 name="title"
                                 id="title"
                                 className="create__recipe__form__input__text"
                                 value={title}
                                 type="text"
-                                placeholder="title"
+                                placeholder="Tomato pasta"
                                 onChange={e => setTitle(e.target.value)}
                             /><br />
                         </label>
-                        <label for="category">
-                        <div className="create__recipe__form__input__title">category</div>
+                        <label htmlFor="category">
+                            <div className="create__recipe__form__input__title">Category</div>
+
                             <input
                                 name="category"
                                 id="category"
                                 className="create__recipe__form__input__text"
                                 value={category}
                                 type="category"
-                                placeholder="category"
+                                placeholder="Pasta"
                                 onChange={e => setCategory(e.target.value)}
                             /><br />
                         </label>
-                        <label for="servings">
-                        <div className="create__recipe__form__input__title">servings</div>
+                        <label htmlFor="servings">
+                            <div className="create__recipe__form__input__title">Servings</div>
                             <input
                                 name="servings"
+                                id="servings"
                                 className="create__recipe__form__input__text"
                                 value={servings}
                                 type="servings"
-                                placeholder="servings"
+                                placeholder="2"
                                 onChange={e => setServings(e.target.value)}
                             /><br />
                         </label>
-                        <label className="create__recipe__form__input__image__title" for="file_upload">Image
-                        <div className="create__recipe__form__input__image__icon"></div>
+                        <div className="create__recipe__form__input__title">Ingredients</div>
+                        {ingredients.map((item,index) => {
+                            return (
+                                <input
+                                    name="ingredients"
+                                    className="create__recipe__form__input__text"
+                                    value={item}
+                                    type="ingredients"
+                                    placeholder="500g Tomato can"
+                                    onChange={e => handleChange(e, index)}
+                                />
+                            )
+                        })}
+                        {/* <input
+                                name="ingredients"
+                                id="ingredients"
+                                className="create__recipe__form__input__text"
+                                value={ingredients}
+                                type="ingredients"
+                                placeholder="500g Tomato can"
+                                onChange={e => setIngredients(e.target.value)}
+                            /><br /> */}
+                        <div onClick={addIngredientsField}>Add</div>
+                        <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
+                        <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => setImage(e.target.files[0])} />
                         </label>
                     </div>
