@@ -33,16 +33,21 @@ function NavBar() {
         <nav className="navigation">
           <ul className="navigation__ul">
             <li className="navigation__ul__li">
-              <Link to="/">Home</Link>
+              <Link to="/" className="fontAwesome navigation__ul__li--link">
+                <div className="navigation__ul__home"></div>
+              </Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/recipes">Recipes</Link>
+              <Link to="/recipes" className="fontAwesome navigation__ul__li--link">&#xf02d;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/user">User</Link>
+              <Link to="/user" className="fontAwesome navigation__ul__li--link">&#xf2bd;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/menu">Menu</Link>
+              <Link to="/search" className="fontAwesome navigation__ul__li--link">&#xf002;</Link>
+            </li>
+            <li className="navigation__ul__li">
+              <Link to="/menu" className="fontAwesome navigation__ul__li--link navigation__dots">&#xf111; &#xf111; &#xf111;</Link>
             </li>
           </ul>
         </nav>
@@ -58,6 +63,9 @@ function NavBar() {
           </Route>
           <Route path="/user">
             {isUserloggedIn}
+          </Route>
+          <Route path="/search">
+            {console.log("Searching..")}
           </Route>
           <Route path="/menu">
             <Menu />

@@ -12,12 +12,29 @@
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         height: 100%;
     }
 
     &__ul__li {
         display: inline-block;
+        font-size: 30px;
+    }
+    
+    &__ul__home {
+        background: url('/img/pie.svg');
+        width: 30px;
+        height: 30px;
+    }
+
+    &__ul__li--link {
+        text-decoration: none;
+        color: $color_white;
+    }
+
+    &__dots {
+        font-size: 12px;
+        padding-bottom: 6px;
     }
 }
