@@ -79,7 +79,7 @@ function CreateRecipe() {
                         </label>
                         <label htmlFor="category">
                             <div className="create__recipe__form__input__title">Category</div>
-
+                            {/* Nicklas */}
                             <input
                                 name="category"
                                 id="category"
@@ -90,6 +90,7 @@ function CreateRecipe() {
                                 onChange={e => setCategory(e.target.value)}
                             /><br />
                         </label>
+                        {/* Nicklas slut */}
                         <label htmlFor="servings">
                             <div className="create__recipe__form__input__title">Servings</div>
                             <input
