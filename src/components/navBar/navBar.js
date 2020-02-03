@@ -65,7 +65,7 @@ function NavBar() {
             {isUserloggedIn}
           </Route>
           <Route path="/search">
-            {console.log("Searching..")}
+            <Hero />
           </Route>
           <Route path="/menu">
             <Menu />
