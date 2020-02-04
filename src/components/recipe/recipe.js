@@ -4,12 +4,12 @@ import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 
 function Recipe({ recipe }) {
-
   const [backToPage, setBackToPage] = useState(false)
   const style = {
     backgroundImage: `url(${recipe.imageUrl})`
   }
 
+  // Parameters for Swiper
   const params = {
     initialSlide: 1, /* Starting slide index */
     speed: 600,
@@ -37,10 +37,10 @@ function Recipe({ recipe }) {
         <div className="recipe__ingredients">
           <h2>Ingredients</h2>
           <ul className="recipe__ingredients__ul">
-            {/* data-swiper-parallax creates a fade in delay */}
-          
-            {recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li> 
-              )
+            { 
+              !recipe.ingredients === true ? <li className="recipe__ingredients__ul__li">You have all you need</li>
+              :recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li>)
+              // data-swiper-parallax creates a fade in delay 
             }
           </ul>
 
@@ -67,12 +67,11 @@ function Recipe({ recipe }) {
         <div className="recipe__how-to-cook">
           <h2>How to cook</h2>
           <ol className="recipe__how-to-cook__ol">
-            {/* data-swiper-parallax creates a fade in delay */}
-            <li data-swiper-parallax="0"    className="recipe__how-to-cook__ol__li">Step One</li>
-            <li data-swiper-parallax="-100" className="recipe__how-to-cook__ol__li">Step Two</li>
-            <li data-swiper-parallax="-200" className="recipe__how-to-cook__ol__li">Step Three</li>
-            <li data-swiper-parallax="-300" className="recipe__how-to-cook__ol__li">Step Four</li>
-            <li data-swiper-parallax="-400" className="recipe__how-to-cook__ol__li">Step Five</li>
+            { 
+              !recipe.directions === true ? <li className="recipe__how-to-cook__ol__li">Just eat it</li>
+              :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__how-to-cook__ol__li">{item}</li>)
+              // data-swiper-parallax creates a fade in delay      
+            }
           </ol>
 
           <div className="button__container button__container--right fontAwesome">
