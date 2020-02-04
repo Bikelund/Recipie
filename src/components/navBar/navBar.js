@@ -4,6 +4,10 @@ import Hero from '../hero/hero';
 import Menu from '../menu/menu';
 import Login from '../login/Login';
 import MyRecipes from '../myRecipes/myRecipes';
+import CreateRecipe from '../createRecipe/createRecipe'
+import ResetPassword from '../login/ResetPassword';
+import Register from '../register/register'
+import Recipe from '../recipe/recipe';
 import firebase from '../firebase/firebase';
 import {
   BrowserRouter as Router,
@@ -13,15 +17,15 @@ import {
 } from "react-router-dom";
 
 function NavBar() {
-  const [isUserloggedIn, setIsUserLoggedIn] = useState('')
+  const [isUserloggedIn, setIsUserLoggedIn] = useState(null)
 
   useEffect(() => {
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
-              setIsUserLoggedIn(<MyRecipes />)
+              setIsUserLoggedIn(true)
           }
           else {
-              setIsUserLoggedIn(<Login />)
+              setIsUserLoggedIn(false)
           }
       })
       
@@ -41,7 +45,7 @@ function NavBar() {
               <Link to="/recipes" className="fontAwesome navigation__ul__li--link">&#xf02d;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/user" className="fontAwesome navigation__ul__li--link">&#xf2bd;</Link>
+              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link">&#xf2bd;</Link>
             </li>
             <li className="navigation__ul__li">
               <Link to="/search" className="fontAwesome navigation__ul__li--link">&#xf002;</Link>
@@ -61,14 +65,26 @@ function NavBar() {
           <Route path="/recipes">
             <Recipes />
           </Route>
-          <Route path="/user">
-            {isUserloggedIn}
+          <Route path="/myRecipe">
+            <MyRecipes />
           </Route>
           <Route path="/search">
             <Hero />
           </Route>
           <Route path="/menu">
             <Menu />
+          </Route>
+          <Route path="/createRecipe">
+            <CreateRecipe />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/resetPassword">
+            <ResetPassword />
           </Route>
         </Switch>
       </div>

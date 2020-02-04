@@ -3,10 +3,9 @@ import firebase from '../firebase/firebase';
 import 'firebase/firestore';
 import { firestore } from 'firebase';
 import { v4 as uuid } from 'uuid';
-import MyRecipes from '../myRecipes/myRecipes';
+import { useHistory } from "react-router-dom";
 
 function CreateRecipe() {
-    const [backToPage, setBackToPage] = useState(false)
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
@@ -18,6 +17,7 @@ function CreateRecipe() {
     const [srcImg, setSrcImg] = useState('')
     const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder ingredients value
     const directionsPlaceholder = ['Cut the eggplant', 'Prepare boild water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls'] // Default placeholder directions value
+    const history = useHistory();
 
 
     //Add ingredients field when user click on Add button
@@ -109,10 +109,8 @@ function CreateRecipe() {
 
 
     return (
-        <>{backToPage ?
-            <MyRecipes /> :
-            <>
-                <div onClick={() => setBackToPage(true)} className="arrow"></div>
+        <>
+                <div onClick={() => history.goBack()} className="arrow"></div>
                 <div className="create__recipe__title">Create Recipe</div>
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
@@ -249,8 +247,6 @@ function CreateRecipe() {
                         ADD RECEPT
                     </button>
                 </form>
-            </>
-        }
         </>
     )
 }

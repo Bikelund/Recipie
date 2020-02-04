@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../firebase/firebase';
 import { getUserRecipes } from '../../server/api';
 import Recipe from '../recipe/recipe';
-import CreateRecipe from '../createRecipe/createRecipe';
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+
 
 
 
@@ -10,7 +12,8 @@ function MyRecipes() {
     const [recipes, setRecipes] = useState([]) //All my recipe lists state
     const [recipe, setrecipe] = useState([]) //One recipe state which was clicked 
     const [showRecipeList, setshowRecipeList] = useState(true) //Check if my recipe list is shown
-    const [createRecipeIsShown, setCreateRecipeIsShown] = useState(false) //Check if create recipe component is shown
+    const history = useHistory();
+
 
     //Data fetching after render
     useEffect(() => {

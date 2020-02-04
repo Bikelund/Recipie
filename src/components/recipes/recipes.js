@@ -15,7 +15,7 @@ function AllRecipes() {
             setRecipes(allUserRecipes) //Set data to recipes state
         }
         fetchData();
-      }, []) //Passing empty array because we want to run an effect only once
+    }, []) //Passing empty array because we want to run an effect only once
 
     /**
     *
@@ -24,10 +24,11 @@ function AllRecipes() {
     function seeRecipe(recipe) {
         setrecipe(recipe)
     }
-    
+
     return (
         <>
-        {showRecipeList ? 
+            {
+        showRecipeList ? 
             <>
             <div className='recipes'>
                 <h1>All Recipes</h1>

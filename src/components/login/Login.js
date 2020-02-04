@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import firebase from '../firebase/firebase';
-import ResetPassword from './ResetPassword';
-import Register from '../register/register';
+import { useHistory } from 'react-router-dom';
 
-
-function Login({ registerIsShown }) {
+function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [resetPassword, setResetPassword] = useState(false)
-    const [loginIsShown, setLoginIsShown] = useState(!registerIsShown ? true : false)
     const [emailErrorMsg, setEmailErrorMsg] = useState(false)
     const [passwordErrorMsg, setPasswordErrorMsg] = useState(false)
     const [message, setMessage] = useState('');
+    const history = useHistory();
     
 
     function validateForm() {
@@ -23,6 +20,7 @@ function Login({ registerIsShown }) {
 
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
+            history.push('/myRecipe')
             setEmail('')
             setPassword('')
         } catch (error) {
@@ -42,7 +40,7 @@ function Login({ registerIsShown }) {
 
     return (
         <>
-            {resetPassword? <ResetPassword/> : loginIsShown ?
+            {
                 <div>
                     <h1 className="login__title">Log in to Recipie</h1>
                     <form className="login__form" onSubmit={handleSubmit}>
@@ -65,7 +63,7 @@ function Login({ registerIsShown }) {
                                 placeholder="&#xf13e; Password"
                                 onChange={e => setPassword(e.target.value)}
                             />
-                            <div className="forgot__password" onClick={() => { setResetPassword(true); setLoginIsShown(false); }}>Forgot Password?</div>
+                            <div className="forgot__password" onClick={() => {history.push('/resetPassword') }}>Forgot Password?</div>
                         </div>
                         <button type="submit" className="login__form__button" disabled={!validateForm()} >
                             LOG IN
@@ -73,10 +71,10 @@ function Login({ registerIsShown }) {
                     </form>
                     <hr />
                     <h2 className="switch__login">Create a New Account</h2>
-                    <button type="submit" className="login__form__button sign__up" onClick={() => setLoginIsShown(false)}>
+                    <button type="submit" className="login__form__button sign__up" onClick={() => history.push('/register')}>
                         SIGN UP
                 </button>
-                </div> : <Register loginIsShown={loginIsShown} />
+                </div> 
             }
         </>
     )

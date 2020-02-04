@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import firebase from '../firebase/firebase';
-import Login from '../login/Login';
+import { useHistory } from 'react-router-dom';
 
 
 function ResetPassword() {
     const [email, setEmail] = useState('');
     const [errorMsg, seterrorMeg] = useState(false);
-    const [backToPage, setBackToPage] = useState(false)
+    const [backToPage, setBackToPage] = useState(false);
+    const history = useHistory();
 
     function validateForm() {
         return email.length > 0;
@@ -31,10 +32,8 @@ function ResetPassword() {
 
     return (
         <>
-            {backToPage ?
-            <Login /> : 
-            <>
-                <div onClick={() => setBackToPage(true)} className="arrow"></div>
+    
+                <div onClick={() => history.goBack()} className="arrow"></div>
                 <h1 className="login__title">Reset Password</h1>
                 <form className="login__form" onSubmit={handleSubmit}>
                     <div className="login__form__input">
@@ -52,8 +51,6 @@ function ResetPassword() {
                         SUBMIT
                 </button>
                 </form>
-                </>
-            }
         </>
     )
 }

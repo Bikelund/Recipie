@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import firebase from '../firebase/firebase';
 import Login from '../login/Login';
 import MyRecipes from '../myRecipes/myRecipes';
+import { useHistory } from 'react-router-dom';
 
-function Register({ loginIsShown }) {
+function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [registerIsShown, setRegisterIsShown] = useState(!loginIsShown ? true : false)
     const [emailErrorMsg, setEmailErrorMsg] = useState(false)
     const [passwordErrorMsg, setPasswordErrorMsg] = useState(false)
     const [myRecipeListisShown, setMyRecipeListisShown] = useState(false)
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('')
+    const history = useHistory()
 
 
 
@@ -23,7 +24,7 @@ function Register({ loginIsShown }) {
 
         try {
             await firebase.auth().createUserWithEmailAndPassword(email, password);
-            setMyRecipeListisShown(true)
+            history.push('/myRecipe')
             setEmail('')
             setPassword('')
         } catch (error) {
@@ -49,8 +50,7 @@ function Register({ loginIsShown }) {
 
     return (
         <>
-            {myRecipeListisShown ? <MyRecipes /> :
-                registerIsShown ?
+            {
                     <div>
                         <h1 className="login__title">Create a New Account</h1>
                         <form className="login__form" onSubmit={handleSubmit}>
@@ -80,10 +80,10 @@ function Register({ loginIsShown }) {
                         </form>
                         <hr />
                         <h2 className="switch__login">Log in to Recipie</h2>
-                        <button type="submit" className="login__form__button" onClick={() => setRegisterIsShown(false)}>
+                        <button type="submit" className="login__form__button" onClick={() => history.push('/login')}>
                             LOG IN
             </button>
-                    </div> : <Login registerIsShown={registerIsShown} />
+                    </div> 
             }
         </>
     )
