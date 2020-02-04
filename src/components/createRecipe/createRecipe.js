@@ -207,7 +207,8 @@ function CreateRecipe() {
                         {directionsPlaceholder.map((placeholder, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <div className="create__recipe__form__input__number"><span>{index + 1}</span></div>
+                                <div className="create__recipe__form__input__container">
+                                    <div className="create__recipe__form__input__number">{index + 1}</div>
                                     <textarea
                                         name="directions"
                                         id={index}
@@ -216,6 +217,7 @@ function CreateRecipe() {
                                         placeholder={placeholder}
                                         onChange={e => { setDirectionsChange(e, e.target.id) }}
                                     />
+                                </div>
                                 </React.Fragment>
                             )
                         })}
@@ -223,7 +225,8 @@ function CreateRecipe() {
                         {directionsFields.map((_, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <div className="create__recipe__form__input__number"><span>{index + 4}</span></div>
+                                <div className="create__recipe__form__input__container">
+                                    <div className="create__recipe__form__input__number">{index + 4}</div>
                                     <textarea
                                         name="directions"
                                         id={index + 3} //Index starts from 3 because there are already 3 default input field.
@@ -231,6 +234,7 @@ function CreateRecipe() {
                                         type="text"
                                         onChange={e => { setDirectionsChange(e, e.target.id) }}
                                     />
+                                </div>
                                 </React.Fragment>
                             );
                         })}
