@@ -73,6 +73,12 @@
     }
   }
 
+  &__container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
   &__number {
     height:20px;
     width:20px;
@@ -84,6 +90,8 @@
     border-radius: 50%;
     flex-flow: column; 
     vertical-align: top;
+    position: absolute;
+    left: -25px;
   }
   
 }
