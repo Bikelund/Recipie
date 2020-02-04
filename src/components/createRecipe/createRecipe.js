@@ -95,6 +95,7 @@ function CreateRecipe() {
                         directions: directions,
                         imageUrl: downloadUrl
                     })
+                    console.log('loading')
                 })
                 .then(() => {
                     console.log('Recipe Created');
@@ -124,8 +125,12 @@ function CreateRecipe() {
                                 value={title}
                                 type="text"
                                 placeholder="Tomato pasta"
-                                onChange={e => setTitle(e.target.value)}
-                                required 
+                                onChange={e => setTitle(e.target.value
+                                    .toLowerCase() //Make first letter of a string uppercase
+                                    .split(' ')
+                                    .map(s => s.charAt(0).toUpperCase() + s.substr(1))
+                                    .join(' '))}
+                                required
                             />
                         </label>
                         <label htmlFor="category">
