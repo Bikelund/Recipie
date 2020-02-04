@@ -12,18 +12,22 @@ function CreateRecipe() {
     const [category, setCategory] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [fields, setFields] = useState([{ value: null }]);
+    const [directions, setDirections] = useState([])
+    const [directionsFields, setDirectionsFields] = useState([{ value: null }]);
     const [image, setImage] = useState('')
     const [srcImg, setSrcImg] = useState('')
-    const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder value
+    const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder ingredients value
+    const directionsPlaceholder = ['Cut the eggplant', 'Prepare boild water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls'] // Default placeholder directions value
 
 
+    //Add ingredients field when user click on Add button
     function addIngredientsField() {
         const values = [...fields];
         values.push({ value: null });
         setFields(values);
     }
 
-
+    //Add ingredients in array 
     function setIngredientsChange(event, i) {
         const values = [...ingredients];
 
@@ -33,15 +37,37 @@ function CreateRecipe() {
             .split(' ')
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
-
         setIngredients(values);
     }
 
+    //Add directions field when user click on Add button
+    function addDirectionsField() {
+        const values = [...directionsFields];
+        values.push({ value: null });
+        setDirectionsFields(values);
+    }
+
+    //Add directions in array
+    function setDirectionsChange(event, i) {
+        const values = [...directions];
+
+        //Make first letter uppercase 
+        values[i] = event.target.value
+            .toLowerCase()
+            .split(' ')
+            .map(s => s.charAt(0).toUpperCase() + s.substr(1))
+            .join(' ');
+
+        setDirections(values);
+        console.log(values)
+    }
+
+    //When user chose image, display it on image input field
     function setSrcImage(file) {
         let reader = new FileReader()
         reader.onloadend = () => {
             setSrcImg(reader.result)
-        }   
+        }
         reader.readAsDataURL(file)
     }
 
@@ -49,7 +75,6 @@ function CreateRecipe() {
 
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(ingredients)
         firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
             const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
             const filename = image.name; //Get image name from image state
@@ -67,6 +92,7 @@ function CreateRecipe() {
                         category: category,
                         servings: servings,
                         ingredients: ingredients,
+                        directions: directions,
                         imageUrl: downloadUrl
                     })
                 })
@@ -99,7 +125,8 @@ function CreateRecipe() {
                                 type="text"
                                 placeholder="Tomato pasta"
                                 onChange={e => setTitle(e.target.value)}
-                            /><br />
+                                required 
+                            />
                         </label>
                         <label htmlFor="category">
                             <div className="create__recipe__form__input__title">Category</div>
@@ -108,6 +135,7 @@ function CreateRecipe() {
                                 id="category"
                                 className="create__recipe__form__category"
                                 onChange={e => setCategory(e.target.value)}>
+                                <option >-- choose --</option>
                                 <option value="Brunch">Brunch</option>
                                 <option value="Buffé">Buffé</option>
                                 <option value="Efterrätt">Efterrätt</option>
@@ -125,9 +153,10 @@ function CreateRecipe() {
                             <select
                                 name="servings"
                                 id="servings"
-                                defaultValue="2"
+                                defaultValue="choose"
                                 className="create__recipe__form__select"
                                 onChange={e => setServings(e.target.value)}>
+                                <option>-- choose --</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -137,6 +166,7 @@ function CreateRecipe() {
                             </select>
                         </label>
                         <div className="create__recipe__form__input__title">Ingredients</div>
+                        {/* Default ingredients field which is 5 fields*/}
                         {ingredientsPlaceholder.map((placeholder, index) => {
                             return (
                                 <input
@@ -151,7 +181,7 @@ function CreateRecipe() {
                                 />
                             )
                         })}
-
+                        {/* Add ingredients field when user click Add button */}
                         {fields.map((_, index) => {
                             return (
                                 <input
@@ -166,6 +196,41 @@ function CreateRecipe() {
                             );
                         })}
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addIngredientsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
+                        <div className="create__recipe__form__input__title">Directions</div>
+                        {/* Default directions field which is 3 fields */}
+                        {/* Nicklas */}
+                        {directionsPlaceholder.map((placeholder, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                <div className="create__recipe__form__input__number"><span>{index + 1}</span></div>
+                                <textarea
+                                    name="directions"
+                                    id={index}
+                                    className="create__recipe__form__input__text"
+                                    type="text"
+                                    placeholder={placeholder}
+                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                />
+                                </React.Fragment>
+                            )
+                        })}
+                        {/* Add directions field when user click on Add button */}
+                        {directionsFields.map((_, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                <div className="create__recipe__form__input__number"><span>{index + 4}</span></div>
+                                <textarea
+                                    name="directions"
+                                    id={index + 3} //Index starts from 3 because there are already 3 default input field.
+                                    className="create__recipe__form__input__text"
+                                    type="text"
+                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                />
+                                </React.Fragment>
+                            );
+                        })}
+                        {/* Nickas end */}
+                        <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
                         {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
