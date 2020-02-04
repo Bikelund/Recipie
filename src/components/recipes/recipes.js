@@ -16,7 +16,7 @@ function AllRecipes() {
             setRecipes(allUserRecipes) //Set data to recipes state
         }
         fetchData();
-      }, []) //Passing empty array because we want to run an effect only once
+    }, []) //Passing empty array because we want to run an effect only once
 
     /**
     *
@@ -25,22 +25,24 @@ function AllRecipes() {
     function seeRecipe(recipe) {
         setrecipe(recipe)
     }
-    
+
     return (
         <>
-        {showRecipeList ? 
+            {
+        showRecipeList ? 
             <>
-                <div className='recipes'>
-                    <h1>All recipes</h1>
-                    {recipes.length === 0 ? <div>There are no recipes here</div>
-                        : Object.keys(recipes).map((i, key) => (
-                            <div className='recipes__recipe' key={key} onClick={() => {seeRecipe(recipes[i]); setshowRecipeList(false)}}>
-                                <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
-                                <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
-                            </div>  
-                        ))}
-                </div>
-            </> : <Recipe recipe={recipe} />
+            <div className='recipes'>
+                <h1>All recipes</h1>
+                {recipes.length === 0 ? <div>There are no recipes here</div>
+                    : Object.keys(recipes).map((i, key) => (
+                        <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
+                            <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
+                            <div className="recipes__recipe__image" style={{ backgroundImage: `url(${recipes[i].imageUrl})` }}></div>
+                        </div>
+                    ))}
+            </div>
+            </> 
+            : <Recipe recipe={recipe} />
         }
         </>
     )
