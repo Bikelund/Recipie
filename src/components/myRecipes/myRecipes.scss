@@ -1,0 +1,37 @@
+.myRecipes {
+    background-color: $color_white;
+    padding-bottom: 60px;
+
+    h1 {
+        text-align: center;
+        margin: 0;
+        padding: 12px 0;
+    }
+
+    &__btn {
+        background-color: $color_light_red_orange;
+        color: $color_white;
+        border: none;
+        padding: 4px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 10px;
+        margin: 20px auto;
+    }
+
+    &__btn__create-recipe {
+        background-color: $color_green;
+        padding: 10px 32px;
+        font-size: 16px;
+        width: 80%;
+    }
+
+    &__btn__log-out {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 6px 10px;
+        margin: 0;
+    }
+}

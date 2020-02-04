@@ -38,18 +38,20 @@ function MyRecipes() {
         <>
             {createRecipeIsShown ? <CreateRecipe /> :
                 showRecipeList ? <>
+                <div className="myRecipes">
                     <h1>My Recipes</h1>
-                    <button onClick={() => firebase.auth().signOut()}>LOG OUT</button>
-                    <button onClick={() => { setCreateRecipeIsShown(true) }}>Create Recipe</button>
+                    <button className="myRecipes__btn__log-out myRecipes__btn fontAwesome" onClick={() => firebase.auth().signOut()}>&#xf0a5; Log out</button>
+                    <button className="myRecipes__btn__create-recipe myRecipes__btn fontAwesome" onClick={() => { setCreateRecipeIsShown(true) }}>Create Recipe &#xf044;</button>
                     <div className='recipes'>
                         {recipes.length === 0 ? <div>There is no recipe</div>
                             : Object.keys(recipes).map((i, key) => (
                                 <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
                                     <h2 className='recipes__recipe__title' >{recipes[i].title}</h2>
-                                    <img className='recipes__recipe__image' src={recipes[i].imageUrl} alt={recipes[i].title}></img>
+                                    <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
                                 </div>
                             ))}
                     </div>
+                </div>
                 </> : <Recipe recipe={recipe} />
             }
         </>
