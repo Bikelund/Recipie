@@ -3,9 +3,15 @@ import MyRecipes from '../myRecipes/myRecipes';
 import EditRecipe from '../editRecipe/editRecipe';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
+import { useHistory } from 'react-router-dom';
 
-function Recipe({ recipe }) {
+function Recipe( props ) {
+  console.log(props)
+  const recipe = props.history.location.state //Get data through <Route render={...props} /> from myRecipes.js or recipes.js
+  console.log(recipe)
   const [backToPage, setBackToPage] = useState(false)
+  const history = useHistory()
+
   const style = {
     backgroundImage: `url(${recipe.imageUrl})`
   }
@@ -25,8 +31,6 @@ function Recipe({ recipe }) {
   }
 
   return (
-    <>{backToPage ?
-      <MyRecipes /> :
       <>
       <Swiper {...params}>
         {/* Slide Ingredients */}
@@ -49,9 +53,7 @@ function Recipe({ recipe }) {
         {/* Slide Title */}
         <div className="recipe__title" data-initial-slide="1"> {/* Makes this the initial slide */}
           <h1>{recipe.title}</h1>
-          <div onClick={() => setBackToPage(true)} className="arrowBack fontAwesome">
-            <p>Go back to my recipes</p>
-          </div>
+          <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
           <div className="bgImg" style={style}></div>
           <button className="delete" onClick={() => { console.log("test") }}>Edit</button>
           <div className="button__container fontAwesome">
@@ -77,8 +79,6 @@ function Recipe({ recipe }) {
 
         </div>
       </Swiper>
-      </>
-    }
     </>
   )
 };

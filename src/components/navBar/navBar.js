@@ -76,9 +76,7 @@ function NavBar() {
           <Route path="/search">
             <Hero />
           </Route>
-          {/* <Route path="/menu">
-            <Menu />
-          </Route> */}
+
           <Route path="/createRecipe">
             <CreateRecipe />
           </Route>
@@ -91,6 +89,8 @@ function NavBar() {
           <Route path="/resetPassword">
             <ResetPassword />
           </Route>
+          {/* to pass a prop to a Recipe component */}
+          <Route path="/recipe" render={(props)=> <Recipe {...props} />} />
         </Switch>
       </div>
     </Router>

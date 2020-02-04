@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUserRecipes } from '../../server/api';
-import Recipe from '../recipe/recipe';
+import { useHistory } from 'react-router-dom';
 
 function AllRecipes() {
     const [recipes, setRecipes] = useState([]) //All recipes lists state
-    const [recipe, setrecipe] = useState([]) //One recipe state which was clicked 
-    const [showRecipeList, setshowRecipeList] = useState(true)
+    const history = useHistory()
 
     //Data fetching after render
     useEffect(() => {
@@ -17,31 +16,27 @@ function AllRecipes() {
         fetchData();
     }, []) //Passing empty array because we want to run an effect only once
 
-    /**
-    *
-    * @param recipe object of recipe data which was clicked
-    */
-    function seeRecipe(recipe) {
-        setrecipe(recipe)
-    }
 
     return (
         <>
-            {
+            {/* {
         showRecipeList ? 
-            <>
+            <> */}
             <div className='recipes'>
                 <h1>All Recipes</h1>
-                {recipes.length === 0 ? <div>There are no recipes here</div>
+                {recipes.length === 0 ? ''
                     : Object.keys(recipes).map((i, key) => (
-                        <div className='recipes__recipe' key={key} onClick={() => {seeRecipe(recipes[i]); setshowRecipeList(false)}}>
+                        <div className='recipes__recipe' key={key} onClick={() => {history.push({
+                            pathname: '/recipe',
+                            state : recipes[i]
+                        })}}>
                             <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
                             <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
                         </div>  
                     ))}
             </div>
-            </> : <Recipe recipe={recipe} />
-        }
+            {/* </> : <Recipe recipe={recipe} />
+        } */}
         </>
     )
 }
