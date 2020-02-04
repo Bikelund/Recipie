@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 function ResetPassword() {
     const [email, setEmail] = useState('');
     const [errorMsg, seterrorMeg] = useState(false);
-    const [backToPage, setBackToPage] = useState(false);
     const history = useHistory();
 
     function validateForm() {
@@ -17,9 +16,8 @@ function ResetPassword() {
         event.preventDefault();
 
         firebase.auth().sendPasswordResetEmail(email).then(function () {
-            console.log('email sent')
+            history.push('/login')
             setEmail('')
-            setBackToPage(true)
         }).catch(function (error) {
             console.log(error)
             setEmail('')

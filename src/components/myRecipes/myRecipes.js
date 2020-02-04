@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../firebase/firebase';
 import { getUserRecipes } from '../../server/api';
 import Recipe from '../recipe/recipe';
-import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 
@@ -45,7 +44,7 @@ function MyRecipes() {
                 <h1>My Recipes</h1>
                 <button className="myRecipes__btn__log-out myRecipes__btn fontAwesome" onClick={() => {firebase.auth().signOut(); history.push('/login')}}>&#xf0a5; Log out</button>
                 <button className="myRecipes__btn__create-recipe myRecipes__btn fontAwesome" onClick={() => { history.push('/createRecipe') }}>Create Recipe &#xf044;</button>
-                    {recipes.length === 0 ? <div>There is no recipe</div>
+                    {recipes.length === 0 ? ''
                         : Object.keys(recipes).map((i, key) => (
                             <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
                                 <h2 className='recipes__recipe__title' >{recipes[i].title}</h2>
