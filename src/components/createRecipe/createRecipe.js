@@ -95,6 +95,7 @@ function CreateRecipe() {
                         directions: directions,
                         imageUrl: downloadUrl
                     })
+                    console.log('loading')
                 })
                 .then(() => {
                     console.log('Recipe Created');
@@ -124,8 +125,12 @@ function CreateRecipe() {
                                 value={title}
                                 type="text"
                                 placeholder="Tomato pasta"
-                                onChange={e => setTitle(e.target.value)}
-                                required 
+                                onChange={e => setTitle(e.target.value
+                                    .toLowerCase() //Make first letter of a string uppercase
+                                    .split(' ')
+                                    .map(s => s.charAt(0).toUpperCase() + s.substr(1))
+                                    .join(' '))}
+                                required
                             />
                         </label>
                         <label htmlFor="category">
@@ -202,15 +207,15 @@ function CreateRecipe() {
                         {directionsPlaceholder.map((placeholder, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                <div className="create__recipe__form__input__number"><span>{index + 1}</span></div>
-                                <textarea
-                                    name="directions"
-                                    id={index}
-                                    className="create__recipe__form__input__text"
-                                    type="text"
-                                    placeholder={placeholder}
-                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                />
+                                    <div className="create__recipe__form__input__number"><span>{index + 1}</span></div>
+                                    <textarea
+                                        name="directions"
+                                        id={index}
+                                        className="create__recipe__form__input__text"
+                                        type="text"
+                                        placeholder={placeholder}
+                                        onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                    />
                                 </React.Fragment>
                             )
                         })}
@@ -218,14 +223,14 @@ function CreateRecipe() {
                         {directionsFields.map((_, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                <div className="create__recipe__form__input__number"><span>{index + 4}</span></div>
-                                <textarea
-                                    name="directions"
-                                    id={index + 3} //Index starts from 3 because there are already 3 default input field.
-                                    className="create__recipe__form__input__text"
-                                    type="text"
-                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                />
+                                    <div className="create__recipe__form__input__number"><span>{index + 4}</span></div>
+                                    <textarea
+                                        name="directions"
+                                        id={index + 3} //Index starts from 3 because there are already 3 default input field.
+                                        className="create__recipe__form__input__text"
+                                        type="text"
+                                        onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                    />
                                 </React.Fragment>
                             );
                         })}
