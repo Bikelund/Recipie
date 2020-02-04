@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import firebase from '../firebase/firebase';
 import { getAllUserRecipes } from '../../server/api';
 import Recipe from '../recipe/recipe';
 
@@ -32,17 +31,16 @@ function AllRecipes() {
         showRecipeList ? 
             <>
             <div className='recipes'>
-                <h1>All recipes</h1>
+                <h1>All Recipes</h1>
                 {recipes.length === 0 ? <div>There are no recipes here</div>
                     : Object.keys(recipes).map((i, key) => (
-                        <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
+                        <div className='recipes__recipe' key={key} onClick={() => {seeRecipe(recipes[i]); setshowRecipeList(false)}}>
                             <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
-                            <div className="recipes__recipe__image" style={{ backgroundImage: `url(${recipes[i].imageUrl})` }}></div>
-                        </div>
+                            <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
+                        </div>  
                     ))}
             </div>
-            </> 
-            : <Recipe recipe={recipe} />
+            </> : <Recipe recipe={recipe} />
         }
         </>
     )
