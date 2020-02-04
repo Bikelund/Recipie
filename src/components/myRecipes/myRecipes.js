@@ -39,12 +39,12 @@ function MyRecipes() {
 
     return (
         <>
-        {createRecipeIsShown ? <CreateRecipe /> :
+        {
             showRecipeList ? <>
             <div className="myRecipes">
                 <h1>My Recipes</h1>
-                <button className="myRecipes__btn__log-out myRecipes__btn fontAwesome" onClick={() => firebase.auth().signOut()}>&#xf0a5; Log out</button>
-                <button className="myRecipes__btn__create-recipe myRecipes__btn fontAwesome" onClick={() => { setCreateRecipeIsShown(true) }}>Create Recipe &#xf044;</button>
+                <button className="myRecipes__btn__log-out myRecipes__btn fontAwesome" onClick={() => {firebase.auth().signOut(); history.push('/login')}}>&#xf0a5; Log out</button>
+                <button className="myRecipes__btn__create-recipe myRecipes__btn fontAwesome" onClick={() => { history.push('/createRecipe') }}>Create Recipe &#xf044;</button>
                     {recipes.length === 0 ? <div>There is no recipe</div>
                         : Object.keys(recipes).map((i, key) => (
                             <div className='recipes__recipe' key={key} onClick={() => { seeRecipe(recipes[i]); setshowRecipeList(false) }}>
