@@ -110,6 +110,20 @@
     background-position: center;
 }
 
+.delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: $color_pink_beige;
+    color: $color_white;
+    border: none;
+    padding: 4px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+}
+
 .arrowBack {
     height: 50px;
     width: 100%;

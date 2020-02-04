@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MyRecipes from '../myRecipes/myRecipes';
+import EditRecipe from '../editRecipe/editRecipe';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 
@@ -52,6 +53,7 @@ function Recipe({ recipe }) {
             <p>Go back to my recipes</p>
           </div>
           <div className="bgImg" style={style}></div>
+          <button className="delete" onClick={() => { console.log("test") }}>Edit</button>
           <div className="button__container fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>
