@@ -11,13 +11,8 @@ function Recipe({ recipe }) {
 
   // Parameters for Swiper
   const params = {
-    initialSlide: 1, /* Starting slide index */
+    initialSlide: 1, // Starting slide index
     speed: 600,
-    parallax: true,
-    parallaxEl: {
-      el: '.parallax-bg',
-      value: '-23%'
-    },
     pagination: {
       el: '.swiper-pagination',
       clickable: true

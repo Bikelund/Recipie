@@ -33,7 +33,6 @@ export async function getAllUserRecipes() {
         .then((querySnapshot) => {
           return  querySnapshot.forEach((doc) => {
                 if (doc.exists) {
-                    console.log(doc.id)
                     allUserRecipes.push(doc.data());                    
                 }
             });
