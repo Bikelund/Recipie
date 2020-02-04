@@ -38,11 +38,10 @@ function Recipe({ recipe }) {
           <h2>Ingredients</h2>
           <ul className="recipe__ingredients__ul">
             {/* data-swiper-parallax creates a fade in delay */}
-            <li data-swiper-parallax="0"    className="recipe__ingredients__ul__li">Ingredient One</li>
-            <li data-swiper-parallax="-100" className="recipe__ingredients__ul__li">Ingredient Two</li>
-            <li data-swiper-parallax="-200" className="recipe__ingredients__ul__li">Ingredient Three</li>
-            <li data-swiper-parallax="-300" className="recipe__ingredients__ul__li">Ingredient Four</li>
-            <li data-swiper-parallax="-400" className="recipe__ingredients__ul__li">Ingredient Five</li>
+          
+            {recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li> 
+              )
+            }
           </ul>
 
           <div className="button__container button__container--left fontAwesome">
