@@ -18,6 +18,7 @@ import {
 
 function NavBar() {
   const [isUserloggedIn, setIsUserLoggedIn] = useState(null)
+  const [isMenuOpened, setIsMenuOpened] = useState(false)
 
   useEffect(() => {
       firebase.auth().onAuthStateChanged(user => {
@@ -51,10 +52,14 @@ function NavBar() {
               <Link to="/search" className="fontAwesome navigation__ul__li--link">&#xf002;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/menu" className="fontAwesome navigation__ul__li--link navigation__dots">&#xf111; &#xf111; &#xf111;</Link>
+              <div className="fontAwesome navigation__ul__li--link navigation__dots" onClick={() => setIsMenuOpened(!isMenuOpened)}>&#xf111; &#xf111; &#xf111;</div>
             </li>
           </ul>
         </nav>
+              {<div className={isMenuOpened? 'menuOpen' : 'menuOpen hidden'} >
+                <Menu />
+              </div>
+              }
 
         {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
@@ -71,9 +76,9 @@ function NavBar() {
           <Route path="/search">
             <Hero />
           </Route>
-          <Route path="/menu">
+          {/* <Route path="/menu">
             <Menu />
-          </Route>
+          </Route> */}
           <Route path="/createRecipe">
             <CreateRecipe />
           </Route>

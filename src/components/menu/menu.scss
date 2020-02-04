@@ -20,3 +20,13 @@
         padding: 10px;
     }
 }
+
+.menuOpen {
+
+
+    &.hidden {
+        opacity: 0;
+        transform: translateX(10%);
+        visibility: hidden;
+      }
+}
