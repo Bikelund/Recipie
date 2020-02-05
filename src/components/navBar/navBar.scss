@@ -5,7 +5,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 10;
+    z-index: 101;
 
     &__ul {
         list-style-type: none;
@@ -36,5 +36,6 @@
     &__dots {
         font-size: 12px;
         padding-bottom: 6px;
+        cursor: pointer;
     }
 }

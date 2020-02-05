@@ -26,15 +26,19 @@
     }
 }
 
-.menuOpen {
+.menuAnimation {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 100;
+    transition: 500ms ease-in-out;
+}
+
+.menuOpen {
 
     &.hidden {
-        opacity: 0;
-        transform: translateX(10%);
+        transform: translateX(20%);
         visibility: hidden;
-      }
+        top: 100vh;
+    }
 }
