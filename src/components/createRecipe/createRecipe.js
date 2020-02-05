@@ -89,9 +89,11 @@ function CreateRecipe() {
             const filename = image.name; //Get image name from image state
             const ext = filename.slice(filename.lastIndexOf("."));
             const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
+            let storageId; 
 
             storageRef.put(image) //File uploaded
-                .then(() => {
+                .then(doc => {
+                    storageId = doc.metadata.name; //image name in storage
                     return storageRef.getDownloadURL(); //To get image url
                 })
                 .then((downloadUrl) => {
@@ -102,7 +104,8 @@ function CreateRecipe() {
                         servings: servings,
                         ingredients: ingredients,
                         directions: directions,
-                        imageUrl: downloadUrl
+                        imageUrl: downloadUrl,
+                        storageId: storageId
                     })
                 })
                 .then(() => {
