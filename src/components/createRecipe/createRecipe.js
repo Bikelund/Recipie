@@ -4,17 +4,20 @@ import 'firebase/firestore';
 import { firestore } from 'firebase';
 import { v4 as uuid } from 'uuid';
 import { useHistory } from "react-router-dom";
+import Loading from '../loading/Loading'
 
 function CreateRecipe() {
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
     const [ingredients, setIngredients] = useState([])
-    const [fields, setFields] = useState([{ value: null }]);
+    const [fields, setFields] = useState([{ value: null }])
     const [directions, setDirections] = useState([])
-    const [directionsFields, setDirectionsFields] = useState([{ value: null }]);
+    const [directionsFields, setDirectionsFields] = useState([{ value: null }])
     const [image, setImage] = useState('')
     const [srcImg, setSrcImg] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState(false)
     const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder ingredients value
     const directionsPlaceholder = ['Cut the eggplant', 'Prepare boild water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls'] // Default placeholder directions value
     const history = useHistory();
@@ -75,8 +78,14 @@ function CreateRecipe() {
 
     function handleSubmit(event) {
         event.preventDefault()
+        if(!image) {
+            setErrorMsg(true)
+        }else {
+
+        setIsLoading(true)
         firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
             const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
+            
             const filename = image.name; //Get image name from image state
             const ext = filename.slice(filename.lastIndexOf("."));
             const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
@@ -95,9 +104,10 @@ function CreateRecipe() {
                         directions: directions,
                         imageUrl: downloadUrl
                     })
-                    console.log('loading')
                 })
                 .then(() => {
+                    setIsLoading(false)
+                    history.push('/myRecipe')
                     console.log('Recipe Created');
                 })
                 .catch((error) => {
@@ -105,11 +115,13 @@ function CreateRecipe() {
                 });
 
         })
+        }
     }
 
 
     return (
-        <>
+        <> {isLoading ? <Loading /> :
+            <>
                 <div onClick={() => history.goBack()} className="arrow"></div>
                 <div className="create__recipe__title">Create Recipe</div>
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
@@ -205,17 +217,17 @@ function CreateRecipe() {
                         {directionsPlaceholder.map((placeholder, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                <div className="create__recipe__form__input__container">
-                                    <div className="create__recipe__form__input__number">{index + 1}</div>
-                                    <textarea
-                                        name="directions"
-                                        id={index}
-                                        className="create__recipe__form__input__text"
-                                        type="text"
-                                        placeholder={placeholder}
-                                        onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                    />
-                                </div>
+                                    <div className="create__recipe__form__input__container">
+                                        <div className="create__recipe__form__input__number">{index + 1}</div>
+                                        <textarea
+                                            name="directions"
+                                            id={index}
+                                            className="create__recipe__form__input__text"
+                                            type="text"
+                                            placeholder={placeholder}
+                                            onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                        />
+                                    </div>
                                 </React.Fragment>
                             )
                         })}
@@ -223,30 +235,32 @@ function CreateRecipe() {
                         {directionsFields.map((_, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                <div className="create__recipe__form__input__container">
-                                    <div className="create__recipe__form__input__number">{index + 4}</div>
-                                    <textarea
-                                        name="directions"
-                                        id={index + 3} //Index starts from 3 because there are already 3 default input field.
-                                        className="create__recipe__form__input__text"
-                                        type="text"
-                                        onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                    />
-                                </div>
+                                    <div className="create__recipe__form__input__container">
+                                        <div className="create__recipe__form__input__number">{index + 4}</div>
+                                        <textarea
+                                            name="directions"
+                                            id={index + 3} //Index starts from 3 because there are already 3 default input field.
+                                            className="create__recipe__form__input__text"
+                                            type="text"
+                                            onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                        />
+                                    </div>
                                 </React.Fragment>
                             );
                         })}
-                        {/* Nickas end */}
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
+                        {errorMsg ? <div className="error__message">Update your food image</div> : ''}
                         {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
                     </div>
                     <button className="create__recipe__form__button" type="submit">
-                        ADD RECEPT
+                        ADD RECIPE
                     </button>
                 </form>
+            </>
+        }
         </>
     )
 }
