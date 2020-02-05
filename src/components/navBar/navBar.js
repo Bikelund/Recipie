@@ -56,10 +56,10 @@ function NavBar() {
             </li>
           </ul>
         </nav>
-              {<div className={isMenuOpened? 'menuOpen' : 'menuOpen hidden'} >
-                <Menu />
-              </div>
-              }
+        {<div className={isMenuOpened? 'menuOpen' : 'menuOpen hidden'} >
+          <Menu />
+        </div>
+        }
 
         {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
