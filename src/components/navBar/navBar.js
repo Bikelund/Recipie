@@ -9,6 +9,7 @@ import ResetPassword from '../login/ResetPassword';
 import Register from '../register/register';
 import Recipe from '../recipe/recipe';
 import EditRecipe from '../editRecipe/editRecipe';
+import Search from '../search/search';
 import firebase from '../firebase/firebase';
 import {
   BrowserRouter as Router,
@@ -75,7 +76,7 @@ function NavBar() {
             <MyRecipes />
           </Route>
           <Route path="/search">
-            <Hero />
+            <Search />
           </Route>
           <Route path="/createRecipe">
             <CreateRecipe />
