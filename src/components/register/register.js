@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import firebase from '../firebase/firebase';
-import Login from '../login/Login';
-import MyRecipes from '../myRecipes/myRecipes';
 import { useHistory } from 'react-router-dom';
 
 function Register() {
@@ -9,12 +7,12 @@ function Register() {
     const [password, setPassword] = useState('')
     const [emailErrorMsg, setEmailErrorMsg] = useState(false)
     const [passwordErrorMsg, setPasswordErrorMsg] = useState(false)
-    const [myRecipeListisShown, setMyRecipeListisShown] = useState(false)
     const [message, setMessage] = useState('')
     const history = useHistory()
 
 
-
+    //Sign up button appear when user filled in form
+    //disabled={!validateForm()}
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
