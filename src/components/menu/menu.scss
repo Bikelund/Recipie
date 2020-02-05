@@ -1,9 +1,9 @@
 .menu {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 60px);
     background: $color_green;
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0; 
     display: flex;
     justify-content: center;
@@ -19,10 +19,18 @@
     &__ul__li {
         padding: 10px;
     }
+
+    &__ul__li--link {
+        text-decoration: none;
+        color: $color_white;
+    }
 }
 
 .menuOpen {
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
 
     &.hidden {
         opacity: 0;
