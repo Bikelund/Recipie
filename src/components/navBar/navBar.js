@@ -56,7 +56,7 @@ function NavBar() {
             </li>
           </ul>
         </nav>
-        {<div className={isMenuOpened? 'menuOpen' : 'menuOpen hidden'} >
+        {<div className={isMenuOpened? 'menuOpen menuAnimation' : 'menuOpen hidden menuAnimation'} >
           <Menu />
         </div>
         }

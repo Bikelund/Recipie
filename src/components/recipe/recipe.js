@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import MyRecipes from '../myRecipes/myRecipes';
-import EditRecipe from '../editRecipe/editRecipe';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 import { useHistory } from 'react-router-dom';

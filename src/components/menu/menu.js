@@ -1,15 +1,9 @@
 import React, { useState, useEffect }from 'react';
 import firebase from '../firebase/firebase';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Menu() {
     const [isUserloggedIn, setIsUserLoggedIn] = useState(null)
-    const [isMenuOpened, setIsMenuOpened] = useState(false)
 
   useEffect(() => {
       firebase.auth().onAuthStateChanged(user => {
