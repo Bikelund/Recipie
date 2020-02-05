@@ -202,7 +202,7 @@ function CreateRecipe() {
                                 <input
                                     name="ingredients"
                                     key={index}
-                                    id={index + 5} //Index starts from 5 because there are already 4 default input field.
+                                    id={index + ingredientsPlaceholder.length} //Index starts from 5 because there are already 4 default input field.
                                     className="create__recipe__form__input__text"
                                     // value={ingredients[index + 5]}
                                     type="text"
@@ -213,7 +213,6 @@ function CreateRecipe() {
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addIngredientsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <div className="create__recipe__form__input__title">Directions</div>
                         {/* Default directions field which is 3 fields */}
-                        {/* Nicklas */}
                         {directionsPlaceholder.map((placeholder, index) => {
                             return (
                                 <React.Fragment key={index}>
@@ -239,7 +238,7 @@ function CreateRecipe() {
                                         <div className="create__recipe__form__input__number">{index + 4}</div>
                                         <textarea
                                             name="directions"
-                                            id={index + 3} //Index starts from 3 because there are already 3 default input field.
+                                            id={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
                                             className="create__recipe__form__input__text"
                                             type="text"
                                             onChange={e => { setDirectionsChange(e, e.target.id) }}

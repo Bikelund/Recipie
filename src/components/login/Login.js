@@ -11,6 +11,8 @@ function Login() {
     const history = useHistory();
     
 
+     //Log in button appear when user filled in form
+    //disabled={!validateForm()}
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }

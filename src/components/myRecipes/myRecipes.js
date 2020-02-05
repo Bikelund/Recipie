@@ -3,9 +3,6 @@ import firebase from '../firebase/firebase';
 import { getUserRecipes } from '../../server/api';
 import { useHistory } from "react-router-dom";
 
-
-
-
 function MyRecipes() {
     const [recipes, setRecipes] = useState([]) //All my recipe lists state
     const history = useHistory();

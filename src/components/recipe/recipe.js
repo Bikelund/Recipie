@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import MyRecipes from '../myRecipes/myRecipes';
-import EditRecipe from '../editRecipe/editRecipe';
+import React from 'react';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +7,6 @@ function Recipe( props ) {
   console.log(props)
   const recipe = props.history.location.state //Get data through <Route render={...props} /> from myRecipes.js or recipes.js
   console.log(recipe)
-  const [backToPage, setBackToPage] = useState(false)
   const history = useHistory()
 
   const style = {
@@ -55,7 +52,10 @@ function Recipe( props ) {
           <h1>{recipe.title}</h1>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
           <div className="bgImg" style={style}></div>
-          <button className="delete" onClick={() => { console.log("test") }}>Edit</button>
+          <button className="delete" onClick={() => history.push({
+             pathname: '/editRecipe',
+             state: recipe
+          })}>Edit</button>
           <div className="button__container fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>

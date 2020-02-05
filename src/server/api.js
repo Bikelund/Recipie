@@ -6,13 +6,15 @@ import firebase from '../components/firebase/firebase';
  */
 export async function getUserRecipes(userId) {
     
-    let userRecipes = [];
+    let userRecipes = []
+    let recipeId = []
     
     await firebase.firestore().collection('users').doc(userId).collection('recipes').get()
         .then((querySnapshot) => {
           return  querySnapshot.forEach((doc) => {
                 if (doc.exists) {
-                    userRecipes.push(doc.data())
+                    userRecipes.push(doc.data()) //Get all user recipes
+                    recipeId.push(doc.id) //Get recipe ID number
                 } else {
                     return userRecipes
                 }
@@ -21,7 +23,11 @@ export async function getUserRecipes(userId) {
         .catch(function (error) {
             return {}
         });
-
+        
+        // creates a new array and add recipe id
+        userRecipes.map((recipe, index) => {
+            recipe.id =  recipeId[index]
+        })
         return userRecipes;
 }
 
