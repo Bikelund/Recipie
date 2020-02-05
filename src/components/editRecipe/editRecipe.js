@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import firebase from '../firebase/firebase'
 import Loading from '../loading/Loading'
 
 function EditRecipe(props) {
@@ -16,6 +17,7 @@ function EditRecipe(props) {
     const [image, setImage] = useState('')
     const [srcImg, setSrcImg] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState(false)
     const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder ingredients value
     const directionsPlaceholder = ['Cut the eggplant', 'Prepare boild water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls'] // Default placeholder directions value
 
@@ -97,8 +99,16 @@ function EditRecipe(props) {
 
     }
 
-    function deleteSubmit(event) {
-        event.preventDefault()
+    //Delete recipe function
+    function deleteSubmit() {
+        firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
+            firebase.firestore().collection('users').doc(user.uid).collection('recipes')
+            .doc(recipe.id).delete().then(function() {
+                history.push('/myRecipe')
+            }).catch(function(error) {
+                setErrorMsg(true)
+            });
+        })
     }
 
 
@@ -107,8 +117,10 @@ function EditRecipe(props) {
         <> {isLoading ? <Loading /> :
             <>
                 <div onClick={() => history.goBack()} className="arrow"></div>
-                <div className="delete__recipe fontAwesome" onClick={() => deleteSubmit()}>Delete &#xf1f8;</div>
+                <button className="delete__recipe fontAwesome"  onClick={() => deleteSubmit()}>Delete &#xf1f8;</button>
                 <div className="create__recipe__title">Edit Recipe</div>
+                {/* If delete function failed show error message */}
+                {errorMsg? <div className="error__edit__message">Something went to wrong. Please try again</div> : ''} 
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
                         <label htmlFor="title">
