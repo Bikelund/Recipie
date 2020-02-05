@@ -2,5 +2,12 @@
     display: inline-block;
     position: absolute;
     left: 80%;
+    z-index: 2;
     opacity: 0.7;
+}
+.error__edit__message {
+    font-size: 10px;
+    font-family: $fonts_montserrat;
+    color: red;
+    text-align: center;
 }

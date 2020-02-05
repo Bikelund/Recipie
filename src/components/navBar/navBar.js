@@ -41,17 +41,17 @@ function NavBar() {
           <ul className="navigation__ul">
             <li className="navigation__ul__li">
               <Link to="/" className="fontAwesome navigation__ul__li--link">
-                <div className="navigation__ul__home"></div>
+                <div className="navigation__ul__home" onClick={() => setIsMenuOpened(false)}></div>
               </Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/recipes" className="fontAwesome navigation__ul__li--link">&#xf02d;</Link>
+              <Link to="/recipes" className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf02d;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link">&#xf2bd;</Link>
+              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf2bd;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/search" className="fontAwesome navigation__ul__li--link">&#xf002;</Link>
+              <Link to="/search" className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf002;</Link>
             </li>
             <li className="navigation__ul__li">
               <div className="fontAwesome navigation__ul__li--link navigation__dots" onClick={() => setIsMenuOpened(!isMenuOpened)}>&#xf111; &#xf111; &#xf111;</div>
@@ -68,6 +68,9 @@ function NavBar() {
         <Switch>
           <Route exact strict path="/">
             <Hero />
+          </Route>
+          <Route path="/menu">
+            <Menu />
           </Route>
           <Route path="/recipes">
             <Recipes />
