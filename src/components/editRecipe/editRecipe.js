@@ -31,6 +31,7 @@ function EditRecipe(props) {
         setSrcImg(recipe.imageUrl)
 
     }, [])
+    
 
     //Add ingredients field when user click on Add button
     function addIngredientsField() {
@@ -88,22 +89,45 @@ function EditRecipe(props) {
     function handleSubmit(event) {
         event.preventDefault()
         // setIsLoading(true)
-        console.log(srcImg)
-        if (!image) {
+        console.log(!image)
+        // if (image) {
             
-        } else {
+        // } else {
+        //    firebase.firestore().collection('recipes').doc(recipe.id)
+        //     .update({
+        //         title: title,
+        //         category: category,
+        //         servings: servings,
+        //         ingredients: ['tomato','mushroom'],
+        //         directions: directions,
+        //         imageUrl: srcImg,
+        //     })
+        //     .then(() => {
+        //         console.log('Success')
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     })
 
-
-
-        }
+        // }
 
     }
-
-    //Delete recipe function
+    
+    //Delete recipe by recipe id
     function deleteSubmit() {
+        setIsLoading(true)
+
+        //Delete image in storage
+       firebase.storage().ref('recipes').child(recipe.storageId).delete().then(function() {
+            console.log('success')
+        }).catch(function(error) {
+            console.log(error)
+          });
+        //Delete recipe in firestore
         firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
             firebase.firestore().collection('users').doc(user.uid).collection('recipes')
             .doc(recipe.id).delete().then(function() {
+                setIsLoading(false)
                 history.push('/myRecipe')
             }).catch(function(error) {
                 setErrorMsg(true)
