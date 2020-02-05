@@ -118,3 +118,9 @@ select {
     border-radius: 0;
 }
 
+.error__message {
+  font-size: 10px;
+  font-family: $fonts_montserrat;
+  color: red;
+}
+
