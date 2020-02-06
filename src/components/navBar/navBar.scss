@@ -39,3 +39,48 @@
         cursor: pointer;
     }
 }
+
+.menu {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background: $color_green;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    &__ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 100px;
+    }
+
+    &__ul__li {
+        padding: 10px;
+    }
+
+    &__ul__li--link {
+        text-decoration: none;
+        color: $color_white;
+    }
+}
+
+.menuAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: 500ms ease-in-out;
+}
+
+.menuOpen {
+
+    &.hidden {
+        transform: translateX(20%);
+        visibility: hidden;
+        top: 100vh;
+    }
+}
