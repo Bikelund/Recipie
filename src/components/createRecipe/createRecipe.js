@@ -81,7 +81,7 @@ function CreateRecipe() {
  */
     function removeEmptyString(items) {
        return items.filter((element) => {
-            return element != '' && element != undefined;
+            return element !== '' && element !== undefined;
         });
     }
 
@@ -269,7 +269,7 @@ function CreateRecipe() {
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
                         {errorMsg ? <div className="error__message">Update your food image</div> : ''}
-                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
+                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
                     </div>

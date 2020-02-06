@@ -27,7 +27,7 @@ export async function getUserRecipes(userId) {
         
         // creates a new array and add recipe id
         userRecipes.map((recipe, index) => {
-            recipe.id =  recipeId[index]
+            return recipe.id =  recipeId[index]
         })
         return userRecipes;
 }
@@ -52,7 +52,7 @@ export async function getAllUserRecipes() {
 
         // creates a new array and add recipe id
         allUserRecipes.map((recipe, index) => {
-            recipe.id =  recipeId[index]
+           return recipe.id =  recipeId[index]
         })
 
         return allUserRecipes;

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import firebase from '../firebase/firebase'
-import 'firebase/firestore'
 import Loading from '../loading/Loading'
 import { v4 as uuid } from 'uuid'
 
 
 function EditRecipe(props) {
     const recipe = props.history.location.state
-    console.log(recipe.directions.length === 0)
-    console.log(!recipe.directions)
     const history = useHistory()
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
@@ -38,7 +35,7 @@ function EditRecipe(props) {
         setDefaultDirections(recipe.directions)
         setSrcImg(recipe.imageUrl)
 
-    }, [])
+    }, [recipe])
 
 
     //Add ingredients field when user click on Add button
@@ -59,10 +56,6 @@ function EditRecipe(props) {
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
 
-        //Remove empty string while filter method creats a new array
-        const filtered = values.filter((element) => {
-            return element != '';
-        });
         setIngredients(values);
 
     }
@@ -105,7 +98,7 @@ function EditRecipe(props) {
  */
     function removeEmptyString(items) {
         return items.filter((element) => {
-            return element != '' && element != undefined;
+            return element !== '' && element !== undefined;
         });
     }
 
@@ -421,7 +414,7 @@ function EditRecipe(props) {
 
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
-                            {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
+                            {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setNewImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
                     </div>
