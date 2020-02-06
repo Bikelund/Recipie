@@ -8,3 +8,23 @@ body {
     margin: 0;
     padding: 0;
 }
+.arrow {
+    height: 12px;
+    width: 12px;
+    border: 2px solid rgba($color: $color_light_red_orange, $alpha: 1);
+    border-width: 2px 2px 0 0;
+    transform: rotate(-134deg);
+    position: absolute;
+    top: 20px;
+    left: 30px;
+  
+    &:after {
+      content: "";
+      display: block;
+      height: 12px;
+      width: 12px;
+      border: 2px solid rgba($color: $color_light_red_orange, $alpha: 1);
+      border-width: 2px 2px 0 0;
+      transform: translate(6px, -8px);
+    }
+  }
