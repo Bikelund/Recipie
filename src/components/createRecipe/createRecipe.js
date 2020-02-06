@@ -40,6 +40,7 @@ function CreateRecipe() {
             .split(' ')
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
+
         setIngredients(values);
     }
 
@@ -60,9 +61,8 @@ function CreateRecipe() {
             .split(' ')
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
-
+        
         setDirections(values);
-        console.log(values)
     }
 
     //When user chose image, display it on image input field
@@ -74,10 +74,26 @@ function CreateRecipe() {
         reader.readAsDataURL(file)
     }
 
+/**
+ * 
+ * @param {array} items contains array objects (Ingredients or Directions)
+ * Remove empty string while filter method creats a new array
+ */
+    function removeEmptyString(items) {
+       return items.filter((element) => {
+            return element != '' && element != undefined;
+        });
+    }
+
 
 
     function handleSubmit(event) {
         event.preventDefault()
+
+        //Remove empty string and create a new array
+        const filteredIngredients = removeEmptyString(ingredients)
+        const filteredDirections = removeEmptyString(directions)
+
         if(!image) {
             setErrorMsg(true)
         }else {
@@ -103,8 +119,8 @@ function CreateRecipe() {
                         title: title,
                         category: category,
                         servings: servings,
-                        ingredients: ingredients,
-                        directions: directions,
+                        ingredients: filteredIngredients,
+                        directions: filteredDirections,
                         imageUrl: downloadUrl,
                         storageId: storageId
                     })

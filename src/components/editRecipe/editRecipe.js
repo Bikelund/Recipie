@@ -8,6 +8,8 @@ import { v4 as uuid } from 'uuid'
 
 function EditRecipe(props) {
     const recipe = props.history.location.state
+    console.log(recipe.directions.length === 0)
+    console.log(!recipe.directions)
     const history = useHistory()
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
@@ -61,7 +63,8 @@ function EditRecipe(props) {
         const filtered = values.filter((element) => {
             return element != '';
         });
-        setIngredients(filtered);
+        setIngredients(values);
+
     }
 
     //Add directions field when user click on Add button
@@ -82,11 +85,7 @@ function EditRecipe(props) {
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
 
-        //Remove empty string while filter method creats a new array
-        const filtered = values.filter((element) => {
-            return element != '';
-        });
-        setDirections(filtered);
+        setDirections(values);
 
     }
 
@@ -99,11 +98,31 @@ function EditRecipe(props) {
         reader.readAsDataURL(file)
     }
 
+    /**
+ * 
+ * @param {array} items contains array objects (Ingredients or Directions)
+ * Remove empty string while filter method creats a new array
+ */
+    function removeEmptyString(items) {
+        return items.filter((element) => {
+            return element != '' && element != undefined;
+        });
+    }
+
 
     //Update new data to firestore and storage
     function handleSubmit(event) {
         event.preventDefault()
+
+         //Remove empty string and create a new array
+         const filteredIngredients = removeEmptyString(ingredients)
+         const filteredDirections = removeEmptyString(directions)
+
+         console.log(filteredDirections)
+         console.log(filteredIngredients)
+
         setIsLoading(true)
+
 
         firebase.auth().onAuthStateChanged(user => {
             const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
@@ -115,10 +134,10 @@ function EditRecipe(props) {
                 const ext = filename.slice(filename.lastIndexOf("."));
                 const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
                 let storageId;
-    
+
                 //Delete old image
                 firebase.storage().ref('recipes').child(recipe.storageId).delete()
-          
+
                 //Store new image in storage
                 storageRef.put(newImage) //File uploaded
                     .then(doc => {
@@ -131,8 +150,8 @@ function EditRecipe(props) {
                             title: title,
                             category: category,
                             servings: servings,
-                            ingredients: ingredients,
-                            directions: directions,
+                            ingredients: filteredIngredients,
+                            directions: filteredDirections,
                             imageUrl: downloadUrl,
                             storageId: storageId
                         })
@@ -151,8 +170,8 @@ function EditRecipe(props) {
                         title: title,
                         category: category,
                         servings: servings,
-                        ingredients: ingredients,
-                        directions: directions,
+                        ingredients: filteredIngredients,
+                        directions: filteredDirections,
                         imageUrl: srcImg,
                     })
                     .then(() => {
@@ -261,7 +280,7 @@ function EditRecipe(props) {
                       Both have Add ingredients field after map().
                     */}
                         <div className="create__recipe__form__input__title">Ingredients</div>
-                        {defaultIngredients ?
+                        {defaultIngredients && defaultIngredients.length !== 0?
                             <>{defaultIngredients.map((ingredient, index) => {
                                 return (
                                     <input
@@ -326,7 +345,7 @@ function EditRecipe(props) {
                     */}
                         <div className="create__recipe__form__input__title">Directions</div>
                         {/* Directions field which user wrote */}
-                        {defaultDirections ?
+                        {defaultDirections && defaultDirections.length !== 0?
                             <> {defaultDirections.map((direction, index) => {
                                 return (
                                     <React.Fragment key={index}>
