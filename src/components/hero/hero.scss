@@ -20,3 +20,24 @@
         font-weight: 100;
     }
 }
+
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+    .hero {
+        width: calc(100vw - 100px);
+        right: 0;
+        height: 100vh;
+        left: 100px;
+
+        h1 {
+            font-size: 80px;
+            top: 40vh;
+        }
+    }
+}

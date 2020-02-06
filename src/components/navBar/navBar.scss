@@ -83,3 +83,102 @@
 .menuOpen.hidden > ul {
     display: none;
 }
+
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+    .navigation {
+        width: 100px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+
+        &__ul {
+            justify-content: space-between;
+            flex-direction: column;
+        }
+        
+        &__ul__home {
+            width: 50px;
+            height: 50px;
+            margin-top: 20px;
+            transition: transform 1000ms ease-in-out;
+        }
+
+        &__ul__home:hover {
+            transform: rotate(360deg);
+        }
+    
+        &__dots {
+            font-size: 12px;
+            padding-bottom: 6px;
+            cursor: pointer;
+        }
+    }
+
+    .desktop {
+
+        &__navbar__hidden {
+            display: none;
+        }
+
+        &__navbar__dots {
+            position: absolute;
+            top: calc(50% - 13px);
+            left: 0;
+            padding: 26px 30px;
+            transition: color 200ms ease-in-out;
+        }
+
+        &__navbar__my-recipes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 26px 35px;
+            transition: color 200ms ease-in-out;
+        }
+    }
+
+    .menu {
+        &__ul {
+            margin: 20vh 0 0 50px;
+        }
+    
+        &__ul__li {
+            padding: 0;
+            margin: 30px 0;
+        }
+    
+        &__ul__li--link {
+            font-size: 20px;
+            padding: 12px;
+            transition: color 200ms ease-in-out;
+        }
+    }
+
+    // Styling for menu
+    .menuOpen {
+        width: 50vw;
+        height: 100vh;
+        top: 0;
+
+        // And when hidden
+        &.hidden {
+            width: 0;
+            left: 0;
+            height: 100vh;
+        }
+    }
+
+    // Hover effects 
+    .menu__ul__li--link:hover,
+    .desktop__navbar__my-recipes:hover,
+    .desktop__navbar__dots:hover {
+        color: pink;
+    }
+}
