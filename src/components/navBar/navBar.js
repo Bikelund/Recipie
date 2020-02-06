@@ -57,23 +57,21 @@ function NavBar() {
             </li>
           </ul>
         </nav>
-        {<div className={isMenuOpened? 'menuOpen menuAnimation' : 'menuOpen hidden menuAnimation'} >
-          <div className="menu">
-              <ul className="menu__ul">
-                  <li className="menu__ul__li">
-                    <Link to="/" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Home</Link>
-                  </li>
-                  <li className="menu__ul__li">
-                    <Link to="/recipes" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Recipes</Link>
-                  </li>
-                  <li className="menu__ul__li">
-                    <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>My Recipes</Link>
-                  </li>
-                  <li className="menu__ul__li">
-                    <Link to="/search" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Search</Link>
-                  </li>
-              </ul>
-          </div>
+        {<div className={isMenuOpened? 'menuOpen' : 'menuOpen hidden'} >
+          <ul className="menu__ul">
+            <li className="menu__ul__li">
+              <Link to="/" className="menu__ul__li--link" onClick={() => setIsMenuOpened(false)}>Home</Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link to="/recipes" className="menu__ul__li--link" onClick={() => setIsMenuOpened(false)}>Recipes</Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="menu__ul__li--link" onClick={() => setIsMenuOpened(false)}>My Recipes</Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link to="/search" className="menu__ul__li--link" onClick={() => setIsMenuOpened(false)}>Search</Link>
+            </li>
+          </ul>
         </div>
         }
 
