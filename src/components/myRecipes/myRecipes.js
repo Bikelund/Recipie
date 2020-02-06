@@ -29,7 +29,7 @@ function MyRecipes() {
                     <h1>My Recipes</h1>
                     <button className="myRecipes__btn__log-out myRecipes__btn fontAwesome" onClick={() => {firebase.auth().signOut(); history.push('/login')}}>&#xf0a5; Log out</button>
                     <button className="myRecipes__btn__create-recipe myRecipes__btn fontAwesome" onClick={() => { history.push('/createRecipe') }}>Create Recipe &#xf044;</button>
-                    <div className='recipes'>
+                    <div className='myRecipes__recipes__list'>
                         {recipes.length === 0 ? <div className="myRecipes__empty">Your cookbook is empty. Click on the button to create a new one.</div>
                             : Object.keys(recipes).map((i, key) => (
                                 <div className='recipes__recipe' key={key} onClick={() => { history.push({
