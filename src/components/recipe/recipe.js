@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Swiper from 'react-id-swiper';
 import 'swiper/swiper.scss';
 import { useHistory } from 'react-router-dom';
+import firebase from '../firebase/firebase';
 
 function Recipe( props ) {
-  console.log(props)
   const recipe = props.history.location.state //Get data through <Route render={...props} /> from myRecipes.js or recipes.js
-  console.log(recipe)
   const history = useHistory()
+  const [isUserloggedIn, setIsUserLoggedIn] = useState(false)
+  const [editRecipe, seteditRecipe] = useState(false)
 
-  const style = {
-    backgroundImage: `url(${recipe.imageUrl})`
-  }
+  useEffect(() => {
+    const imageBG = document.getElementsByClassName('parallax-bg');
+    imageBG[0].style.background = `url(${recipe.imageUrl})`;
+    imageBG[0].style.backgroundSize = 'cover';
+    imageBG[0].style.backgroundPosition = 'center center';
+  }, [])
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      setIsUserLoggedIn(true)
+    }
+    if (user.uid == recipe.userId) {
+      seteditRecipe(true)
+    }
+
+  })
+  
 
   // Parameters for Swiper
   const params = {
     initialSlide: 1, // Starting slide index
     speed: 600,
+    parallax: true,
+    parallaxEl: {
+      el: '.parallax-bg',
+      value: '-23%'
+    },
     pagination: {
       el: '.swiper-pagination',
       clickable: true
@@ -60,11 +80,10 @@ function Recipe( props ) {
             <h1 className="container__h1">{recipe.title}</h1>
           </div>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
-          <div className="bgImg" style={style}></div>
-          <button className="recipe__edit" onClick={() => history.push({
+          {editRecipe ? <button className="recipe__edit" onClick={() => history.push({
              pathname: '/editRecipe',
              state: recipe
-          })}>Edit</button>
+          })}>Edit</button> : ""}
           <div className="button__container fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>
