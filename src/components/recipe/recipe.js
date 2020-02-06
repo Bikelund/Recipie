@@ -7,6 +7,7 @@ import firebase from '../firebase/firebase';
 function Recipe( props ) {
   const recipe = props.history.location.state //Get data through <Route render={...props} /> from myRecipes.js or recipes.js
   const history = useHistory()
+  // const [isUserloggedIn, setIsUserLoggedIn] = useState(false)
   const [editRecipe, seteditRecipe] = useState(false)
 
   // This is the only way to change the background image
@@ -23,6 +24,7 @@ function Recipe( props ) {
   // If true, and edit button will show in the recipe
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
+      // setIsUserLoggedIn(true)
       if (user.uid === recipe.userId) {
         seteditRecipe(true)
       }
