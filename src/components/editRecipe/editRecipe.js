@@ -56,7 +56,12 @@ function EditRecipe(props) {
             .split(' ')
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
-        setIngredients(values);
+
+        //Remove empty string while filter method creats a new array
+        const filtered = values.filter((element) => {
+            return element != '';
+        });
+        setIngredients(filtered);
     }
 
     //Add directions field when user click on Add button
@@ -77,8 +82,12 @@ function EditRecipe(props) {
             .map(s => s.charAt(0).toUpperCase() + s.substr(1))
             .join(' ');
 
-        setDirections(values);
-        console.log(values)
+        //Remove empty string while filter method creats a new array
+        const filtered = values.filter((element) => {
+            return element != '';
+        });
+        setDirections(filtered);
+
     }
 
     //When user chose image, display it on image input field
@@ -91,11 +100,10 @@ function EditRecipe(props) {
     }
 
 
-
+    //Update new data to firestore and storage
     function handleSubmit(event) {
         event.preventDefault()
         setIsLoading(true)
-
 
         firebase.auth().onAuthStateChanged(user => {
             const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
@@ -107,8 +115,11 @@ function EditRecipe(props) {
                 const ext = filename.slice(filename.lastIndexOf("."));
                 const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
                 let storageId;
-
-
+    
+                //Delete old image
+                firebase.storage().ref('recipes').child(recipe.storageId).delete()
+          
+                //Store new image in storage
                 storageRef.put(newImage) //File uploaded
                     .then(doc => {
                         storageId = doc.metadata.name; //image name in storage
@@ -323,6 +334,7 @@ function EditRecipe(props) {
                                             <div className="create__recipe__form__input__number">{index + 1}</div>
                                             <textarea
                                                 name="directions"
+                                                id={index}
                                                 className="create__recipe__form__input__text"
                                                 type="text"
                                                 defaultValue={direction}
@@ -349,7 +361,8 @@ function EditRecipe(props) {
                                         </React.Fragment>
                                     );
                                 })}
-                            </> : <>
+                            </>
+                            : <>
                                 {/* Default directions field which is 3 fields */}
                                 {directionsPlaceholder.map((placeholder, index) => {
                                     return (

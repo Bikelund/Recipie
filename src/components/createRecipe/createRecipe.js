@@ -99,6 +99,7 @@ function CreateRecipe() {
                 .then((downloadUrl) => {
                     //Add recipe data to firestore
                     firestoreRef.add({
+                        userId: user.uid,
                         title: title,
                         category: category,
                         servings: servings,
