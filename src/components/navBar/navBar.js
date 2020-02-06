@@ -44,17 +44,17 @@ function NavBar() {
               </Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/recipes" className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf02d;</Link>
+              <Link to="/recipes" className="fontAwesome navigation__ul__li--link desktop__navbar__hidden" onClick={() => setIsMenuOpened(false)}>&#xf02d;</Link>
             </li>
             <li className="navigation__ul__li">
               {/* If a user isn't logged in, hen will be directed to login page */}
-              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf2bd;</Link>
+              <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link desktop__navbar__my-recipes" onClick={() => setIsMenuOpened(false)}>&#xf2bd;</Link>
             </li>
             <li className="navigation__ul__li">
-              <Link to="/search" className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf002;</Link>
+              <Link to="/search" className="fontAwesome navigation__ul__li--link desktop__navbar__hidden" onClick={() => setIsMenuOpened(false)}>&#xf002;</Link>
             </li>
             <li className="navigation__ul__li">
-              <div className="fontAwesome navigation__ul__li--link navigation__dots" onClick={() => setIsMenuOpened(!isMenuOpened)}>&#xf111; &#xf111; &#xf111;</div>
+              <div className="fontAwesome navigation__ul__li--link navigation__dots desktop__navbar__dots" onClick={() => setIsMenuOpened(!isMenuOpened)}>&#xf111; &#xf111; &#xf111;</div>
             </li>
           </ul>
         </nav>
