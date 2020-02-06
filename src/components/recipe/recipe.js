@@ -52,7 +52,7 @@ function Recipe( props ) {
           <h1>{recipe.title}</h1>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
           <div className="bgImg" style={style}></div>
-          <button className="delete" onClick={() => history.push({
+          <button className="recipe__edit" onClick={() => history.push({
              pathname: '/editRecipe',
              state: recipe
           })}>Edit</button>

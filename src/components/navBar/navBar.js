@@ -1,7 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import Recipes from '../recipes/recipes';
 import Hero from '../hero/hero';
-import Menu from '../menu/menu';
 import Login from '../login/Login';
 import MyRecipes from '../myRecipes/myRecipes';
 import CreateRecipe from '../createRecipe/createRecipe'
@@ -59,7 +58,22 @@ function NavBar() {
           </ul>
         </nav>
         {<div className={isMenuOpened? 'menuOpen menuAnimation' : 'menuOpen hidden menuAnimation'} >
-          <Menu />
+          <div className="menu">
+              <ul className="menu__ul">
+                  <li className="menu__ul__li">
+                    <Link to="/" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Home</Link>
+                  </li>
+                  <li className="menu__ul__li">
+                    <Link to="/recipes" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Recipes</Link>
+                  </li>
+                  <li className="menu__ul__li">
+                    <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>My Recipes</Link>
+                  </li>
+                  <li className="menu__ul__li">
+                    <Link to="/search" className="menu__ul__li--link" onClick={() => setIsMenuOpened(!isMenuOpened)}>Search</Link>
+                  </li>
+              </ul>
+          </div>
         </div>
         }
 
@@ -68,9 +82,6 @@ function NavBar() {
         <Switch>
           <Route exact strict path="/">
             <Hero />
-          </Route>
-          <Route path="/menu">
-            <Menu />
           </Route>
           <Route path="/recipes">
             <Recipes />

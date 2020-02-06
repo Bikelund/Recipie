@@ -1,9 +1,20 @@
 .delete__recipe {
-    display: inline-block;
+   /*  display: inline-block;
     position: absolute;
     left: 80%;
     z-index: 2;
-    opacity: 0.7;
+    opacity: 0.7; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: $color_pink_beige;
+    color: $color_white;
+    border: none;
+    padding: 4px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
 }
 .error__edit__message {
     font-size: 10px;
