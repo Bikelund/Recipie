@@ -117,16 +117,13 @@ function EditRecipe(props) {
     function deleteSubmit() {
         setIsLoading(true)
 
-        //Delete image in storage
-       firebase.storage().ref('recipes').child(recipe.storageId).delete().then(function() {
-            console.log('success')
-        }).catch(function(error) {
-            console.log(error)
-          });
-        //Delete recipe in firestore
         firebase.auth().onAuthStateChanged(user => {  //Check if user is logged in
+            //Delete image in storage
+            firebase.storage().ref('recipes').child(recipe.storageId).delete()
+            //Delete recipe in firestore
             firebase.firestore().collection('users').doc(user.uid).collection('recipes')
-            .doc(recipe.id).delete().then(function() {
+            .doc(recipe.id).delete()
+            .then(function() {
                 setIsLoading(false)
                 history.push('/myRecipe')
             }).catch(function(error) {

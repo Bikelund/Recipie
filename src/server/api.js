@@ -34,18 +34,25 @@ export async function getUserRecipes(userId) {
 export async function getAllUserRecipes() {
     
     let allUserRecipes = [];
+    let recipeId = []
     
     await firebase.firestore().collectionGroup('recipes').get()
         .then((querySnapshot) => {
           return  querySnapshot.forEach((doc) => {
                 if (doc.exists) {
-                    allUserRecipes.push(doc.data());                    
+                    allUserRecipes.push(doc.data()); 
+                    recipeId.push(doc.id) //Get all recipe ID number                   
                 }
             });
         })
         .catch(function (error) {
             return {}
         });
+
+        // creates a new array and add recipe id
+        allUserRecipes.map((recipe, index) => {
+            recipe.id =  recipeId[index]
+        })
 
         return allUserRecipes;
 }
