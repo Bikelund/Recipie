@@ -15,8 +15,9 @@
         display: block;
         margin: 20px 50px ;
         display: flex;
+        position: relative;
     }
-
+    
     &__input {
         width: calc(100% - 32px);
         margin: 0;
@@ -34,5 +35,13 @@
         text-decoration: none;
         font-size: 16px;
         width: 30px;
+    }
+
+    &__delete__button {
+        position: absolute;
+        left: 88%;
+        top: 10%;
+        opacity: 0.5;
+        transform: translate(-87%, 3%);
     }
 }
