@@ -225,16 +225,16 @@ function EditRecipe(props) {
                                 className="create__recipe__form__category"
                                 onChange={e => setCategory(e.target.value)}>
                                 <option >-- choose --</option>
+                                <option value="Breakfast">Breakfast</option>
                                 <option value="Brunch">Brunch</option>
-                                <option value="Buffé">Buffé</option>
-                                <option value="Efterrätt">Efterrätt</option>
+                                <option value="Buffet">Buffet</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Dinner">Dinner</option>
                                 <option value="Fika">Fika</option>
-                                <option value="Frukost">Frukost</option>
-                                <option value="Förrätt">Förrätt</option>
-                                <option value="Huvudrätt">Huvudrätt</option>
                                 <option value="Lunch">Lunch</option>
-                                <option value="Mellanmål">Mellanmål</option>
-                                <option value="Middag">Middag</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="Snack">Snack</option>
+                                <option value="Starter">Starter</option>
                             </select>
                         </label>
                         <label htmlFor="servings">
