@@ -207,7 +207,6 @@ function CreateRecipe() {
                                     key={index}
                                     id={index + ingredientsPlaceholder.length} //Index starts from 5 because there are already 4 default input field.
                                     className="create__recipe__form__input__text"
-                                    // value={ingredients[index + 5]}
                                     type="text"
                                     onChange={e => { setIngredientsChange(e, e.target.id) }}
                                 />
