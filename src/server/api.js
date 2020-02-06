@@ -1,5 +1,6 @@
 import firebase from '../components/firebase/firebase';
 
+
 /**
  * 
  * @param {number} userId contains users UID 

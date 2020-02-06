@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import firebase from '../firebase/firebase'
+import 'firebase/firestore'
 import Loading from '../loading/Loading'
+import { v4 as uuid } from 'uuid'
+
 
 function EditRecipe(props) {
-    console.log(props);
     const recipe = props.history.location.state
     const history = useHistory()
     const [title, setTitle] = useState('')
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
+    const [defaultIngredients, setDefaultIngredients] = useState([])
     const [ingredients, setIngredients] = useState([])
     const [fields, setFields] = useState([{ value: null }])
+    const [defaultDirections, setDefaultDirections] = useState([])
     const [directions, setDirections] = useState([])
     const [directionsFields, setDirectionsFields] = useState([{ value: null }])
-    const [image, setImage] = useState('')
+    const [newImage, setNewImage] = useState('')
     const [srcImg, setSrcImg] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState(false)
@@ -27,11 +31,13 @@ function EditRecipe(props) {
         setServings(recipe.servings)
         setCategory(recipe.category)
         setIngredients(recipe.ingredients)
+        setDefaultIngredients(recipe.ingredients)
         setDirections(recipe.directions)
+        setDefaultDirections(recipe.directions)
         setSrcImg(recipe.imageUrl)
 
     }, [])
-    
+
 
     //Add ingredients field when user click on Add button
     function addIngredientsField() {
@@ -88,31 +94,69 @@ function EditRecipe(props) {
 
     function handleSubmit(event) {
         event.preventDefault()
-        // setIsLoading(true)
-        console.log(!image)
-        // if (image) {
-            
-        // } else {
-        //    firebase.firestore().collection('recipes').doc(recipe.id)
-        //     .update({
-        //         title: title,
-        //         category: category,
-        //         servings: servings,
-        //         ingredients: ['tomato','mushroom'],
-        //         directions: directions,
-        //         imageUrl: srcImg,
-        //     })
-        //     .then(() => {
-        //         console.log('Success')
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //     })
+        setIsLoading(true)
 
-        // }
+
+        firebase.auth().onAuthStateChanged(user => {
+            const firestoreRef = firebase.firestore().collection('users').doc(user.uid).collection('recipes'); //Create a firestore and child reference 
+
+            //Check if user uploaded a new image
+            //If user upload a new image then save image in storage and then update new data in firestore
+            if (newImage) {
+                const filename = newImage.name; //Get image name from image state
+                const ext = filename.slice(filename.lastIndexOf("."));
+                const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
+                let storageId;
+
+
+                storageRef.put(newImage) //File uploaded
+                    .then(doc => {
+                        storageId = doc.metadata.name; //image name in storage
+                        return storageRef.getDownloadURL(); //To get image url
+                    })
+                    .then((downloadUrl) => {
+                        //Add recipe data to firestore
+                        firestoreRef.doc(recipe.id).update({
+                            title: title,
+                            category: category,
+                            servings: servings,
+                            ingredients: ingredients,
+                            directions: directions,
+                            imageUrl: downloadUrl,
+                            storageId: storageId
+                        })
+                    })
+                    .then(() => {
+                        setIsLoading(false)
+                        history.push('/myRecipe')
+                    })
+                    .catch((error) => {
+                        setErrorMsg(true)
+                    });
+
+            } else {
+                firestoreRef.doc(recipe.id)
+                    .update({
+                        title: title,
+                        category: category,
+                        servings: servings,
+                        ingredients: ingredients,
+                        directions: directions,
+                        imageUrl: srcImg,
+                    })
+                    .then(() => {
+                        setIsLoading(false)
+                        history.push('/myRecipe')
+                    })
+                    .catch((error) => {
+                        setErrorMsg(true)
+                    })
+
+            }
+        })
 
     }
-    
+
     //Delete recipe by recipe id
     function deleteSubmit() {
         setIsLoading(true)
@@ -122,13 +166,13 @@ function EditRecipe(props) {
             firebase.storage().ref('recipes').child(recipe.storageId).delete()
             //Delete recipe in firestore
             firebase.firestore().collection('users').doc(user.uid).collection('recipes')
-            .doc(recipe.id).delete()
-            .then(function() {
-                setIsLoading(false)
-                history.push('/myRecipe')
-            }).catch(function(error) {
-                setErrorMsg(true)
-            });
+                .doc(recipe.id).delete()
+                .then(function () {
+                    setIsLoading(false)
+                    history.push('/myRecipe')
+                }).catch(function (error) {
+                    setErrorMsg(true)
+                });
         })
     }
 
@@ -138,10 +182,10 @@ function EditRecipe(props) {
         <> {isLoading ? <Loading /> :
             <>
                 <div onClick={() => history.goBack()} className="arrow"></div>
-                <button className="delete__recipe fontAwesome"  onClick={() => deleteSubmit()}>Delete &#xf1f8;</button>
+                <button className="delete__recipe fontAwesome" onClick={() => deleteSubmit()}>Delete &#xf1f8;</button>
                 <div className="create__recipe__title">Edit Recipe</div>
                 {/* If delete function failed show error message */}
-                {errorMsg? <div className="error__edit__message">Something went to wrong. Please try again</div> : ''} 
+                {errorMsg ? <div className="error__edit__message">Something went to wrong. Please try again</div> : ''}
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
                         <label htmlFor="title">
@@ -206,15 +250,15 @@ function EditRecipe(props) {
                       Both have Add ingredients field after map().
                     */}
                         <div className="create__recipe__form__input__title">Ingredients</div>
-                        {ingredients ?
-                            <>{ingredients.map((item, index) => {
+                        {defaultIngredients ?
+                            <>{defaultIngredients.map((ingredient, index) => {
                                 return (
                                     <input
                                         name="ingredients"
                                         key={index}
                                         id={index}
                                         className="create__recipe__form__input__text"
-                                        value={item}
+                                        defaultValue={ingredient}
                                         type="text"
                                         onChange={e => { setIngredientsChange(e, e.target.id) }}
                                     />
@@ -226,9 +270,8 @@ function EditRecipe(props) {
                                         <input
                                             name="ingredients"
                                             key={index}
-                                            id={index + ingredients.length} //Index starts from 0 + ingredients.length
+                                            id={index + defaultIngredients.length} //Index starts from 0 + ingredients.length
                                             className="create__recipe__form__input__text"
-                                            // value={ingredients[index + 5]}
                                             type="text"
                                             onChange={e => { setIngredientsChange(e, e.target.id) }}
                                         />
@@ -243,7 +286,6 @@ function EditRecipe(props) {
                                             key={index}
                                             id={index}
                                             className="create__recipe__form__input__text"
-                                            // value={ingredients[index]}
                                             type="text"
                                             placeholder={placeholder}
                                             onChange={e => { setIngredientsChange(e, e.target.id) }}
@@ -258,7 +300,6 @@ function EditRecipe(props) {
                                             key={index}
                                             id={index + ingredientsPlaceholder.length} //Index starts from 5 because there are already 4 default input field.
                                             className="create__recipe__form__input__text"
-                                            // value={ingredients[index + 5]}
                                             type="text"
                                             onChange={e => { setIngredientsChange(e, e.target.id) }}
                                         />
@@ -274,17 +315,17 @@ function EditRecipe(props) {
                     */}
                         <div className="create__recipe__form__input__title">Directions</div>
                         {/* Directions field which user wrote */}
-                        {directions ?
-                            <> {directions.map((item, index) => {
+                        {defaultDirections ?
+                            <> {defaultDirections.map((direction, index) => {
                                 return (
                                     <React.Fragment key={index}>
                                         <div className="create__recipe__form__input__container">
                                             <div className="create__recipe__form__input__number">{index + 1}</div>
                                             <textarea
                                                 name="directions"
-                                                value={item}
                                                 className="create__recipe__form__input__text"
                                                 type="text"
+                                                defaultValue={direction}
                                                 onChange={e => { setDirectionsChange(e, e.target.id) }}
                                             />
                                         </div>
@@ -299,7 +340,7 @@ function EditRecipe(props) {
                                                 <div className="create__recipe__form__input__number">{index + directions.length + 1}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index + directions.length} //Index starts from 0 + directions.length
+                                                    id={index + defaultDirections.length} //Index starts from 0 + directions.length
                                                     className="create__recipe__form__input__text"
                                                     type="text"
                                                     onChange={e => { setDirectionsChange(e, e.target.id) }}
@@ -349,7 +390,7 @@ function EditRecipe(props) {
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
                             {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
-                            <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
+                            <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setNewImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
                     </div>
                     <button className="create__recipe__form__button" type="submit">
