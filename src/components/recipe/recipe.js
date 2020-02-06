@@ -10,6 +10,8 @@ function Recipe( props ) {
   const [isUserloggedIn, setIsUserLoggedIn] = useState(false)
   const [editRecipe, seteditRecipe] = useState(false)
 
+  // This is the only way to change the background image
+  // Due to Swipers other unreachable background class
   useEffect(() => {
     const imageBG = document.getElementsByClassName('parallax-bg');
     imageBG[0].style.background = `url(${recipe.imageUrl})`;
@@ -17,6 +19,9 @@ function Recipe( props ) {
     imageBG[0].style.backgroundPosition = 'center center';
   }, [])
 
+  // Checks if the user is logged in
+  // And checks if the current recipe matches user id
+  // If true, and edit button will show in the recipe
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       setIsUserLoggedIn(true)
@@ -24,24 +29,22 @@ function Recipe( props ) {
     if (user.uid == recipe.userId) {
       seteditRecipe(true)
     }
-
-  })
-  
+  }) 
 
   // Parameters for Swiper
   const params = {
     initialSlide: 1, // Starting slide index
     speed: 600,
-    parallax: true,
+    parallax: true, // Makes background parallax
     parallaxEl: {
       el: '.parallax-bg',
       value: '-23%'
     },
-    pagination: {
+    pagination: { // Pagination dots
       el: '.swiper-pagination',
       clickable: true
     },
-    navigation: {
+    navigation: { // Navigation buttons
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev'
     }
@@ -50,7 +53,7 @@ function Recipe( props ) {
   return (
       <>
       <Swiper {...params}>
-        {/* Slide Ingredients */}
+        {/* Slide for Ingredients */}
         <div className="recipe__ingredients">
           <div className="container">
             <div className="container__blur"></div>
@@ -59,10 +62,11 @@ function Recipe( props ) {
           <div className="container">
             <div className="container__blur__list"></div>
             <ul className="recipe__ingredients__ul">
+              {/* A ternary operator that checks if the ingredient list is empty or not */}
               { 
-                !recipe.ingredients === true ? <li className="recipe__ingredients__ul__li">You have all you need</li>
+                !recipe.ingredients === true ? <li className="recipe__ingredients__ul__li">You have all you need</li> // Shows this if empty
                 :recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li>)
-                // data-swiper-parallax creates a fade in delay 
+                // data-swiper-parallax creates a fade in offset
               }
             </ul>
           </div>
@@ -73,24 +77,27 @@ function Recipe( props ) {
 
         </div>
 
-        {/* Slide Title */}
+        {/* Slide for Main Title */}
         <div className="recipe__title" data-initial-slide="1"> {/* Makes this the initial slide */}
           <div className="container">
               <div className="container__blur"></div>
             <h1 className="container__h1">{recipe.title}</h1>
           </div>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
-          {editRecipe ? <button className="recipe__edit fontAwesome" onClick={() => history.push({
+          {/* Edit button only shows for the creator of the recipe */}
+          {
+          editRecipe ? <button className="recipe__edit fontAwesome" onClick={() => history.push({
              pathname: '/editRecipe',
              state: recipe
-          })}>Edit &#xf0e2;</button> : ""}
+          })}>Edit &#xf0e2;</button> : ""
+          }
           <div className="button__container fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>
           </div>
         </div>
 
-        {/* Slide How to cook */}
+        {/* Slide for How to cook */}
         <div className="recipe__how-to-cook">
           <div className="container">
               <div className="container__blur"></div>
@@ -101,8 +108,7 @@ function Recipe( props ) {
             <ol className="recipe__how-to-cook__ol">
               { 
                 !recipe.directions === true ? <li className="recipe__how-to-cook__ol__li">Just eat it</li>
-                :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__how-to-cook__ol__li">{item}</li>)
-                // data-swiper-parallax creates a fade in delay      
+                :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__how-to-cook__ol__li">{item}</li>)     
               }
             </ol>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import Recipes from '../recipes/recipes';
 import Hero from '../hero/hero';
 import Login from '../login/Login';
@@ -19,7 +19,7 @@ import {
 
 function NavBar() {
   const [isUserloggedIn, setIsUserLoggedIn] = useState(null)
-  const [isMenuOpened, setIsMenuOpened] = useState(false)
+  const [isMenuOpened, setIsMenuOpened] = useState(false) // This changes the state of the menu from open or closed
 
   useEffect(() => {
       firebase.auth().onAuthStateChanged(user => {
@@ -47,6 +47,7 @@ function NavBar() {
               <Link to="/recipes" className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf02d;</Link>
             </li>
             <li className="navigation__ul__li">
+              {/* If a user isn't logged in, hen will be directed to login page */}
               <Link to={isUserloggedIn? "/myRecipe" : "/login"} className="fontAwesome navigation__ul__li--link" onClick={() => setIsMenuOpened(false)}>&#xf2bd;</Link>
             </li>
             <li className="navigation__ul__li">
@@ -102,11 +103,10 @@ function NavBar() {
           <Route path="/resetPassword">
             <ResetPassword />
           </Route>
-          {/* to pass a prop to a Recipe component */}
+          {/* To pass a prop to the Recipe component */}
           <Route path="/recipe" render={(props)=> <Recipe {...props} />} />
-          {/* to pass a prop to a EditRecipe component */}
+          {/* To pass a prop to the EditRecipe component */}
           <Route path="/editRecipe" render={(props)=> <EditRecipe {...props} />} />
-
         </Switch>
       </div>
     </Router>

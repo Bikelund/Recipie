@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import firebase from '../firebase/firebase';
 import 'firebase/firestore';
-import { firestore } from 'firebase';
 import { v4 as uuid } from 'uuid';
 import { useHistory } from "react-router-dom";
 import Loading from '../loading/Loading'

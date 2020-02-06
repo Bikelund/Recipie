@@ -40,6 +40,7 @@
     }
 }
 
+// Styling for menu
 .menuOpen {
     transition: 600ms ease-in-out;
     width: 100vw;
@@ -53,6 +54,7 @@
     align-items: flex-start;
     z-index: 100;
 
+    // And when hidden
     &.hidden {
         height: 0;
         bottom: 0;
@@ -77,6 +79,7 @@
     }
 }
 
+// A small fix, otherwise the ul will break the layout
 .menuOpen.hidden > ul {
     display: none;
 }
