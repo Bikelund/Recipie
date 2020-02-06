@@ -1,7 +1,9 @@
 .loading {
     position: relative;
     width: 100vw;
-    height: calc(100vh - 60px);
+    height: 100vh;
+    z-index: 200;
+    background-color: $color_white;
 }
 .loading__symbol {
     background-image: url('/img/pie.svg');
