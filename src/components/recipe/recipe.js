@@ -17,7 +17,7 @@ function Recipe( props ) {
     imageBG[0].style.background = `url(${recipe.imageUrl})`;
     imageBG[0].style.backgroundSize = 'cover';
     imageBG[0].style.backgroundPosition = 'center center';
-  }, [])
+  }, [recipe])
 
   // Checks if the user is logged in
   // And checks if the current recipe matches user id
@@ -25,9 +25,9 @@ function Recipe( props ) {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       setIsUserLoggedIn(true)
-    }
-    if (user.uid == recipe.userId) {
-      seteditRecipe(true)
+      if (user.uid === recipe.userId) {
+        seteditRecipe(true)
+      }
     }
   }) 
 
