@@ -10,7 +10,6 @@ function Register() {
     const [message, setMessage] = useState('')
     const history = useHistory()
 
-
     //Sign up button appear when user filled in form
     //disabled={!validateForm()}
     function validateForm() {
@@ -42,47 +41,44 @@ function Register() {
                 setMessage('The email address is already in use by another account.')
             }
         }
-
-
     }
 
     return (
         <>
-            {
-                    <div>
-                        <h1 className="login__title">Create a New Account</h1>
-                        <form className="login__form" onSubmit={handleSubmit}>
-                            <div className="login__form__input">
-                                {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
-                                <input
-                                    name="email"
-                                    className="fontAwesome login__form__input__text"
-                                    value={email}
-                                    type="text"
-                                    placeholder="&#xf0e0; Email"
-                                    onChange={e => setEmail(e.target.value)}
-                                /><br />
-                                {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
-                                <input
-                                    name="password"
-                                    className="fontAwesome login__form__input__text"
-                                    value={password}
-                                    type="password"
-                                    placeholder="&#xf13e; Password"
-                                    onChange={e => setPassword(e.target.value)}
-                                />
-                            </div>
-                            <button type="submit" className="login__form__button sign__up" disabled={!validateForm()} >
-                                SIGN UP
-                    </button>
-                        </form>
-                        <hr />
-                        <h2 className="switch__login">Log in to Recipie</h2>
-                        <button type="submit" className="login__form__button" onClick={() => history.push('/login')}>
-                            LOG IN
+        {<div>
+            <h1 className="login__title">Create a New Account</h1>
+            <form className="login__form" onSubmit={handleSubmit}>
+                <div className="login__form__input">
+                    {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
+                <input
+                    name="email"
+                    className="fontAwesome login__form__input__text"
+                    value={email}
+                    type="text"
+                    placeholder="&#xf0e0; Email"
+                    onChange={e => setEmail(e.target.value)}
+                /><br />
+                {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
+                <input
+                    name="password"
+                    className="fontAwesome login__form__input__text"
+                    value={password}
+                    type="password"
+                    placeholder="&#xf13e; Password"
+                    onChange={e => setPassword(e.target.value)}
+                />
+                </div>
+                <button type="submit" className="login__form__button sign__up" disabled={!validateForm()}>
+                    SIGN UP
+                </button>
+            </form>
+            <hr />
+            <h2 className="switch__login">Log in to Recipie</h2>
+            <button type="submit" className="login__form__button" onClick={() => history.push('/login')}>
+                LOG IN
             </button>
-                    </div> 
-            }
+        </div> 
+        }
         </>
     )
 }

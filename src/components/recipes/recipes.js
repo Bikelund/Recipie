@@ -19,24 +19,20 @@ function AllRecipes() {
 
     return (
         <>
-            {/* {
-        showRecipeList ? 
-            <> */}
-            <div className='recipes'>
-                <h1>All Recipes</h1>
-                {recipes.length === 0 ? ''
-                    : Object.keys(recipes).map((i, key) => (
-                        <div className='recipes__recipe' key={key} onClick={() => {history.push({
-                            pathname: '/recipe',
-                            state : recipes[i]
-                        })}}>
-                            <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
-                            <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
-                        </div>  
-                    ))}
-            </div>
-            {/* </> : <Recipe recipe={recipe} />
-        } */}
+        <div className='recipes'>
+            <h1>All Recipes</h1>
+            {/* This renders all recipes for every user */}
+            {recipes.length === 0 ? ''
+                : Object.keys(recipes).map((i, key) => (
+                    <div className='recipes__recipe' key={key} onClick={() => {history.push({
+                        pathname: '/recipe',
+                        state : recipes[i]
+                    })}}>
+                        <h2 className='recipes__recipe__title'>{recipes[i].title}</h2>
+                        <div className="recipes__recipe__image" style={{backgroundImage: `url(${recipes[i].imageUrl})`}}></div>
+                    </div>
+                ))}
+        </div>
         </>
     )
 }
