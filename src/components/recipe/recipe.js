@@ -80,10 +80,10 @@ function Recipe( props ) {
             <h1 className="container__h1">{recipe.title}</h1>
           </div>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
-          {editRecipe ? <button className="recipe__edit" onClick={() => history.push({
+          {editRecipe ? <button className="recipe__edit fontAwesome" onClick={() => history.push({
              pathname: '/editRecipe',
              state: recipe
-          })}>Edit</button> : ""}
+          })}>Edit &#xf0e2;</button> : ""}
           <div className="button__container fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>

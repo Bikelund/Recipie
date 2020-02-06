@@ -1,11 +1,15 @@
+.loading {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 60px);
+}
 .loading__symbol {
     background-image: url('/img/pie.svg');
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 80px);
+    left: calc(50% - 50px);
     animation: rotate;
     animation-duration: 2000ms;
     animation-iteration-count: infinite;

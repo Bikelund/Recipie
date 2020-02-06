@@ -18,8 +18,8 @@ function CreateRecipe() {
     const [srcImg, setSrcImg] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState(false)
-    const ingredientsPlaceholder = ['500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'cheese'] // Default placeholder ingredients value
-    const directionsPlaceholder = ['Cut the eggplant', 'Prepare boild water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls'] // Default placeholder directions value
+    const ingredientsPlaceholder = ['E.g. 500g tomato can', '150g penne', '1/2 eggplant', '1 garlic clove', 'Cheese'] // Default placeholder ingredients value
+    const directionsPlaceholder = ['Cut the eggplant in cubes...', 'Prepare boiled water with a pinch of salt added to cook the pasta in...', 'Divide the pasta between 2 serving bowls...'] // Default placeholder directions value
     const history = useHistory();
 
 
@@ -154,16 +154,16 @@ function CreateRecipe() {
                                 className="create__recipe__form__category"
                                 onChange={e => setCategory(e.target.value)}>
                                 <option >-- choose --</option>
+                                <option value="Breakfast">Breakfast</option>
                                 <option value="Brunch">Brunch</option>
-                                <option value="Buffé">Buffé</option>
-                                <option value="Efterrätt">Efterrätt</option>
+                                <option value="Buffet">Buffet</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Dinner">Dinner</option>
                                 <option value="Fika">Fika</option>
-                                <option value="Frukost">Frukost</option>
-                                <option value="Förrätt">Förrätt</option>
-                                <option value="Huvudrätt">Huvudrätt</option>
                                 <option value="Lunch">Lunch</option>
-                                <option value="Mellanmål">Mellanmål</option>
-                                <option value="Middag">Middag</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="Snack">Snack</option>
+                                <option value="Starter">Starter</option>
                             </select>
                         </label>
                         <label htmlFor="servings">
