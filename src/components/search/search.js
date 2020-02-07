@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { getAllUserRecipes } from '../../server/api'
-import Results from './result'
+import { useHistory } from 'react-router-dom'
 
 function Search() {
     const [searchWord, setSearchWord] = useState('')
     const [focus, setFocus] = useState(false)
-    const [results, setResults] = useState([])
     const [error, setError] = useState(false)
+    const history = useHistory()
 
     function handleChangeSearchWord(e) {
         setFocus(true)
@@ -62,8 +62,9 @@ function Search() {
                     result = removeDublicateValues(result) //Remove dublicate values if there are dublicate values
                     if (result.length === 0) {
                         setError(true)
+                    }else{
+                        history.push({ pathname: '/results', state: result})
                     }
-                    setResults(result)
                 })
         }
     }
@@ -76,7 +77,6 @@ function Search() {
         setError(false)
         setSearchWord('')
         setFocus(false)
-        setResults([])
     }
 
     return (
@@ -100,7 +100,6 @@ function Search() {
                     <button className="fontAwesome search__form__button">&#xf002;</button>
                 </div>
             </form>
-            {results.length > 0 ? <Results results={results} /> : ''}
         </div>
     )
 }
