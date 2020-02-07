@@ -45,3 +45,44 @@
         padding: 0 40px;
     }
 }
+
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+    .myRecipes {
+
+        h1 {
+            padding: 70px 0 0;
+            font-size: 50px;
+            width: 100%;
+            margin-bottom: 70px;
+        }
+
+        &__recipes__list{
+            width: 700px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 0 40px 60px;
+        }
+
+        &__btn__create-recipe {
+            padding: 10px 32px;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        &__btn__log-out {
+            left: 100px;
+            padding: 10px;
+            font-size: 12px;
+        }
+    }
+}

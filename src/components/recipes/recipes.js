@@ -27,6 +27,7 @@ function AllRecipes() {
                 <Loading /> :
                 <>
                     <div className='recipes'>
+                        <div className="recipes__container">
                         <h1>All Recipes</h1>
                         {/* This renders all recipes for every user */}
                         {recipes.length === 0 ? ''
@@ -41,6 +42,7 @@ function AllRecipes() {
                                     <div className="recipes__recipe__image" style={{ backgroundImage: `url(${recipes[i].imageUrl})` }}></div>
                                 </div>
                             ))}
+                        </div>
                     </div>
                 </>
             }
