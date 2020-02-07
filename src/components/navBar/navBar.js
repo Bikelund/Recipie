@@ -9,6 +9,7 @@ import Register from '../register/register';
 import Recipe from '../recipe/recipe';
 import EditRecipe from '../editRecipe/editRecipe';
 import Search from '../search/search';
+import Results from '../search/result';
 import firebase from '../firebase/firebase';
 import {
   BrowserRouter as Router,
@@ -107,6 +108,8 @@ function NavBar() {
           <Route path="/recipe" render={(props)=> <Recipe {...props} />} />
           {/* To pass a prop to the EditRecipe component */}
           <Route path="/editRecipe" render={(props)=> <EditRecipe {...props} />} />
+          {/* To pass a prop to the EditRecipe component */}
+          <Route path="/results" render={(props)=> <Results {...props} />} />
         </Switch>
       </div>
     </Router>
