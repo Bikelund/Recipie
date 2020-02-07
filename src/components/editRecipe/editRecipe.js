@@ -107,6 +107,8 @@ function EditRecipe(props) {
     function handleSubmit(event) {
         event.preventDefault()
 
+        console.log(directions)
+
          //Remove empty string and create a new array
          const filteredIngredients = removeEmptyString(ingredients)
          const filteredDirections = removeEmptyString(directions)
