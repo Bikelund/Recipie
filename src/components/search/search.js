@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getAllUserRecipes } from '../../server/api'
 import { useHistory } from 'react-router-dom'
 
@@ -6,7 +6,16 @@ function Search() {
     const [searchWord, setSearchWord] = useState('')
     const [focus, setFocus] = useState(false)
     const [error, setError] = useState(false)
+    const [data, setData] = useState([])
     const history = useHistory()
+
+    //Get all user recipes from firestore and put them in data state
+    useEffect(() => {
+        getAllUserRecipes() 
+                .then(response => {
+                    setData(response)
+                })
+    },[data])
 
     function handleChangeSearchWord(e) {
         setFocus(true)
@@ -56,16 +65,13 @@ function Search() {
         setSearchWord(searchWord.trim()) //Remove whitespacing
 
         if (searchWord.length > 0 && searchWord !== '' && searchWord !== ' ') {
-            getAllUserRecipes() //Get all user recipes from firestore
-                .then(response => {
-                    let result = search(searchWord, response)
+                    let result = search(searchWord, data) 
                     result = removeDublicateValues(result) //Remove dublicate values if there are dublicate values
                     if (result.length === 0) {
                         setError(true)
                     }else{
                         history.push({ pathname: '/results', state: result})
                     }
-                })
         }
     }
 
