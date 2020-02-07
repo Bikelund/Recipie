@@ -7,6 +7,13 @@
         font-weight: 100;
         opacity: 0.8;
     }
+
+    &__error__message {
+        text-align: center;
+        font-size: 10px;
+        font-family: $fonts_montserrat;
+        color: red;
+    }
 }
 
 .search__form {
@@ -39,7 +46,7 @@
 
     &__delete__button {
         position: absolute;
-        left: 88%;
+        left: 85%;
         top: 10%;
         opacity: 0.5;
         transform: translate(-87%, 3%);
