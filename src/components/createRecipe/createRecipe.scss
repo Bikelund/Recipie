@@ -125,3 +125,117 @@ select {
   color: red;
 }
 
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+  .create__recipe {
+    width: calc(100vw - 100px);
+    right: 0;
+    left: 100px;
+    position: relative;
+    margin: 0;
+    padding: 100px 0 0 0;
+    overflow-x: hidden;
+
+    &__title {
+      margin: 0;
+      padding: 30px 0 50px;
+      font-size: 45px;
+      opacity: .6;
+    }
+
+    &__form__button {
+      padding: 8px 16px;
+      text-align: center;
+      display: inline-block;
+      font-size: 12px;
+      margin: 0 auto;
+      height: max-content;
+      right: 0;
+      bottom: 10px;
+      width: 80%;
+      position: absolute;
+    }
+
+    .create__recipe__form__input {
+      margin: 0;
+      display: flex;
+      justify-content: space-evenly;
+
+      &__title {
+        font-size: 16px;
+      }
+    
+      &__text {
+        width: calc(100% - 20px);
+        margin: 2px 0 10px;
+      }
+
+      &__add {
+        cursor: pointer;
+        right: 0;
+        position: absolute;
+        font-size: 14px;
+        &__icon {
+          font-size: 18px;
+        }
+      }
+      .create__recipe__form__input__textarea {
+        height: 60px;
+      }
+
+      .create__recipe__form__image__container {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-top: 20px;
+      }
+
+      .create__recipe__form__button__container {
+        width: 50%;
+        position: relative;
+        padding: 0 2px;
+      }
+
+      &__image {
+    
+        &__title {
+          font-size: 16px;
+          margin-top: 20px;
+          width: 50%;
+        }
+
+        &__box {
+          width: 100%;
+          height: 120px;
+          margin: 6px 0;
+          position: relative;
+          cursor: pointer;
+
+           &__img {
+            width: 100%;
+            height: auto;
+            margin: 6px 0;
+           }
+        }
+      }
+    }
+
+    .form__container__left, 
+    .form__container__right {
+      width: 30%;
+      position: relative;
+    }
+
+    .create__recipe__form__select,
+    .create__recipe__form__category {
+      margin: 2px 0 10px;
+      width: 100%;
+    }
+  }
+}

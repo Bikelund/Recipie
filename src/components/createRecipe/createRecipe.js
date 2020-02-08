@@ -142,10 +142,12 @@ function CreateRecipe() {
     return (
         <> {isLoading ? <Loading /> :
             <>
+            <div className="create__recipe">
                 <div onClick={() => history.goBack()} className="arrow"></div>
-                <div className="create__recipe__title">Create Recipe</div>
+                <h1 className="create__recipe__title">Create Recipe</h1>
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
+                        <div className="form__container__left">
                         <label htmlFor="title">
                             <div className="create__recipe__form__input__title">Title</div>
                             <input
@@ -230,53 +232,61 @@ function CreateRecipe() {
                             );
                         })}
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addIngredientsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
-                        <div className="create__recipe__form__input__title">Directions</div>
-                        {/* Default directions field which is 3 fields */}
-                        {directionsPlaceholder.map((placeholder, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <div className="create__recipe__form__input__container">
-                                        <div className="create__recipe__form__input__number">{index + 1}</div>
-                                        <textarea
-                                            name="directions"
-                                            id={index}
-                                            className="create__recipe__form__input__text"
-                                            type="text"
-                                            placeholder={placeholder}
-                                            onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                        />
-                                    </div>
-                                </React.Fragment>
-                            )
-                        })}
-                        {/* Add directions field when user click on Add button */}
-                        {directionsFields.map((_, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <div className="create__recipe__form__input__container">
-                                        <div className="create__recipe__form__input__number">{index + 4}</div>
-                                        <textarea
-                                            name="directions"
-                                            id={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
-                                            className="create__recipe__form__input__text"
-                                            type="text"
-                                            onChange={e => { setDirectionsChange(e, e.target.id) }}
-                                        />
-                                    </div>
-                                </React.Fragment>
-                            );
-                        })}
-                        <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
-                        <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
-                        {errorMsg ? <div className="error__message">Update your food image</div> : ''}
-                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
-                            <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
-                        </label>
+                        </div>
+                    <div className="form__container__right">
+                            <div className="create__recipe__form__input__title">Directions</div>
+                            {/* Default directions field which is 3 fields */}
+                            {directionsPlaceholder.map((placeholder, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <div className="create__recipe__form__input__container">
+                                            <div className="create__recipe__form__input__number">{index + 1}</div>
+                                            <textarea
+                                                name="directions"
+                                                id={index}
+                                                className="create__recipe__form__input__text create__recipe__form__input__textarea"
+                                                type="text"
+                                                placeholder={placeholder}
+                                                onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                            />
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            })}
+                            {/* Add directions field when user click on Add button */}
+                            {directionsFields.map((_, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <div className="create__recipe__form__input__container">
+                                            <div className="create__recipe__form__input__number">{index + 4}</div>
+                                            <textarea
+                                                name="directions"
+                                                id={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
+                                                className="create__recipe__form__input__text create__recipe__form__input__textarea"
+                                                type="text"
+                                                onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                            />
+                                        </div>
+                                    </React.Fragment>
+                                );
+                            })}
+                            <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
+                            <div className="create__recipe__form__image__container">
+                                <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
+                                {errorMsg ? <div className="error__message">Update your food image</div> : ''}
+                                {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
+                                    <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
+                                </label>
+                                <div className="create__recipe__form__button__container">
+                                <button className="create__recipe__form__button" type="submit">
+                                    ADD RECIPE
+                                </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button className="create__recipe__form__button" type="submit">
-                        ADD RECIPE
-                    </button>
                 </form>
+            </div>
             </>
         }
         </>
