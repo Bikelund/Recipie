@@ -1,228 +1,338 @@
-// Slide for Main Title
-.recipe__title {
-    height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    h1 {
-        margin: 0;
-        text-align: center;
-        padding: 60px 0 10px;
-        color: $color_white;
-        font-family: $fonts_josefin;
-    }
-}
-
-.button__container {
-    color: $color_white;
-    display: flex;
-    justify-content: space-around;
-    background: rgba($color: #000000, $alpha: 0.5);
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    outline: none;
-    z-index: 22;
-    padding-top: 16px;
-
-    &--left {
-        flex-direction: row-reverse;
-    }
-
-    &--left,
-    &--right {
+@media screen and (max-width: $desktopBP) {
+    // Slide for Main Title
+    .recipe__title {
+        height: calc(100vh - 60px);
+        display: flex;
+        flex-direction: column;
         justify-content: space-between;
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            padding: 60px 0 10px;
+            color: $color_white;
+            font-family: $fonts_josefin;
+        }
     }
 
-    &--left p {
-        padding-right: 50px;
-    }
-
-    &--right p {
-        padding-left: 50px;
-    }
-}
-
-// Black blurry effect on texts
-// To make the text readable against white backgrounds
-.container {
-    position: relative;
-
-    &__blur,
-    &__blur__list {
-        mix-blend-mode: multiply;
-        content: "";
-        background: rgba(0,0,0,.6);
+    .button__container {
+        color: $color_white;
+        display: flex;
+        justify-content: space-around;
+        background: rgba($color: #000000, $alpha: 0.5);
         position: absolute;
-        filter: blur(70px);
-        right: 0;
-        bottom: 0;
         left: 0;
-        z-index: -1;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        outline: none;
+        z-index: 22;
+        padding-top: 16px;
+
+        &--left {
+            flex-direction: row-reverse;
+        }
+
+        &--left,
+        &--right {
+            justify-content: space-between;
+        }
+
+        &--left p {
+            padding-right: 50px;
+        }
+
+        &--right p {
+            padding-left: 50px;
+        }
+    }
+
+    // Black blurry effect on texts
+    // To make the text readable against white backgrounds
+    .container {
+        position: relative;
+
+        &__blur,
+        &__blur__list {
+            mix-blend-mode: multiply;
+            content: "";
+            background: rgba(0,0,0,.6);
+            position: absolute;
+            filter: blur(70px);
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            height: 100%;
+            width: 100%;
+        }
+        &__blur__list {
+            filter: blur(120px);
+        }
+        &__h2,
+        &__h1 {
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7);
+        }
+    }
+
+    // Slide for Ingredients
+    .recipe__ingredients {
+        height: calc(100vh - 60px);
+        color: $color_white;
+        font-family: $fonts_montserrat;
+
+        h2 {
+            margin: 0;
+            text-align: center;
+            padding: 64px 0 14px;
+            color: $color_white;
+            font-family: $fonts_josefin;
+        }
+
+        &__ul {
+            margin: 0 auto;
+            padding: 20px 10px 20px 26%;
+            min-height: calc(100vh - 268px);
+        }
+
+        &__ul__li {
+            margin: 10px 0;
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7);
+        }
+    }
+
+    // Slide for how to cook
+    .recipe__how-to-cook {
+        height: calc(100vh - 60px);
+        color: $color_white;
+        font-family: $fonts_montserrat;
+
+        h2 {
+            margin: 0;
+            text-align: center;
+            padding: 64px 0 14px;
+            color: $color_white;
+            font-family: $fonts_josefin;
+        }
+
+        &__ol {
+            margin: 0 auto;
+            padding: 20px 20px 20px 22%;
+            min-height: calc(100vh - 268px);
+        }
+
+        &__ol__li {
+            margin: 10px 0;
+        }
+    }
+
+    // Edit button
+    .recipe__edit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $color_pink_beige;
+        color: $color_white;
+        border: none;
+        padding: 4px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 12px;
+    }
+
+    // Background image styling
+    .parallax-bg {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 130%;
         height: 100%;
+    }
+
+    // Swiper button styling
+    .swiper-button-prev, 
+    .swiper-button-next {
+        position: absolute;
+        top: calc(100% - 50px);
+        width: 50vw;
+        height: 50px;
+        z-index: 20;
+        cursor: pointer;
+        background-position: center center;
+        background-repeat: no-repeat;
+        outline: none;
+    }
+    .swiper-button-next {
+        right: 0;
+        left: auto;
+    }
+    .swiper-button-prev {
+        left: 0;
+        right: auto;
+    }
+    .swiper-button-prev.swiper-button-disabled,
+    .swiper-button-next.swiper-button-disabled {
+        opacity: 1;
+        cursor: auto;
+        pointer-events: none;
+    }
+
+    // Swiper pagination styling 
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 0;
+        padding-bottom: 50px;
+        left: 0px;
         width: 100%;
     }
-    &__blur__list {
-        filter: blur(120px);
+    .swiper-pagination {
+        position: absolute;
+        text-align: center;
+        transform: translate3d(0px, 0px, 0px);
+        z-index: 10;
+        transition: opacity 300ms ease .3s;
     }
-    &__h2,
-    &__h1 {
-        text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7);
+    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0px 4px;
+    }
+    .swiper-pagination-bullet {
+        background-color: $color_white;
+        opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+        opacity: 1;
+        background-color: $color_pink !important;
+    }
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        display: inline-block;
+        opacity: 1;
+        border-radius: 100%;
+        background: $color_white;
+    }
+
+    // Hides desktop markup
+    .desktop__recipe {
+        display: none;
     }
 }
 
-// Slide for Ingredients
-.recipe__ingredients {
-    height: calc(100vh - 60px);
-    color: $color_white;
-    font-family: $fonts_montserrat;
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
 
-    h2 {
+@media screen and (min-width: $desktopBP) {
+
+    // Hides Swiper for mobile
+    .swiper-container {
+        display: none;
+    }
+
+    .desktop__recipe {
+        color: $color_white;
+        width: calc(100vw - 100px);
+        left: 100px;
+        position: relative;
         margin: 0;
-        text-align: center;
-        padding: 64px 0 14px;
-        color: $color_white;
-        font-family: $fonts_josefin;
+        height: 100vh;
+        max-width: 2000px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+
+        &__edit {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: $color_light_red_orange;
+            color: $color_white;
+            border: none;
+            padding: 8px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+            margin: 6px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        &__container {
+            display: flex;
+            justify-content: center;
+        }
+
+        &__ingredients,
+        &__how-to-cook {
+            width: 35%;
+        }
     }
 
-    &__ul {
-        margin: 0 auto;
-        padding: 20px 10px 20px 26%;
-        min-height: calc(100vh - 268px);
+    .desktop__recipe__title {
+        height: 300px;
+
+        &__h1 {
+            font-size: 60px;
+            margin: 0;
+            padding-top: 120px;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7)
+        }
     }
 
-    &__ul__li {
-        margin: 10px 0;
-        text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7);
-    }
-}
+    .desktop__recipe__ingredients {
 
-// Slide for how to cook
-.recipe__how-to-cook {
-    height: calc(100vh - 60px);
-    color: $color_white;
-    font-family: $fonts_montserrat;
+        &__ul {
+            padding: 20px 0 20px 30%;
+            font-size: 20px;
+        }
 
-    h2 {
-        margin: 0;
-        text-align: center;
-        padding: 64px 0 14px;
-        color: $color_white;
-        font-family: $fonts_josefin;
+        &__ul__li {
+            margin: 10px 0;
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7)
+        }
     }
 
-    &__ol {
-        margin: 0 auto;
-        padding: 20px 20px 20px 22%;
-        min-height: calc(100vh - 268px);
+    .desktop__recipe__how-to-cook {
+
+        &__ol {
+            padding: 20px 0 20px 30%;
+            font-size: 20px;
+        }
+
+        &__ol__li {
+            margin: 10px 0;
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7)
+        }
     }
+    
+    .container {
+        position: relative;
 
-    &__ol__li {
-        margin: 10px 0;
+        &__blur,
+        &__blur__list {
+            mix-blend-mode: multiply;
+            content: "";
+            background: rgba(0,0,0,.6);
+            position: absolute;
+            filter: blur(70px);
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            height: 100%;
+            width: 100%;
+        }
+        &__blur__list {
+            filter: blur(120px);
+        }
+        &__h2 {
+            text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.7);
+            text-align: center;
+            font-size: 40px;
+        }
     }
-}
-
-// Edit button
-.recipe__edit {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: $color_pink_beige;
-    color: $color_white;
-    border: none;
-    padding: 4px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 12px;
-}
-
-// Back arrows
-.arrowBack {
-    height: 50px;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-
-    p {
-        font-weight: 900;
-        color: $color_white;
-        text-align: center;
-    }
-}
-
-// Background image styling
-.parallax-bg {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 130%;
-    height: 100%;
-}
-
-// Swiper button styling
-.swiper-button-prev, 
-.swiper-button-next {
-    position: absolute;
-    top: calc(100% - 50px);
-    width: 50vw;
-    height: 50px;
-    z-index: 20;
-    cursor: pointer;
-    background-position: center center;
-    background-repeat: no-repeat;
-    outline: none;
-}
-.swiper-button-next {
-    right: 0;
-    left: auto;
-}
-.swiper-button-prev {
-    left: 0;
-    right: auto;
-}
-.swiper-button-prev.swiper-button-disabled,
-.swiper-button-next.swiper-button-disabled {
-    opacity: 1;
-    cursor: auto;
-    pointer-events: none;
-}
-
-// Swiper pagination styling 
-.swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 0;
-    padding-bottom: 50px;
-    left: 0px;
-    width: 100%;
-}
-.swiper-pagination {
-    position: absolute;
-    text-align: center;
-    transform: translate3d(0px, 0px, 0px);
-    z-index: 10;
-    transition: opacity 300ms ease .3s;
-}
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0px 4px;
-}
-.swiper-pagination-bullet {
-    background-color: $color_white;
-    opacity: 1;
-}
-.swiper-pagination-bullet-active {
-    opacity: 1;
-    background-color: $color_pink !important;
-}
-.swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    opacity: 1;
-    border-radius: 100%;
-    background: $color_white;
 }

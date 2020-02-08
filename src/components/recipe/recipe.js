@@ -80,7 +80,7 @@ function Recipe( props ) {
         {/* Slide for Main Title */}
         <div className="recipe__title" data-initial-slide="1"> {/* Makes this the initial slide */}
           <div className="container">
-              <div className="container__blur"></div>
+            <div className="container__blur"></div>
             <h1 className="container__h1">{recipe.title}</h1>
           </div>
           <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
@@ -100,7 +100,7 @@ function Recipe( props ) {
         {/* Slide for How to cook */}
         <div className="recipe__how-to-cook">
           <div className="container">
-              <div className="container__blur"></div>
+            <div className="container__blur"></div>
             <h2 className="container__h2">How to cook</h2>
           </div>
           <div className="container">
@@ -119,6 +119,42 @@ function Recipe( props ) {
 
         </div>
       </Swiper>
+
+      {/* Desktop Markup */}
+
+      <div className="desktop__recipe" style={{background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover"}}>
+        <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
+        {
+          editRecipe ? <button className="desktop__recipe__edit fontAwesome" onClick={() => history.push({
+          pathname: '/editRecipe',
+          state: recipe
+          })}>Edit &#xf0e2;</button> : ""
+        }
+        <div className="desktop__recipe__title container">
+          <div className="container__blur"></div>
+          <h1 className="desktop__recipe__title__h1 container__h1">{recipe.title}</h1>
+        </div>
+        <div className="desktop__recipe__container">
+          <div className="desktop__recipe__ingredients container">
+            <h2 className="container__h2">Ingredients</h2>
+            <ul className="desktop__recipe__ingredients__ul">
+              { 
+                !recipe.ingredients === true ? <li className="desktop__recipe__ingredients__ul__li">You have all you need</li>
+                :recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__ingredients__ul__li">{item}</li>)
+              }
+            </ul>
+          </div>
+          <div className="desktop__recipe__how-to-cook container">
+            <h2 className="container__h2">How to cook</h2>
+            <ol className="desktop__recipe__how-to-cook__ol">
+              { 
+                !recipe.directions === true ? <li className="desktop__recipe__how-to-cook__ol__li">Just eat it</li>
+                :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__how-to-cook__ol__li">{item}</li>)     
+              }
+            </ol>
+          </div>
+        </div>
+      </div>
     </>
   )
 };

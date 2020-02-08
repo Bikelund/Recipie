@@ -77,3 +77,62 @@ hr {
   font-weight: 100;
   opacity: 0.8;
 }
+
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+  .login {
+    width: calc(100vw - 100px);
+    right: 0;
+    left: 100px;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20vh;
+    max-width: 1500px;
+  }
+
+  .login__title,
+  .switch__login {
+    margin: 50px 0 50px;
+    font-size: 30px;
+  }
+
+  .login__left,
+  .login__right {
+    width: calc(50% - 1px);
+  }
+
+  .login__middle {
+    width: 2px;
+    background-color: black;
+    opacity: .5;
+    border-radius: 30%;
+  }
+
+  .login__form__input {
+    margin: 0 200px;
+  
+    &__text {
+      width: calc(100% - 20px);
+      margin: 14px auto 6px;
+      padding: 4px 10px;
+      border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
+    }
+  }
+
+  .login__form__button {
+    padding: 8px 32px;
+    font-size: 12px;
+  }
+
+  hr {
+    display: none;
+  }
+
+}

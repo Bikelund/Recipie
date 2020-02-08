@@ -45,38 +45,44 @@ function Register() {
 
     return (
         <>
-        {<div>
-            <h1 className="login__title">Create a New Account</h1>
-            <form className="login__form" onSubmit={handleSubmit}>
-                <div className="login__form__input">
-                    {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
-                <input
-                    name="email"
-                    className="fontAwesome login__form__input__text"
-                    value={email}
-                    type="text"
-                    placeholder="&#xf0e0; Email"
-                    onChange={e => setEmail(e.target.value)}
-                /><br />
-                {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
-                <input
-                    name="password"
-                    className="fontAwesome login__form__input__text"
-                    value={password}
-                    type="password"
-                    placeholder="&#xf13e; Password"
-                    onChange={e => setPassword(e.target.value)}
-                />
-                </div>
-                <button type="submit" className="login__form__button sign__up" disabled={!validateForm()}>
-                    SIGN UP
-                </button>
-            </form>
+        {
+        <div className="login">
+            <div className="login__left">
+                <h1 className="login__title">Create a New Account</h1>
+                <form className="login__form" onSubmit={handleSubmit}>
+                    <div className="login__form__input">
+                        {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
+                    <input
+                        name="email"
+                        className="fontAwesome login__form__input__text"
+                        value={email}
+                        type="text"
+                        placeholder="&#xf0e0; Email"
+                        onChange={e => setEmail(e.target.value)}
+                    /><br />
+                    {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : ''}
+                    <input
+                        name="password"
+                        className="fontAwesome login__form__input__text"
+                        value={password}
+                        type="password"
+                        placeholder="&#xf13e; Password"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    </div>
+                    <button type="submit" className="login__form__button sign__up" disabled={!validateForm()}>
+                        SIGN UP
+                    </button>
+                </form>
+            </div>
+            <div className="login__middle"></div>
             <hr />
-            <h2 className="switch__login">Log in to Recipie</h2>
-            <button type="submit" className="login__form__button" onClick={() => history.push('/login')}>
-                LOG IN
-            </button>
+            <div className="login__right">
+                <h2 className="switch__login">Log in to Recipie</h2>
+                <button type="submit" className="login__form__button" onClick={() => history.push('/login')}>
+                    LOG IN
+                </button>
+            </div>
         </div> 
         }
         </>
