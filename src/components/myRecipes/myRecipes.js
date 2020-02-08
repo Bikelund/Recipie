@@ -20,7 +20,6 @@ function MyRecipes() {
                     setRecipes(response) //Set data to recipes state
     
                 }).then(() => {
-                    console.log('finish')
                     setIsLoading(false)
                 })
             }

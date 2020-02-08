@@ -11,9 +11,9 @@ function CreateRecipe() {
     const [servings, setServings] = useState('')
     const [category, setCategory] = useState('')
     const [ingredients, setIngredients] = useState([])
-    const [fields, setFields] = useState([{ value: null }])
+    const [fields, setFields] = useState([])
     const [directions, setDirections] = useState([])
-    const [directionsFields, setDirectionsFields] = useState([{ value: null }])
+    const [directionsFields, setDirectionsFields] = useState([])
     const [image, setImage] = useState('')
     const [srcImg, setSrcImg] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -25,8 +25,9 @@ function CreateRecipe() {
 
     //Add ingredients field when user click on Add button
     function addIngredientsField() {
+        console.log(fields)
         const values = [...fields];
-        values.push({ value: null });
+        values.push({ value: null }); //This value for iterating over when user click on add button
         setFields(values);
     }
 
@@ -294,3 +295,4 @@ function CreateRecipe() {
 }
 
 export default CreateRecipe
+
