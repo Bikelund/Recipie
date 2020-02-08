@@ -42,42 +42,47 @@ function Login() {
 
     return (
         <>
-            {
-                <div>
-                    <h1 className="login__title">Log in to Recipie</h1>
-                    <form className="login__form" onSubmit={handleSubmit}>
-                        <div className="login__form__input">
-                       {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : '' }
-                            <input
-                                name="email"
-                                className="fontAwesome login__form__input__text"
-                                value={email}
-                                type="text"
-                                placeholder="&#xf0e0; Email"
-                                onChange={e => setEmail(e.target.value)}
-                            /><br />
-                        {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : '' }
-                            <input
-                                name="password"
-                                className="fontAwesome login__form__input__text"
-                                value={password}
-                                type="password"
-                                placeholder="&#xf13e; Password"
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                            <div className="forgot__password" onClick={() => {history.push('/resetPassword') }}>Forgot Password?</div>
-                        </div>
-                        <button type="submit" className="login__form__button" disabled={!validateForm()} >
-                            LOG IN
+        {
+        <div className="login">
+            <div className="login__left">
+                <h1 className="login__title">Log in to Recipie</h1>
+                <form className="login__form" onSubmit={handleSubmit}>
+                    <div className="login__form__input">
+                {emailErrorMsg ? <div className="login__form__input__error__message">{message}</div> : '' }
+                        <input
+                            name="email"
+                            className="fontAwesome login__form__input__text"
+                            value={email}
+                            type="text"
+                            placeholder="&#xf0e0; Email"
+                            onChange={e => setEmail(e.target.value)}
+                        /><br />
+                    {passwordErrorMsg ? <div className="login__form__input__error__message">{message}</div> : '' }
+                        <input
+                            name="password"
+                            className="fontAwesome login__form__input__text"
+                            value={password}
+                            type="password"
+                            placeholder="&#xf13e; Password"
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                        <div className="forgot__password" onClick={() => {history.push('/resetPassword') }}>Forgot Password?</div>
+                    </div>
+                    <button type="submit" className="login__form__button" disabled={!validateForm()} >
+                        LOG IN
                     </button>
-                    </form>
-                    <hr />
-                    <h2 className="switch__login">Create a New Account</h2>
-                    <button type="submit" className="login__form__button sign__up" onClick={() => history.push('/register')}>
-                        SIGN UP
+                </form>
+            </div>
+            <div className="login__middle"></div>
+            <hr />
+            <div className="login__right">
+                <h2 className="switch__login">Create a New Account</h2>
+                <button type="submit" className="login__form__button sign__up" onClick={() => history.push('/register')}>
+                    SIGN UP
                 </button>
-                </div> 
-            }
+            </div>
+        </div> 
+        }
         </>
     )
 }
