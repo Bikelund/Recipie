@@ -13,11 +13,16 @@ function AllRecipes() {
         setIsLoading(true)
         //Check if user is logged in
         async function fetchData() {
-            const allUserRecipes = await getAllUserRecipes(); //Fetching user recipe lists from firestore data base
-            setRecipes(allUserRecipes) //Set data to recipes state
-            setIsLoading(false)
+            await getAllUserRecipes() //Fetching user recipe lists from firestore data base
+            .then((response)=>{
+                setRecipes(response) //Set data to recipes state
+
+            }).then(() => {
+                console.log('finish')
+                setIsLoading(false)
+            })
         }
-        fetchData();
+        fetchData()
     }, []) //Passing empty array because we want to run an effect only once
 
 

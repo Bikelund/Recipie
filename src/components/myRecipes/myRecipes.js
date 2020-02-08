@@ -15,9 +15,14 @@ function MyRecipes() {
         //Check if user is logged in
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
-                const userRecipes = await getUserRecipes(user.uid); //Fetching user recipe lists from firestore data base
-                setRecipes(userRecipes) //Set data to recipes state
-                setIsLoading(false)
+                await getUserRecipes(user.uid)//Fetching user recipe lists from firestore data base
+                .then((response)=>{
+                    setRecipes(response) //Set data to recipes state
+    
+                }).then(() => {
+                    console.log('finish')
+                    setIsLoading(false)
+                })
             }
             else {
                 return
