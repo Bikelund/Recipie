@@ -31,7 +31,6 @@ function NavBar() {
               setIsUserLoggedIn(false)
           }
       })
-      
   })
 
   return (
