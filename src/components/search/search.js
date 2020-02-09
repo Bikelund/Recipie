@@ -26,26 +26,26 @@ function Search() {
     /**
      * Search function - Search in 4 categories with filter() method. 
      * 
-     * @param {string} word value to search  
-     * @param {object} data contains all the recipe data to search 
+     * @param {string} searchword value to search  
+     * @param {object} recipeLists contains all the recipe data to search 
      */
-    function search(word, data) {
-        const search = word.toLowerCase();
+    function search(searchword, recipeLists) {
+        const search = searchword.toLowerCase();
         //Search in title
-        const title = data.filter(items => {
+        const title = recipeLists.filter(items => {
             const title = items.title.toLowerCase()
             return title.includes(search)
         })
         //Search in ingredients
-        const ingredients = data.filter(items =>
+        const ingredients = recipeLists.filter(items =>
             items.ingredients !== undefined ? items.ingredients.find(ingredient => ingredient.toLowerCase().includes(search)) : null
         )
         //Search in directions
-        const directions = data.filter(items =>
+        const directions = recipeLists.filter(items =>
             items.directions !== undefined ? items.directions.find(direction => direction.toLowerCase().includes(search)) : null
         )
         //Search in categories
-        const categories = data.filter(items => {
+        const categories = recipeLists.filter(items => {
             const category = items.category.toLowerCase()
             return category.includes(search)
         })
