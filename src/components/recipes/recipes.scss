@@ -50,6 +50,8 @@
             font-size: 50px;
             width: 100%;
             margin-bottom: 70px;
+            opacity: .6;
+            font-weight: 100;
         }
     }
 
@@ -74,6 +76,15 @@
         &__title {
             text-align: center;
             max-height: 20px;
+        }
+
+        &__image {
+            box-sizing: border-box;
+            transition: border 200ms ease-in-out;
+
+            &:hover {
+                border: 6px solid $color_green;
+            }
         }
     }
 }

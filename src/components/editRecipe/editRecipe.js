@@ -206,6 +206,7 @@ function EditRecipe(props) {
     return (
         <> {isLoading ? <Loading /> :
             <>
+            <div className="create__recipe">
                 <div onClick={() => history.goBack()} className="arrow"></div>
                 <button className="delete__recipe fontAwesome" onClick={() => deleteSubmit()}>Delete &#xf1f8;</button>
                 <div className="create__recipe__title">Edit Recipe</div>
@@ -213,6 +214,7 @@ function EditRecipe(props) {
                 {errorMsg ? <div className="error__edit__message">Something went to wrong. Please try again</div> : ''}
                 <form className="create__recipe__form" onSubmit={handleSubmit}>
                     <div className="create__recipe__form__input">
+                        <div className="form__container__left">
                         <label htmlFor="title">
                             <div className="create__recipe__form__input__title">Title</div>
                             <input
@@ -332,12 +334,13 @@ function EditRecipe(props) {
                                 })}</>}
 
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addIngredientsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
-
+                        </div>
                         {/* Directions
                       If there are no directions show default input field.
                       Otherwise show directions list which user alreday wrote.
                       Both have Add directions field after map().
                     */}
+                        <div className="form__container__right">
                         <div className="create__recipe__form__input__title">Directions</div>
                         {/* Directions field which user wrote */}
                         {defaultDirections && defaultDirections.length !== 0?
@@ -415,15 +418,23 @@ function EditRecipe(props) {
                             </>}
 
                         <div className="fontAwesome create__recipe__form__input__add" onClick={() => addDirectionsField()}>Add <span className="create__recipe__form__input__add__icon">&#xf055;</span></div>
+                        <div className="create__recipe__form__image__container">
                         <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
                             {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
                             <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setNewImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
                         </label>
+
+                    
+                        <div className="create__recipe__form__button__container">
+                        <button className="create__recipe__form__button" type="submit">
+                            EDIT RECIPE
+                        </button>
+                        </div>
+                        </div>
+                        </div>
                     </div>
-                    <button className="create__recipe__form__button" type="submit">
-                        EDIT RECIPE
-            </button>
                 </form>
+            </div>
             </>
         }
         </>
