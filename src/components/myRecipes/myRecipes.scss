@@ -61,6 +61,8 @@
             font-size: 50px;
             width: 100%;
             margin-bottom: 70px;
+            opacity: .6;
+            font-weight: 100;
         }
 
         &__recipes__list{
@@ -78,6 +80,12 @@
             font-size: 16px;
             width: 300px;
             cursor: pointer;
+            border-radius: 10px;
+            transition: all 200ms ease-in-out;
+
+            &:hover {
+                transform: scale(1.05);
+            }
         }
 
         &__btn__log-out {

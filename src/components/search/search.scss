@@ -42,13 +42,56 @@
         text-decoration: none;
         font-size: 16px;
         width: 30px;
+        transition: background-color 200ms ease-in-out;
     }
 
     &__delete__button {
         position: absolute;
-        left: 85%;
+        right: 8%;
         top: 10%;
         opacity: 0.5;
         transform: translate(-87%, 3%);
+        cursor: pointer;
+        transition: color 200ms ease-in;
+    }
+}
+
+/*_______________
+|               |
+|    Desktop    |
+|               |
+|_______________*/
+
+@media screen and (min-width: $desktopBP) {
+
+    .search {
+        width: calc(100vw - 100px);
+        position: relative;
+        left: 100px;
+        right: 0;
+
+        &__title {
+            margin: 70px 0 50px;
+            padding: 0;
+            font-size: 50px;
+            opacity: .6;
+        }
+    }
+
+    .search__form {
+
+        &__container {
+            width: 40%;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+
+        &__button:hover {
+            background-color: $color_green;
+        }
+
+        &__delete__button:hover {
+            color: $color_light_red_orange;
+        }
     }
 }

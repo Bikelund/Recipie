@@ -160,6 +160,11 @@ select {
       bottom: 10px;
       width: 80%;
       position: absolute;
+      transition: background-color 200ms ease-in-out;
+
+      &:hover {
+        background: $color_green;
+      }
     }
 
     .create__recipe__form__input {
@@ -181,10 +186,12 @@ select {
         right: 0;
         position: absolute;
         font-size: 14px;
+
         &__icon {
           font-size: 18px;
         }
       }
+
       .create__recipe__form__input__textarea {
         height: 60px;
       }
