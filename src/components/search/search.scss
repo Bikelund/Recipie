@@ -31,6 +31,7 @@
         padding: 4px 10px;
         border: 1px solid rgba($color: $color_light_red_orange, $alpha: 0.6);
         border-right: none;
+        border-radius: none;
     }
 
     &__button {
@@ -47,10 +48,9 @@
 
     &__delete__button {
         position: absolute;
-        right: 8%;
+        right: 36px;
         top: 10%;
         opacity: 0.5;
-        transform: translate(-87%, 3%);
         cursor: pointer;
         transition: color 200ms ease-in;
     }
