@@ -71,7 +71,6 @@
         width: 18%;
         height: 20%;
         margin: 20px;
-        transition: color 300ms ease-in-out;
 
         &__title {
             text-align: center;
@@ -82,11 +81,6 @@
 
         &__image {
             box-sizing: border-box;
-            transition: border 200ms ease-in-out;
-
-            &:hover {
-                border: 6px solid $color_green;
-            }
         }
     }
 }
