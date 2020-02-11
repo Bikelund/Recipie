@@ -20,7 +20,7 @@
         display: flex;
         justify-content: space-around;
         background: rgba($color: #000000, $alpha: 0.5);
-        position: absolute;
+        position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
@@ -29,17 +29,22 @@
         z-index: 22;
         padding-top: 16px;
 
+        &--middle {
+            left: 100vw;
+        }
+
         &--left {
+            left: 0;
+            justify-content: space-between;
             flex-direction: row-reverse;
         }
-
-        &--left,
-        &--right {
-            justify-content: space-between;
-        }
-
         &--left p {
             padding-right: 50px;
+        }
+
+        &--right {
+            left: 200vw;
+            justify-content: space-between;
         }
 
         &--right p {
@@ -80,6 +85,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
+        overflow: scroll;
 
         h2 {
             margin: 0;
@@ -91,7 +97,7 @@
 
         &__ul {
             margin: 0 auto;
-            padding: 20px 10px 20px 26%;
+            padding: 20px 10px 80px 26%;
             min-height: calc(100vh - 268px);
         }
 
@@ -106,6 +112,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
+        overflow: scroll;
 
         h2 {
             margin: 0;
@@ -117,7 +124,7 @@
 
         &__ol {
             margin: 0 auto;
-            padding: 20px 20px 20px 22%;
+            padding: 20px 20px 80px 22%;
             min-height: calc(100vh - 268px);
         }
 
@@ -237,16 +244,13 @@
         left: 100px;
         position: relative;
         margin: 0;
-        height: 100vh;
+        min-height: 100vh;
         max-width: 2000px;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
 
         &__edit {
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 6px;
+            right: 10px;
             background-color: $color_light_red_orange;
             color: $color_white;
             border: none;
@@ -255,7 +259,6 @@
             text-decoration: none;
             display: block;
             font-size: 12px;
-            margin: 6px;
             cursor: pointer;
             z-index: 10;
         }

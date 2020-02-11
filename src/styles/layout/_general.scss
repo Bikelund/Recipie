@@ -1,12 +1,15 @@
 html {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 body {
     background-color: $color_white;
     font-family: $fonts_josefin;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    height: 100%;
 }
 .arrow {
     height: 12px;
@@ -38,6 +41,8 @@ body {
         width: 16px;
         border-width: 4px 4px 0 0;
         transition: border 300ms ease-in-out;
+        position: fixed;
+        left: 130px;
 
         &:before {
             height: 16px;
