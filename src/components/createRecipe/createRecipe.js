@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import firebase from '../firebase/firebase';
-import 'firebase'
-import 'firebase/firestore';
+import firebase from '../firebase/firebase'
+import 'firebase/storage';
 import { v4 as uuid } from 'uuid';
 import { useHistory } from "react-router-dom";
 import Loading from '../loading/Loading'
@@ -25,7 +24,6 @@ function CreateRecipe() {
 
     //Add ingredients field when user click on Add button
     function addIngredientsField() {
-        console.log(fields)
         const values = [...fields];
         values.push({ value: null }); //This value for iterating over when user click on add button
         setFields(values);
@@ -218,7 +216,6 @@ function CreateRecipe() {
                                             key={index}
                                             id={index}
                                             className="create__recipe__form__input__text"
-                                            // value={ingredients[index]}
                                             type="text"
                                             placeholder={placeholder}
                                             onChange={e => { setIngredientsChange(e, e.target.id) }}
@@ -250,11 +247,11 @@ function CreateRecipe() {
                                                 <div className="create__recipe__form__input__number">{index + 1}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index}
+                                                    id_data={index}
                                                     className="create__recipe__form__input__text create__recipe__form__input__textarea"
                                                     type="text"
                                                     placeholder={placeholder}
-                                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                    onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                                 />
                                             </div>
                                         </React.Fragment>
@@ -268,10 +265,10 @@ function CreateRecipe() {
                                                 <div className="create__recipe__form__input__number">{index + 4}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
+                                                    id_data={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
                                                     className="create__recipe__form__input__text create__recipe__form__input__textarea"
                                                     type="text"
-                                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                    onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                                 />
                                             </div>
                                         </React.Fragment>

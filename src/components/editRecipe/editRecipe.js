@@ -107,14 +107,9 @@ function EditRecipe(props) {
     function handleSubmit(event) {
         event.preventDefault()
 
-        console.log(directions)
-
          //Remove empty string and create a new array
          const filteredIngredients = removeEmptyString(ingredients)
          const filteredDirections = removeEmptyString(directions)
-
-         console.log(filteredDirections)
-         console.log(filteredIngredients)
 
         setIsLoading(true)
 
@@ -132,6 +127,12 @@ function EditRecipe(props) {
 
                 //Delete old image
                 firebase.storage().ref('recipes').child(recipe.storageId).delete()
+                .then(() => {
+                    console.log('deleted')
+                })
+                .catch(error => {
+                    console.log(error)
+                })
 
                 //Store new image in storage
                 storageRef.put(newImage) //File uploaded
@@ -351,11 +352,11 @@ function EditRecipe(props) {
                                             <div className="create__recipe__form__input__number">{index + 1}</div>
                                             <textarea
                                                 name="directions"
-                                                id={index}
+                                                id_data={index}
                                                 className="create__recipe__form__input__text"
                                                 type="text"
                                                 defaultValue={direction}
-                                                onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                             />
                                         </div>
                                     </React.Fragment>
@@ -369,10 +370,10 @@ function EditRecipe(props) {
                                                 <div className="create__recipe__form__input__number">{index + directions.length + 1}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index + defaultDirections.length} //Index starts from 0 + directions.length
+                                                    id_data={index + defaultDirections.length} //Index starts from 0 + directions.length
                                                     className="create__recipe__form__input__text"
                                                     type="text"
-                                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                    onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                                 />
                                             </div>
                                         </React.Fragment>
@@ -388,11 +389,11 @@ function EditRecipe(props) {
                                                 <div className="create__recipe__form__input__number">{index + 1}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index}
+                                                    id_data={index}
                                                     className="create__recipe__form__input__text"
                                                     type="text"
                                                     placeholder={placeholder}
-                                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                    onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                                 />
                                             </div>
                                         </React.Fragment>
@@ -406,10 +407,10 @@ function EditRecipe(props) {
                                                 <div className="create__recipe__form__input__number">{index + 4}</div>
                                                 <textarea
                                                     name="directions"
-                                                    id={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
+                                                    id_data={index + directionsPlaceholder.length} //Index starts from 3 because there are already 3 default input field.
                                                     className="create__recipe__form__input__text"
                                                     type="text"
-                                                    onChange={e => { setDirectionsChange(e, e.target.id) }}
+                                                    onChange={e => { setDirectionsChange(e, e.target.getAttribute("id_data")) }}
                                                 />
                                             </div>
                                         </React.Fragment>
