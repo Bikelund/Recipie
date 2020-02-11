@@ -33,8 +33,15 @@
             flex-direction: row-reverse;
         }
 
-        &--left,
+        &--left {
+            position: fixed;
+            left: 0;
+            justify-content: space-between;
+        }
+
         &--right {
+            position: fixed;
+            left: 200vw;
             justify-content: space-between;
         }
 
@@ -80,6 +87,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
+        overflow: scroll;
 
         h2 {
             margin: 0;
@@ -106,6 +114,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
+        overflow: scroll;
 
         h2 {
             margin: 0;
@@ -237,16 +246,13 @@
         left: 100px;
         position: relative;
         margin: 0;
-        height: 100vh;
+        min-height: 100vh;
         max-width: 2000px;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
 
         &__edit {
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 6px;
+            right: 10px;
             background-color: $color_light_red_orange;
             color: $color_white;
             border: none;
@@ -255,7 +261,6 @@
             text-decoration: none;
             display: block;
             font-size: 12px;
-            margin: 6px;
             cursor: pointer;
             z-index: 10;
         }
