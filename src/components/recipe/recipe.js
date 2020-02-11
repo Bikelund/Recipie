@@ -91,7 +91,7 @@ function Recipe( props ) {
              state: recipe
           })}>Edit &#xf0e2;</button> : ""
           }
-          <div className="button__container fontAwesome">
+          <div className="button__container button__container--middle fontAwesome">
             <p>&#xf104; Ingredients</p>
             <p>How to cook &#xf105;</p>
           </div>

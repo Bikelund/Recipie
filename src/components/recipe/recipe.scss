@@ -29,14 +29,16 @@
         z-index: 22;
         padding-top: 16px;
 
-        &--left {
-            flex-direction: row-reverse;
+        &--middle {
+            position: fixed;
+            left: 100vw;
         }
 
         &--left {
             position: fixed;
             left: 0;
             justify-content: space-between;
+            flex-direction: row-reverse;
         }
 
         &--right {
@@ -99,7 +101,7 @@
 
         &__ul {
             margin: 0 auto;
-            padding: 20px 10px 20px 26%;
+            padding: 20px 10px 80px 26%;
             min-height: calc(100vh - 268px);
         }
 
@@ -126,7 +128,7 @@
 
         &__ol {
             margin: 0 auto;
-            padding: 20px 20px 20px 22%;
+            padding: 20px 20px 80px 22%;
             min-height: calc(100vh - 268px);
         }
 
