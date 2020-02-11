@@ -245,4 +245,11 @@ select {
       width: 100%;
     }
   }
+
+  // Microsoft Edge Specific styling
+  @supports (-ms-ime-align:auto) {
+    .create__recipe__form__input {
+        justify-content: space-around;
+    }
+  }
 }
