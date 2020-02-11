@@ -85,7 +85,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
-        overflow: scroll;
+        overflow-y: scroll;
 
         h2 {
             margin: 0;
@@ -112,7 +112,7 @@
         height: calc(100vh - 60px);
         color: $color_white;
         font-family: $fonts_montserrat;
-        overflow: scroll;
+        overflow-y: scroll;
 
         h2 {
             margin: 0;
