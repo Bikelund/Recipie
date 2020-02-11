@@ -122,7 +122,7 @@ function Recipe( props ) {
 
       {/* Desktop Markup */}
 
-      <div className="desktop__recipe" style={{background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover"}}>
+      <div className="desktop__recipe" style={{background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover", backgroundAttachment: "fixed"}}>
         <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
         {
           editRecipe ? <button className="desktop__recipe__edit fontAwesome" onClick={() => history.push({
