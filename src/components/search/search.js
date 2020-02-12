@@ -11,11 +11,15 @@ function Search() {
 
     //Get all user recipes from firestore and put them in data state
     useEffect(() => {
-        getAllUserRecipes() 
+        let cleanedUp = false
+        if (!cleanedUp) {
+            getAllUserRecipes()
                 .then(response => {
                     setData(response)
                 })
-    },[data])
+        }
+        return () => (cleanedUp = true)
+    }, [data])
 
     function handleChangeSearchWord(e) {
         setFocus(true)
@@ -65,13 +69,13 @@ function Search() {
         setSearchWord(searchWord.trim()) //Remove whitespacing
 
         if (searchWord.length > 0 && searchWord !== '' && searchWord !== ' ') {
-                    let result = search(searchWord, data) 
-                    result = removeDublicateValues(result) //Remove dublicate values if there are dublicate values
-                    if (result.length === 0) {
-                        setError(true)
-                    }else{
-                        history.push({ pathname: '/results', state: result})
-                    }
+            let result = search(searchWord, data)
+            result = removeDublicateValues(result) //Remove dublicate values if there are dublicate values
+            if (result.length === 0) {
+                setError(true)
+            } else {
+                history.push({ pathname: '/results', state: result })
+            }
         }
     }
 

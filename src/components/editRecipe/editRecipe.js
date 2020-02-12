@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom'
 import firebase from '../firebase/firebase'
 import Loading from '../loading/Loading'
 import { v4 as uuid } from 'uuid'
+import Resizer from 'react-image-file-resizer'
+
 
 
 function EditRecipe(props) {
@@ -82,13 +84,30 @@ function EditRecipe(props) {
 
     }
 
-    //When user chose image, display it on image input field
+  /**
+     * 
+     * @param {object} file contains object of image file information (name,) 
+     * When user chose image, display it on image input field
+     */
     function setSrcImage(file) {
-        let reader = new FileReader()
-        reader.onloadend = () => {
-            setSrcImg(reader.result)
+        let fileInput = false
+        if(file) {
+            fileInput = true
         }
-        reader.readAsDataURL(file)
+        if(fileInput) {
+            Resizer.imageFileResizer(
+                file,
+                1000,
+                1000,
+                file.type === 'image/svg+xml'? 'SVG' : file.type === 'image/png' ? 'PNG' : 'JPEG',　//Image format
+                95,
+                0,
+                uri => {
+                    setSrcImg(uri)
+                },
+                'base64'
+            );
+        }
     }
 
     /**
@@ -135,7 +154,7 @@ function EditRecipe(props) {
                 })
 
                 //Store new image in storage
-                storageRef.put(newImage) //File uploaded
+                storageRef.putString(srcImg, 'data_url') //File uploaded
                     .then(doc => {
                         storageId = doc.metadata.name; //image name in storage
                         return storageRef.getDownloadURL(); //To get image url
