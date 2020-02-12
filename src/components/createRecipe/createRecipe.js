@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import firebase from '../firebase/firebase'
+import firebase from '../firebase/firebase';
 import 'firebase/storage';
 import { v4 as uuid } from 'uuid';
 import { useHistory } from "react-router-dom";
-import Loading from '../loading/Loading'
+import Loading from '../loading/Loading';
+import Resizer from 'react-image-file-resizer';
 
 function CreateRecipe() {
     const [title, setTitle] = useState('')
@@ -69,12 +70,24 @@ function CreateRecipe() {
      * When user chose image, display it on image input field
      */
     function setSrcImage(file) {
-        let reader = new FileReader()　//Read the contents of image
-        //Read a 'data' url string. The result will be stored on this.result after the 'load' event fires.
-        reader.onloadend = () => {
-            setSrcImg(reader.result)
+        let fileInput = false
+        if(file) {
+            fileInput = true
         }
-        reader.readAsDataURL(file)
+        if(fileInput) {
+            Resizer.imageFileResizer(
+                file,
+                1000,
+                1000,
+                file.type === 'image/svg+xml'? 'SVG' : file.type === 'image/png' ? 'PNG' : 'JPEG',　//Image format
+                95,
+                0,
+                uri => {
+                    setSrcImg(uri)
+                },
+                'base64'
+            );
+        }
     }
 
     /**
@@ -111,9 +124,10 @@ function CreateRecipe() {
                 const ext = filename.slice(filename.lastIndexOf(".")); //Get image format name ex(.jpg, .png)
                 const storageRef = firebase.storage().ref('recipes').child(uuid() + "." + ext); //Create a storage and recipes reference. uuid() is generator to make unique key in every image
                 let storageId;
-
-                storageRef.put(image) //File uploaded
+                
+                storageRef.putString(srcImg, 'data_url') //File uploaded
                     .then(doc => {
+                        console.log(storageRef.getDownloadURL())
                         storageId = doc.metadata.name; //image name in storage
                         return storageRef.getDownloadURL(); //To get image url
                     })
@@ -278,8 +292,8 @@ function CreateRecipe() {
                                 <div className="create__recipe__form__image__container">
                                     <label className="create__recipe__form__input__image__title" htmlFor="file_upload">Image
                                 {errorMsg ? <div className="error__message">Update your food image</div> : ''}
-                                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
-                                        <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setImage(e.target.files[0]); setSrcImage(e.target.files[0]) }} />
+                                        {srcImg ? <div><img className="create__recipe__form__input__image__box__img" src={srcImg} alt={title} onChange={e => console.log(e)}></img></div> : <div className="create__recipe__form__input__image__box"><div className="fontAwesome create__recipe__form__input__image__icon">&#xf1c5;</div></div>}
+                                        <input id="file_upload" className="create__recipe__form__input__image" type="file" name="pic" onChange={e => { setSrcImage(e.target.files[0]); setImage(e.target.files[0]); }} />
                                     </label>
                                     <div className="create__recipe__form__button__container">
                                         <button className="create__recipe__form__button" type="submit">
