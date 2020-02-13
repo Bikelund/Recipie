@@ -19,7 +19,6 @@ function Login() {
 
     async function handleSubmit(event) {
         event.preventDefault();
-
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password);
             history.push('/myRecipe')

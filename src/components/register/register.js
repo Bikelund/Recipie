@@ -73,6 +73,7 @@ function Register() {
                     <button type="submit" className="login__form__button sign__up" disabled={!validateForm()}>
                         SIGN UP
                     </button>
+                    
                 </form>
             </div>
             <div className="login__middle"></div>
