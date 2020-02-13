@@ -121,7 +121,7 @@ function Recipe(props) {
 
       {/* Desktop Markup */}
 
-      <li className="desktop__recipe" style={{ background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover", backgroundAttachment: "fixed" }}>
+      <div className="desktop__recipe" style={{ background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover", backgroundAttachment: "fixed" }}>
         <div onClick={() => history.goBack()} className="fontAwesome arrow shadow">&#xf104;&#xf104;</div>
         {
           editRecipe ? <button className="desktop__recipe__edit fontAwesome" onClick={() => history.push({
@@ -134,7 +134,7 @@ function Recipe(props) {
           <h1 className="desktop__recipe__title__h1 container__h1">{recipe.title}</h1>
         {recipe.servings? <h5 className="container__h5">Serves&nbsp;&nbsp;{recipe.servings}</h5> : '' }
         </div>
-        <li className="desktop__recipe__container">
+        <div className="desktop__recipe__container">
           <div className="desktop__recipe__ingredients container">
             <h2 className="container__h2">Ingredients</h2>
             <ul className="desktop__recipe__ingredients__ul">
@@ -144,7 +144,7 @@ function Recipe(props) {
               }
             </ul>
           </div>
-          <li className="desktop__recipe__how-to-cook container">
+          <div className="desktop__recipe__how-to-cook container">
             <h2 className="container__h2">How to cook</h2>
             <ol className="desktop__recipe__how-to-cook__ol">
               {
@@ -152,9 +152,9 @@ function Recipe(props) {
                   : recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__how-to-cook__ol__li">{item}</li>)
               }
             </ol>
-          </li>
-        </li>
-      </li>
+          </div>
+        </div>
+      </div>
     </>
   )
 };
