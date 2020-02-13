@@ -10,6 +10,7 @@ function Results(props) {
         <>
             <div onClick={() => history.goBack()} className="arrow"></div>
             <div className='recipes'>
+                <div className="recipes__container">
                 <h1 className="search__title">Results</h1>
                 {results.length === 0 ? ''
                     : Object.keys(results).map((i, key) => (
@@ -23,6 +24,7 @@ function Results(props) {
                             <div className="recipes__recipe__image" style={{ backgroundImage: `url(${results[i].imageUrl})` }}></div>
                         </div>
                     ))}
+                </div>
             </div>
         </>
     )
