@@ -4,7 +4,7 @@ import 'swiper/swiper.scss';
 import { useHistory } from 'react-router-dom';
 import firebase from '../firebase/firebase';
 
-function Recipe( props ) {
+function Recipe(props) {
   const recipe = props.history.location.state //Get data through <Route render={...props} /> from myRecipes.js or recipes.js
   const history = useHistory()
   const [editRecipe, seteditRecipe] = useState(false)
@@ -27,7 +27,7 @@ function Recipe( props ) {
         seteditRecipe(true)
       }
     }
-  }) 
+  })
 
   // Parameters for Swiper
   const params = {
@@ -49,21 +49,22 @@ function Recipe( props ) {
   }
 
   return (
-      <>
+    <>
       <Swiper {...params}>
         {/* Slide for Ingredients */}
         <div className="recipe__ingredients">
           <div className="container">
             <div className="container__blur"></div>
             <h2 className="container__h2">Ingredients</h2>
+            {recipe.servings? <h5 className="container__h5">Serves&nbsp;&nbsp;{recipe.servings}</h5> : '' }
           </div>
           <div className="container">
             <div className="container__blur__list"></div>
             <ul className="recipe__ingredients__ul">
               {/* A ternary operator that checks if the ingredient list is empty or not */}
-              { 
+              {
                 !recipe.ingredients === true ? <li className="recipe__ingredients__ul__li">You have all you need</li> // Shows this if empty
-                :recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li>)
+                  : recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__ingredients__ul__li">{item}</li>)
                 // data-swiper-parallax creates a fade in offset
               }
             </ul>
@@ -81,13 +82,13 @@ function Recipe( props ) {
             <div className="container__blur"></div>
             <h1 className="container__h1">{recipe.title}</h1>
           </div>
-          <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
+          <div onClick={() => history.goBack()} className="arrow fontAwesome">&#xf104;&#xf104;</div>
           {/* Edit button only shows for the creator of the recipe */}
           {
-          editRecipe ? <button className="recipe__edit fontAwesome" onClick={() => history.push({
-             pathname: '/editRecipe',
-             state: recipe
-          })}>Edit &#xf0e2;</button> : ""
+            editRecipe ? <button className="recipe__edit fontAwesome" onClick={() => history.push({
+              pathname: '/editRecipe',
+              state: recipe
+            })}>Edit &#xf0e2;</button> : ""
           }
           <div className="button__container button__container--middle fontAwesome">
             <p>&#xf104; Ingredients</p>
@@ -104,9 +105,9 @@ function Recipe( props ) {
           <div className="container">
             <div className="container__blur__list"></div>
             <ol className="recipe__how-to-cook__ol">
-              { 
+              {
                 !recipe.directions === true ? <li className="recipe__how-to-cook__ol__li">Just eat it</li>
-                :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__how-to-cook__ol__li">{item}</li>)     
+                  : recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="recipe__how-to-cook__ol__li">{item}</li>)
               }
             </ol>
           </div>
@@ -120,39 +121,40 @@ function Recipe( props ) {
 
       {/* Desktop Markup */}
 
-      <div className="desktop__recipe" style={{background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover", backgroundAttachment: "fixed"}}>
-        <div onClick={() => history.goBack()} className="arrow fontAwesome"></div>
+      <li className="desktop__recipe" style={{ background: `url(${recipe.imageUrl}) center center`, backgroundSize: "cover", backgroundAttachment: "fixed" }}>
+        <div onClick={() => history.goBack()} className="fontAwesome arrow shadow">&#xf104;&#xf104;</div>
         {
           editRecipe ? <button className="desktop__recipe__edit fontAwesome" onClick={() => history.push({
-          pathname: '/editRecipe',
-          state: recipe
+            pathname: '/editRecipe',
+            state: recipe
           })}>Edit &#xf0e2;</button> : ""
         }
         <div className="desktop__recipe__title container">
           <div className="container__blur"></div>
           <h1 className="desktop__recipe__title__h1 container__h1">{recipe.title}</h1>
+        {recipe.servings? <h5 className="container__h5">Serves&nbsp;&nbsp;{recipe.servings}</h5> : '' }
         </div>
-        <div className="desktop__recipe__container">
+        <li className="desktop__recipe__container">
           <div className="desktop__recipe__ingredients container">
             <h2 className="container__h2">Ingredients</h2>
             <ul className="desktop__recipe__ingredients__ul">
-              { 
+              {
                 !recipe.ingredients === true ? <li className="desktop__recipe__ingredients__ul__li">You have all you need</li>
-                :recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__ingredients__ul__li">{item}</li>)
+                  : recipe.ingredients.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__ingredients__ul__li">{item}</li>)
               }
             </ul>
           </div>
-          <div className="desktop__recipe__how-to-cook container">
+          <li className="desktop__recipe__how-to-cook container">
             <h2 className="container__h2">How to cook</h2>
             <ol className="desktop__recipe__how-to-cook__ol">
-              { 
+              {
                 !recipe.directions === true ? <li className="desktop__recipe__how-to-cook__ol__li">Just eat it</li>
-                :recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__how-to-cook__ol__li">{item}</li>)     
+                  : recipe.directions.map((item, key) => <li data-swiper-parallax={"-" + key + "0"} key={key} className="desktop__recipe__how-to-cook__ol__li">{item}</li>)
               }
             </ol>
-          </div>
-        </div>
-      </div>
+          </li>
+        </li>
+      </li>
     </>
   )
 };

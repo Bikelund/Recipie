@@ -8,7 +8,7 @@ function Results(props) {
 
     return (
         <>
-            <div onClick={() => history.goBack()} className="arrow"></div>
+            <div onClick={() => history.goBack()} className="fontAwesome arrow">&#xf104;&#xf104;</div>
             <div className='recipes'>
                 <div className="recipes__container">
                 <h1 className="search__title">Results</h1>

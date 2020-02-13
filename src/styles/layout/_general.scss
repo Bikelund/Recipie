@@ -1,67 +1,47 @@
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 body {
-    background-color: $color_white;
-    font-family: $fonts_josefin;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    height: 100%;
+  background-color: $color_white;
+  font-family: $fonts_josefin;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
 }
 .arrow {
-    height: 12px;
-    width: 12px;
-    border: 2px solid rgba($color: $color_light_red_orange, $alpha: 1);
-    border-width: 2px 2px 0 0;
-    transform: rotate(-134deg);
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    z-index: 2;
-    cursor: pointer;
-  
-    &:before {
-      content: "";
-      display: block;
-      height: 12px;
-      width: 12px;
-      border: 2px solid rgba($color: $color_light_red_orange, $alpha: 1);
-      border-width: 2px 2px 0 0;
-      transform: translate(6px, -8px);
-    }
+  font-size: 35px;
+  position: fixed;
+  top: 5px;
+  left: 15px;
+  z-index: 2;
+  cursor: pointer;
+  color: rgba($color: $color_light_red_orange, $alpha: 1);
+  letter-spacing: -3px;
 }
 
 @media screen and (min-width: $desktopBP) {
+  button {
+    cursor: pointer;
+  }
 
-    .arrow {
-        height: 16px;
-        width: 16px;
-        border-width: 4px 4px 0 0;
-        transition: border 300ms ease-in-out;
-        position: fixed;
-        left: 130px;
-
-        &:before {
-            height: 16px;
-            width: 16px;
-            border-width: 4px 4px 0 0;
-            transform: translate(8px, -12px);
-        }
+  .arrow {
+    font-size: 45px;
+    transition: color 300ms ease-in-out;
+    position: fixed;
+    top: 0px;
+    left: 120px;
+    z-index: 2;
+    cursor: pointer;
+    color: $color_pink;
+    letter-spacing: -4px;
+    &:hover {
+      color: rgba($color: $color_light_red_orange, $alpha: 1);
     }
-
-    .arrow:hover {
-        border-color: $color_pink;
-
-        &:before {
-            border-color: $color_pink;
-        }
-    }
-
-    button {
-        cursor: pointer;
-    }
-
+  }
+  .shadow {
+    text-shadow: 0 0.2px 0px rgba(0, 0, 0, 0.5), 0 0 0px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0.4);
+  }
 }

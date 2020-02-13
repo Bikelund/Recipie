@@ -31,7 +31,7 @@ function ResetPassword() {
     return (
         <>
     
-                <div onClick={() => history.goBack()} className="arrow"></div>
+                <div onClick={() => history.goBack()} className="fontAwesome arrow">&#xf104;&#xf104;</div>
                 <h1 className="login__title">Reset Password</h1>
                 <form className="login__form" onSubmit={handleSubmit}>
                     <div className="login__form__input">

@@ -162,7 +162,7 @@ function CreateRecipe() {
         <> {isLoading ? <Loading /> :
             <>
                 <div className="create__recipe">
-                    <div onClick={() => history.goBack()} className="arrow"></div>
+                    <div onClick={() => history.goBack()} className="fontAwesome arrow">&#xf104;&#xf104;</div>
                     <h1 className="create__recipe__title">Create Recipe</h1>
                     <form className="create__recipe__form" onSubmit={handleSubmit}>
                         <div className="create__recipe__form__input">

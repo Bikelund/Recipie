@@ -227,7 +227,7 @@ function EditRecipe(props) {
         <> {isLoading ? <Loading /> :
             <>
             <div className="create__recipe">
-                <div onClick={() => history.goBack()} className="arrow"></div>
+                <div onClick={() => history.goBack()} className="fontAwesome arrow">&#xf104;&#xf104;</div>
                 <button className="delete__recipe fontAwesome" onClick={() => deleteSubmit()}>Delete &#xf1f8;</button>
                 <div className="create__recipe__title">Edit Recipe</div>
                 {/* If delete function failed show error message */}
