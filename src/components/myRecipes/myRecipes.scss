@@ -71,8 +71,8 @@
             flex-wrap: wrap;
             justify-content: center;
             margin: 0 auto;
-            min-height: 100vh;
             padding: 0 40px 60px;
+            align-content: flex-start;
         }
 
         &__btn__create-recipe {
