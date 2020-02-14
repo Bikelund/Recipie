@@ -249,7 +249,7 @@ select {
   // Microsoft Edge Specific styling
   @supports (-ms-ime-align:auto) {
     .create__recipe__form__input {
-        justify-content: space-around;
+        justify-content: space-around !important;
     }
   }
 }
